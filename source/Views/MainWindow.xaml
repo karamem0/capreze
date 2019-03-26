@@ -8,7 +8,7 @@
     xmlns:li="clr-namespace:Karamem0.Capreze.Interactivity"
     mc:Ignorable="d"
     Height="400"
-    ResizeMode="CanMinimize"
+    ResizeMode="CanResize"
     Title="Capreze"
     Width="600">
     <Window.Background>
@@ -102,6 +102,81 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Content="_X"
+                    HorizontalContentAlignment="Center"
+                    Margin="3,3,3,3"
+                    Padding="3,3,3,3"
+                    VerticalContentAlignment="Stretch">
+                    <Label.Target>
+                        <Binding ElementName="OffsetXTextBox" />
+                    </Label.Target>
+                </Label>
+                <Label
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Content="_Y"
+                    HorizontalContentAlignment="Center"
+                    Margin="3,3,3,3"
+                    Padding="3,3,3,3"
+                    VerticalContentAlignment="Stretch">
+                    <Label.Target>
+                        <Binding ElementName="OffsetYTextBox" />
+                    </Label.Target>
+                </Label>
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Margin="3,3,3,3"
+                    Padding="3,3,3,3"
+                    Text="Offset:"
+                    TextAlignment="Left" />
+                <TextBox
+                    x:Name="OffsetXTextBox"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="3,3,3,3"
+                    Padding="3,3,3,3"
+                    TextAlignment="Right">
+                    <TextBox.Text>
+                        <Binding
+                            Mode="TwoWay" 
+                            Path="OffsetX" />
+                    </TextBox.Text>
+                    <Validation.ErrorTemplate>
+                        <x:Null />
+                    </Validation.ErrorTemplate>
+                </TextBox>
+                <TextBox
+                    x:Name="OffsetYTextBox"
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    Margin="3,3,3,3"
+                    Padding="3,3,3,3"
+                    TextAlignment="Right">
+                    <TextBox.Text>
+                        <Binding
+                            Mode="TwoWay" 
+                            Path="OffsetY" />
+                    </TextBox.Text>
+                    <Validation.ErrorTemplate>
+                        <x:Null />
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </Grid>
+            <Grid Margin="0,6,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock
@@ -178,7 +253,7 @@
                     <TextBox.Text>
                         <Binding
                             Mode="TwoWay" 
-                            Path="CaptureHeight"/>
+                            Path="CaptureHeight" />
                     </TextBox.Text>
                     <Validation.ErrorTemplate>
                         <x:Null />
@@ -214,7 +289,7 @@
                     Padding="3,3,3,3"
                     ToolTip="800x600 (SVGA, 4:3)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="600" Width="800" />
@@ -228,7 +303,7 @@
                     Padding="3,3,3,3"
                     ToolTip="1024x768 (XGA, 4:3)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="768" Width="1024" />
@@ -242,7 +317,7 @@
                     Padding="3,3,3,3"
                     ToolTip="1600x1200 (UXGA, 4:3)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="1200" Width="1600" />
@@ -256,7 +331,7 @@
                     Padding="3,3,3,3"
                     ToolTip="1366x768 (HD, 16:9)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="768" Width="1366" />
@@ -270,7 +345,7 @@
                     Padding="3,3,3,3"
                     ToolTip="1920x1080 (FHD, 16:9)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="1080" Width="1920" />
@@ -284,7 +359,7 @@
                     Padding="3,3,3,3"
                     ToolTip="2560x1440 (WQHD, 16:9)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="1440" Width="2560" />
@@ -298,7 +373,7 @@
                     Padding="3,3,3,3"
                     ToolTip="1280x800 (WXGA, 16:10)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="800" Width="1280" />
@@ -312,7 +387,7 @@
                     Padding="3,3,3,3"
                     ToolTip="1280x1024 (SXGA, 5:4)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="1024" Width="1280" />
@@ -326,7 +401,7 @@
                     Padding="3,3,3,3"
                     ToolTip="1920x1200 (WUXGA, 16:10)">
                     <Button.Command>
-                        <Binding Path="ResizeCommand" />
+                        <Binding Path="PresetCommand" />
                     </Button.Command>
                     <Button.CommandParameter>
                         <Size Height="1200" Width="1920" />
@@ -339,7 +414,7 @@
                     Margin="3,3,3,3"
                     Padding="3,3,3,3">
                     <Button.Command>
-                        <Binding Path="ExecuteCommand" />
+                        <Binding Path="ResizeCommand" />
                     </Button.Command>
                 </Button>
             </Grid>

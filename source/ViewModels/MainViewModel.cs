@@ -35,6 +35,10 @@ namespace Karamem0.Capreze.ViewModels
 
         private int captureWidth;
 
+        private int offsetX;
+
+        private int offsetY;
+
         public MainViewModel()
         {
             this.WindowInformations = new ObservableCollection<WindowInformation>();
@@ -97,6 +101,32 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
+        public int OffsetX
+        {
+            get { return this.offsetX; }
+            set
+            {
+                if (this.offsetX != value)
+                {
+                    this.offsetX = value;
+                    this.RaisePropertyChanged(nameof(this.OffsetX));
+                }
+            }
+        }
+
+        public int OffsetY
+        {
+            get { return this.offsetY; }
+            set
+            {
+                if (this.offsetY != value)
+                {
+                    this.offsetY = value;
+                    this.RaisePropertyChanged(nameof(this.OffsetY));
+                }
+            }
+        }
+
         private WindowInformation selectedInformation;
 
         public WindowInformation SelectedInformation
@@ -137,14 +167,14 @@ namespace Karamem0.Capreze.ViewModels
                     }
                 });
 
-        public ICommand ResizeCommand =>
+        public ICommand PresetCommand =>
             new DelegateCommand<Size>(parameter =>
                 {
                     this.CaptureHeight = (int)parameter.Height;
                     this.CaptureWidth = (int)parameter.Width;
                 });
 
-        public ICommand ExecuteCommand =>
+        public ICommand ResizeCommand =>
             new DelegateCommand(async () =>
                 {
                     if (this.SelectedInformation != null)
@@ -156,29 +186,33 @@ namespace Karamem0.Capreze.ViewModels
                     }
                 });
 
-        public override void OnLoaded()
+        public override async void OnLoaded()
         {
             this.LoadCommand.Execute(null);
+            this.OffsetX = await this.windowService.GetOffsetXAsync();
+            this.OffsetY = await this.windowService.GetOffsetYAsync();
         }
 
         public override void OnUnloaded()
         {
         }
 
-        protected override async void OnPropertyChanged(PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.PropertyName == nameof(this.CaptureHeight))
+            if (e.PropertyName == nameof(this.CaptureHeight) ||
+                e.PropertyName == nameof(this.OffsetY))
             {
-                var offset = await this.windowService.GetOffisetYAsync();
-                var height = this.CaptureHeight + offset;
-                this.ActualHeight = height;
+                var size = this.CaptureHeight;
+                var offset = this.OffsetY;
+                this.ActualHeight = size + offset;
             }
-            if (e.PropertyName == nameof(this.CaptureWidth))
+            if (e.PropertyName == nameof(this.CaptureWidth) ||
+                e.PropertyName == nameof(this.OffsetX))
             {
-                var offset = await this.windowService.GetOffisetXAsync();
-                var width = this.CaptureWidth + offset * 2;
-                this.ActualWidth = width;
+                var size = this.CaptureWidth;
+                var offset = this.OffsetX * 2;
+                this.ActualWidth = size + offset;
             }
         }
 

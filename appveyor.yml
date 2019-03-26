@@ -1,0 +1,31 @@
+version: 1.1.0.{build}
+skip_non_tags: true
+image: Visual Studio 2019 Preview
+configuration: Release
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+build_script:
+- cmd: |
+    cd %APPVEYOR_BUILD_FOLDER%\source
+    dotnet restore --source https://api.nuget.org/v3/index.json
+    dotnet publish --configuration %CONFIGURATION%
+    dotnet publish --configuration %CONFIGURATION% --self-contained --runtime win-x64
+    dotnet publish --configuration %CONFIGURATION% --self-contained --runtime win-x86
+artifacts:
+- path: source\bin\$(CONFIGURATION)\netcoreapp3.0\publish
+  name: Capreze_$(APPVEYOR_BUILD_VERSION)
+- path: source\bin\$(CONFIGURATION)\netcoreapp3.0\win-x64\publish
+  name: Capreze_$(APPVEYOR_BUILD_VERSION)_win-x64
+- path: source\bin\$(CONFIGURATION)\netcoreapp3.0\win-x86\publish
+  name: Capreze_$(APPVEYOR_BUILD_VERSION)_win-x86
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: PTFuzxR3Alo64xGSRVCXDlB+MfJ0/qA+TASIIuRajBha0FM7h1IJAmrURnJA8XaI
+  artifact: Capreze_$(APPVEYOR_BUILD_VERSION), Capreze_$(APPVEYOR_BUILD_VERSION)_win-x64, Capreze_$(APPVEYOR_BUILD_VERSION)_win-x86

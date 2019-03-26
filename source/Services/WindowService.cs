@@ -23,9 +23,9 @@ namespace Karamem0.Capreze.Services
     public interface IWindowService
     {
 
-        Task<int> GetOffisetXAsync();
+        Task<int> GetOffsetXAsync();
 
-        Task<int> GetOffisetYAsync();
+        Task<int> GetOffsetYAsync();
 
         Task<IEnumerable<WindowInformation>> GetWindowInformationsAsync();
 
@@ -40,7 +40,7 @@ namespace Karamem0.Capreze.Services
         {
         }
 
-        public async Task<int> GetOffisetXAsync()
+        public async Task<int> GetOffsetXAsync()
         {
             return await Task.Run(() =>
             {
@@ -50,7 +50,7 @@ namespace Karamem0.Capreze.Services
             });
         }
 
-        public async Task<int> GetOffisetYAsync()
+        public async Task<int> GetOffsetYAsync()
         {
             return await Task.Run(() =>
             {

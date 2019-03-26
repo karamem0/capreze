@@ -2,6 +2,7 @@
 
 Window Resizing Tool for Capture
 
+[![Build status](https://ci.appveyor.com/api/projects/status/15s539p3yeafj991?svg=true)](https://ci.appveyor.com/project/karamem0/capreze)
 [![License](https://img.shields.io/github/license/karamem0/Capreze.svg)](https://github.com/karamem0/Capreze/blob/master/LICENSE)
 
 ## Screenshot
