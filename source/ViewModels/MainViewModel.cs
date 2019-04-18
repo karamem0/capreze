@@ -35,6 +35,8 @@ namespace Karamem0.Capreze.ViewModels
 
         private int captureWidth;
 
+        private bool isOffsetEnabled;
+
         private int offsetX;
 
         private int offsetY;
@@ -97,6 +99,19 @@ namespace Karamem0.Capreze.ViewModels
                 {
                     this.captureWidth = value;
                     this.RaisePropertyChanged(nameof(this.CaptureWidth));
+                }
+            }
+        }
+
+        public bool IsOffsetEnabled
+        {
+            get { return this.isOffsetEnabled; }
+            set
+            {
+                if (this.isOffsetEnabled != value)
+                {
+                    this.isOffsetEnabled = value;
+                    this.RaisePropertyChanged(nameof(this.IsOffsetEnabled));
                 }
             }
         }
@@ -189,6 +204,7 @@ namespace Karamem0.Capreze.ViewModels
         public override async void OnLoaded()
         {
             this.LoadCommand.Execute(null);
+            this.IsOffsetEnabled = true;
             this.OffsetX = await this.windowService.GetOffsetXAsync();
             this.OffsetY = await this.windowService.GetOffsetYAsync();
         }
@@ -201,17 +217,19 @@ namespace Karamem0.Capreze.ViewModels
         {
             base.OnPropertyChanged(e);
             if (e.PropertyName == nameof(this.CaptureHeight) ||
+                e.PropertyName == nameof(this.IsOffsetEnabled) ||
                 e.PropertyName == nameof(this.OffsetY))
             {
                 var size = this.CaptureHeight;
-                var offset = this.OffsetY;
+                var offset = this.IsOffsetEnabled ? this.OffsetY : 0;
                 this.ActualHeight = size + offset;
             }
             if (e.PropertyName == nameof(this.CaptureWidth) ||
+                e.PropertyName == nameof(this.IsOffsetEnabled) ||
                 e.PropertyName == nameof(this.OffsetX))
             {
                 var size = this.CaptureWidth;
-                var offset = this.OffsetX * 2;
+                var offset = this.IsOffsetEnabled ? this.OffsetX * 2 : 0;
                 this.ActualWidth = size + offset;
             }
         }

@@ -102,6 +102,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Label
                     Grid.Column="1"
@@ -141,6 +142,11 @@
                     Margin="3,3,3,3"
                     Padding="3,3,3,3"
                     TextAlignment="Right">
+                    <TextBox.IsEnabled>
+                        <Binding
+                            Mode="OneWay"
+                            Path="IsOffsetEnabled" />
+                    </TextBox.IsEnabled>
                     <TextBox.Text>
                         <Binding
                             Mode="TwoWay" 
@@ -157,6 +163,11 @@
                     Margin="3,3,3,3"
                     Padding="3,3,3,3"
                     TextAlignment="Right">
+                    <TextBox.IsEnabled>
+                        <Binding
+                            Mode="OneWay"
+                            Path="IsOffsetEnabled" />
+                    </TextBox.IsEnabled>
                     <TextBox.Text>
                         <Binding
                             Mode="TwoWay" 
@@ -166,6 +177,25 @@
                         <x:Null />
                     </Validation.ErrorTemplate>
                 </TextBox>
+                <StackPanel
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="2">
+                    <CheckBox
+                    Content="Enable offsets"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Margin="3,3,3,3"
+                    Padding="3,3,3,3"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center">
+                        <CheckBox.IsChecked>
+                            <Binding
+                                Mode="TwoWay"
+                                Path="IsOffsetEnabled" />
+                        </CheckBox.IsChecked>
+                    </CheckBox>
+                </StackPanel>
             </Grid>
             <Grid Margin="0,6,0,0">
                 <Grid.ColumnDefinitions>
