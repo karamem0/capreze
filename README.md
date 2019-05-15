@@ -7,7 +7,7 @@ Window Resizing Tool for Capture
 
 ## Screenshot
 
-![Screenshot](./docs/img/screenshot.png)
+![Screenshot](./img/screenshot.png)
 
 ## Features
 

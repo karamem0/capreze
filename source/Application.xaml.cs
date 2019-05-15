@@ -7,6 +7,7 @@
 //
 
 using Karamem0.Capreze.Configuration;
+using Karamem0.Capreze.Diagnostics;
 using Karamem0.Capreze.Interactivity;
 using Karamem0.Capreze.ViewModels;
 using System;
@@ -15,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Karamem0.Capreze
 {
@@ -24,10 +26,13 @@ namespace Karamem0.Capreze
 
         public Application()
         {
+            Application.Current.DispatcherUnhandledException += this.OnDispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += this.OnUnhandledException;
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Telemetry.Instance.TrackEvent("Applicaton Startup");
             var viewModelLocator = this.TryFindResource(nameof(ViewModelLocator)) as ViewModelLocator;
             if (viewModelLocator != null)
             {
@@ -44,6 +49,7 @@ namespace Karamem0.Capreze
 
         protected override void OnExit(ExitEventArgs e)
         {
+            Telemetry.Instance.TrackEvent("Applicaton Exit");
             var viewModelLocator = this.TryFindResource(nameof(ViewModelLocator)) as ViewModelLocator;
             if (viewModelLocator != null)
             {
@@ -56,6 +62,16 @@ namespace Karamem0.Capreze
                 }
             }
             base.OnExit(e);
+        }
+
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            Telemetry.Instance.TrackException(e.Exception);
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Telemetry.Instance.TrackException(e.ExceptionObject as Exception);
         }
 
     }
