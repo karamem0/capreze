@@ -41,6 +41,8 @@ namespace Karamem0.Capreze.ViewModels
 
         private int offsetY;
 
+        private bool isTopmost;
+
         public MainViewModel()
         {
             this.WindowInformations = new ObservableCollection<WindowInformation>();
@@ -142,6 +144,19 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
+        public bool IsTopmost
+        {
+            get { return this.isTopmost; }
+            set
+            {
+                if (this.isTopmost != value)
+                {
+                    this.isTopmost = value;
+                    this.RaisePropertyChanged(nameof(this.IsTopmost));
+                }
+            }
+        }
+
         private WindowInformation selectedInformation;
 
         public WindowInformation SelectedInformation
@@ -204,7 +219,6 @@ namespace Karamem0.Capreze.ViewModels
         public override async void OnLoaded()
         {
             this.LoadCommand.Execute(null);
-            this.IsOffsetEnabled = true;
             this.OffsetX = await this.windowService.GetOffsetXAsync();
             this.OffsetY = await this.windowService.GetOffsetYAsync();
         }

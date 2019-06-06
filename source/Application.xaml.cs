@@ -42,6 +42,8 @@ namespace Karamem0.Capreze
                     AppSettings.Instance.Load();
                     mainViewModel.CaptureHeight = AppSettings.Instance.CaptureHeight;
                     mainViewModel.CaptureWidth = AppSettings.Instance.CaptureWidth;
+                    mainViewModel.IsOffsetEnabled = AppSettings.Instance.IsOffsetEnabled;
+                    mainViewModel.IsTopmost = AppSettings.Instance.IsTopmost;
                 }
             }
             base.OnStartup(e);
@@ -58,6 +60,8 @@ namespace Karamem0.Capreze
                 {
                     AppSettings.Instance.CaptureHeight = mainViewModel.CaptureHeight;
                     AppSettings.Instance.CaptureWidth = mainViewModel.CaptureWidth;
+                    AppSettings.Instance.IsOffsetEnabled = mainViewModel.IsOffsetEnabled;
+                    AppSettings.Instance.IsTopmost = mainViewModel.IsTopmost;
                     AppSettings.Instance.Save();
                 }
             }

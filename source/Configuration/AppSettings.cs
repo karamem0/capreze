@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +25,17 @@ namespace Karamem0.Capreze.Configuration
         {
         }
 
+        [DefaultValue(600)]
         public int CaptureHeight { get; set; }
 
+        [DefaultValue(800)]
         public int CaptureWidth { get; set; }
+
+        [DefaultValue(true)]
+        public bool IsOffsetEnabled { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsTopmost { get; set; }
 
     }
 
