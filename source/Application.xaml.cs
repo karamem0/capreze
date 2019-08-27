@@ -6,8 +6,10 @@
 // https://github.com/karamem0/Capreze/blob/master/LICENSE
 //
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Karamem0.Capreze.Configuration;
-using Karamem0.Capreze.Diagnostics;
 using Karamem0.Capreze.Interactivity;
 using Karamem0.Capreze.ViewModels;
 using System;
@@ -32,7 +34,7 @@ namespace Karamem0.Capreze
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Telemetry.Instance.TrackEvent("Applicaton Startup");
+            AppCenter.Start("94420eb3-44fa-45ca-b832-0fbafb832112", typeof(Analytics), typeof(Crashes));
             var viewModelLocator = this.TryFindResource(nameof(ViewModelLocator)) as ViewModelLocator;
             if (viewModelLocator != null)
             {
@@ -46,12 +48,12 @@ namespace Karamem0.Capreze
                     mainViewModel.IsTopmost = AppSettings.Instance.IsTopmost;
                 }
             }
+            Analytics.TrackEvent("application start");
             base.OnStartup(e);
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
-            Telemetry.Instance.TrackEvent("Applicaton Exit");
             var viewModelLocator = this.TryFindResource(nameof(ViewModelLocator)) as ViewModelLocator;
             if (viewModelLocator != null)
             {
@@ -65,17 +67,18 @@ namespace Karamem0.Capreze
                     AppSettings.Instance.Save();
                 }
             }
+            Analytics.TrackEvent("application exit");
             base.OnExit(e);
         }
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            Telemetry.Instance.TrackException(e.Exception);
+            Crashes.TrackError(e.Exception);
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Telemetry.Instance.TrackException(e.ExceptionObject as Exception);
+            Crashes.TrackError(e.ExceptionObject as Exception);
         }
 
     }
