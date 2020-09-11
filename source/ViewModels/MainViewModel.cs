@@ -27,22 +27,6 @@ namespace Karamem0.Capreze.ViewModels
 
         private IWindowService windowService;
 
-        private int actualHeight;
-
-        private int actualWidth;
-
-        private int captureHeight;
-
-        private int captureWidth;
-
-        private bool isOffsetEnabled;
-
-        private int offsetX;
-
-        private int offsetY;
-
-        private bool isTopmost;
-
         public MainViewModel()
         {
             this.WindowInformations = new ObservableCollection<WindowInformation>();
@@ -52,6 +36,8 @@ namespace Karamem0.Capreze.ViewModels
         {
             this.windowService = windowService;
         }
+
+        private int actualHeight;
 
         public int ActualHeight
         {
@@ -66,6 +52,8 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
+        private int actualWidth;
+
         public int ActualWidth
         {
             get { return this.actualWidth; }
@@ -78,6 +66,8 @@ namespace Karamem0.Capreze.ViewModels
                 }
             }
         }
+
+        private int captureHeight;
 
         public int CaptureHeight
         {
@@ -92,6 +82,8 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
+        private int captureWidth;
+
         public int CaptureWidth
         {
             get { return this.captureWidth; }
@@ -104,6 +96,8 @@ namespace Karamem0.Capreze.ViewModels
                 }
             }
         }
+
+        private bool isOffsetEnabled;
 
         public bool IsOffsetEnabled
         {
@@ -118,6 +112,8 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
+        private int offsetX;
+
         public int OffsetX
         {
             get { return this.offsetX; }
@@ -131,6 +127,8 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
+        private int offsetY;
+
         public int OffsetY
         {
             get { return this.offsetY; }
@@ -143,6 +141,38 @@ namespace Karamem0.Capreze.ViewModels
                 }
             }
         }
+
+        private int selectedHeight;
+
+        public int SelectedHeight
+        {
+            get { return this.selectedHeight; }
+            set
+            {
+                if (this.selectedHeight != value)
+                {
+                    this.selectedHeight = value;
+                    this.RaisePropertyChanged(nameof(this.SelectedHeight));
+                }
+            }
+        }
+
+        private int selectedWidth;
+
+        public int SelectedWidth
+        {
+            get { return this.selectedWidth; }
+            set
+            {
+                if (this.selectedWidth != value)
+                {
+                    this.selectedWidth = value;
+                    this.RaisePropertyChanged(nameof(this.SelectedWidth));
+                }
+            }
+        }
+
+        private bool isTopmost;
 
         public bool IsTopmost
         {
@@ -172,6 +202,21 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
+        private Visibility selectedInformationVisibility;
+
+        public Visibility SelectedInformationVisibility
+        {
+            get { return this.selectedInformationVisibility; }
+            set
+            {
+                if (this.selectedInformationVisibility != value)
+                {
+                    this.selectedInformationVisibility = value;
+                    this.RaisePropertyChanged(nameof(this.SelectedInformationVisibility));
+                }
+            }
+        }
+
         public ObservableCollection<WindowInformation> WindowInformations { get; }
 
         public ICommand LoadCommand =>
@@ -194,6 +239,12 @@ namespace Karamem0.Capreze.ViewModels
                         {
                             oldValues.Add(newValue);
                         }
+                    }
+                    if (this.selectedInformation != null)
+                    {
+                        var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
+                        this.SelectedHeight = wi.Height;
+                        this.SelectedWidth = wi.Width;
                     }
                 });
 
@@ -221,13 +272,14 @@ namespace Karamem0.Capreze.ViewModels
             this.LoadCommand.Execute(null);
             this.OffsetX = await this.windowService.GetOffsetXAsync();
             this.OffsetY = await this.windowService.GetOffsetYAsync();
+            this.SelectedInformationVisibility = Visibility.Hidden;
         }
 
         public override void OnUnloaded()
         {
         }
 
-        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        protected override async void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
             if (e.PropertyName == nameof(this.CaptureHeight) ||
@@ -245,6 +297,20 @@ namespace Karamem0.Capreze.ViewModels
                 var size = this.CaptureWidth;
                 var offset = this.IsOffsetEnabled ? this.OffsetX * 2 : 0;
                 this.ActualWidth = size + offset;
+            }
+            if (e.PropertyName == nameof(this.SelectedInformation))
+            {
+                if (this.selectedInformation == null)
+                {
+                    this.SelectedInformationVisibility = Visibility.Hidden;
+                }
+                else
+                {
+                    this.SelectedInformationVisibility = Visibility.Visible;
+                    var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
+                    this.SelectedHeight = wi.Height;
+                    this.SelectedWidth = wi.Width;
+                }
             }
         }
 

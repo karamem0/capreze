@@ -8,10 +8,10 @@
     x:Class="Karamem0.Capreze.Views.MainWindow"
     x:Name="Window"
     mc:Ignorable="d"
-    Height="400"
+    Height="480"
     ResizeMode="CanResize"
     Title="Capreze"
-    Width="600">
+    Width="720">
     <Window.Background>
         <x:Static Member="SystemColors.ControlBrush" />
     </Window.Background>
@@ -30,11 +30,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Menu
             Grid.Column="0"
@@ -64,426 +64,463 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ListBox
+        <Grid
             Grid.Column="0"
-            Grid.Row="1"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ScrollViewer.VerticalScrollBarVisibility="Auto"
-            Margin="6,6,6,6">
-            <ListBox.ItemsSource>
-                <Binding Path="WindowInformations" />
-            </ListBox.ItemsSource>
-            <ListBox.ItemTemplate>
-                <ItemContainerTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <StackPanel
-                            Grid.Column="0"
-                            Grid.Row="0"
-                            Margin="3,3,3,3">
-                            <Image
-                                Height="32"
-                                Width="32">
-                                <Image.Source>
-                                    <Binding Path="FilePath">
-                                        <Binding.Converter>
-                                            <StaticResource ResourceKey="BitmapSourceConverter" />
-                                        </Binding.Converter>
-                                    </Binding>
-                                </Image.Source>
-                            </Image>
-                        </StackPanel>
-                        <StackPanel
-                            Grid.Column="1"
-                            Grid.Row="0"
-                            Margin="6,3,3,3">
-                            <TextBlock TextTrimming="CharacterEllipsis">
-                                <TextBlock.Text>
-                                    <Binding Path="FileName" />
-                                </TextBlock.Text>
-                            </TextBlock>
-                            <TextBlock TextTrimming="CharacterEllipsis">
-                                <TextBlock.Text>
-                                    <Binding Path="Title" />
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Grid>
-                </ItemContainerTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.SelectedItem>
-                <Binding
-                    Mode="OneWayToSource"
-                    Path="SelectedInformation" />
-            </ListBox.SelectedItem>
-        </ListBox>
-        <StackPanel
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="6,6,6,6">
-            <Grid Margin="0,0,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Label
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    Content="_X"
-                    HorizontalContentAlignment="Center"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    VerticalContentAlignment="Stretch">
-                    <Label.Target>
-                        <Binding ElementName="OffsetXTextBox" />
-                    </Label.Target>
-                </Label>
-                <Label
-                    Grid.Column="2"
-                    Grid.Row="0"
-                    Content="_Y"
-                    HorizontalContentAlignment="Center"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    VerticalContentAlignment="Stretch">
-                    <Label.Target>
-                        <Binding ElementName="OffsetYTextBox" />
-                    </Label.Target>
-                </Label>
-                <TextBlock
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    Text="Offset:"
-                    TextAlignment="Left" />
-                <TextBox
-                    x:Name="OffsetXTextBox"
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    TextAlignment="Right">
-                    <TextBox.IsEnabled>
-                        <Binding
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ListBox
+                Grid.Column="0"
+                Grid.Row="0"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                Margin="6,6,6,6">
+                <ListBox.ItemsSource>
+                    <Binding Path="WindowInformations" />
+                </ListBox.ItemsSource>
+                <ListBox.ItemTemplate>
+                    <ItemContainerTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <StackPanel
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="3,3,3,3">
+                                <Image
+                                    Height="32"
+                                    Width="32">
+                                    <Image.Source>
+                                        <Binding Path="FilePath">
+                                            <Binding.Converter>
+                                                <StaticResource ResourceKey="BitmapSourceConverter" />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </Image.Source>
+                                </Image>
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Margin="6,3,3,3">
+                                <TextBlock TextTrimming="CharacterEllipsis">
+                                    <TextBlock.Text>
+                                        <Binding Path="FileName" />
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock TextTrimming="CharacterEllipsis">
+                                    <TextBlock.Text>
+                                        <Binding Path="Title" />
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </ItemContainerTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.SelectedItem>
+                    <Binding
+                        Mode="OneWayToSource"
+                        Path="SelectedInformation" />
+                </ListBox.SelectedItem>
+            </ListBox>
+            <StackPanel
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="6,6,6,6">
+                <Grid Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Content="_X"
+                        HorizontalContentAlignment="Center"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        VerticalContentAlignment="Stretch">
+                        <Label.Target>
+                            <Binding ElementName="OffsetXTextBox" />
+                        </Label.Target>
+                    </Label>
+                    <Label
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Content="_Y"
+                        HorizontalContentAlignment="Center"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        VerticalContentAlignment="Stretch">
+                        <Label.Target>
+                            <Binding ElementName="OffsetYTextBox" />
+                        </Label.Target>
+                    </Label>
+                    <TextBlock
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        Text="Offset:"
+                        TextAlignment="Left" />
+                    <TextBox
+                        x:Name="OffsetXTextBox"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        TextAlignment="Right">
+                        <TextBox.IsEnabled>
+                            <Binding
                             Mode="OneWay"
                             Path="IsOffsetEnabled" />
-                    </TextBox.IsEnabled>
-                    <TextBox.Text>
-                        <Binding
+                        </TextBox.IsEnabled>
+                        <TextBox.Text>
+                            <Binding
                             Mode="TwoWay"
                             Path="OffsetX" />
-                    </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <x:Null />
-                    </Validation.ErrorTemplate>
-                </TextBox>
-                <TextBox
-                    x:Name="OffsetYTextBox"
-                    Grid.Column="2"
-                    Grid.Row="1"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    TextAlignment="Right">
-                    <TextBox.IsEnabled>
-                        <Binding
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <x:Null />
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                    <TextBox
+                        x:Name="OffsetYTextBox"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        TextAlignment="Right">
+                        <TextBox.IsEnabled>
+                            <Binding
                             Mode="OneWay"
                             Path="IsOffsetEnabled" />
-                    </TextBox.IsEnabled>
-                    <TextBox.Text>
-                        <Binding
+                        </TextBox.IsEnabled>
+                        <TextBox.Text>
+                            <Binding
                             Mode="TwoWay"
                             Path="OffsetY" />
-                    </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <x:Null />
-                    </Validation.ErrorTemplate>
-                </TextBox>
-                <StackPanel
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2"
-                    Grid.Row="2">
-                    <CheckBox
-                    Content="Enable offsets"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    VerticalAlignment="Center"
-                    VerticalContentAlignment="Center">
-                        <CheckBox.IsChecked>
-                            <Binding
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <x:Null />
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                    <StackPanel
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="2">
+                        <CheckBox
+                            Content="Enable offsets"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            Margin="3,3,3,3"
+                            Padding="3,3,3,3"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center">
+                            <CheckBox.IsChecked>
+                                <Binding
                                 Mode="TwoWay"
                                 Path="IsOffsetEnabled" />
-                        </CheckBox.IsChecked>
-                    </CheckBox>
-                </StackPanel>
-            </Grid>
-            <Grid Margin="0,6,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    Text="Capture"
-                    TextAlignment="Center" />
-                <TextBlock
-                    Grid.Column="2"
-                    Grid.Row="0"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    Text="Actual"
-                    TextAlignment="Center" />
-                <Label
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    Content="_Width:"
-                    HorizontalAlignment="Left"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    VerticalAlignment="Center">
-                    <Label.Target>
-                        <Binding ElementName="CaptureWidthTextBox" />
-                    </Label.Target>
-                </Label>
-                <TextBox
-                    x:Name="CaptureWidthTextBox"
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    TextAlignment="Right">
-                    <TextBox.Text>
-                        <Binding
+                            </CheckBox.IsChecked>
+                        </CheckBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Margin="0,6,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        Text="Capture"
+                        TextAlignment="Center" />
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        Text="Actual"
+                        TextAlignment="Center" />
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Content="_Width:"
+                        HorizontalAlignment="Left"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        VerticalAlignment="Center">
+                        <Label.Target>
+                            <Binding ElementName="CaptureWidthTextBox" />
+                        </Label.Target>
+                    </Label>
+                    <TextBox
+                        x:Name="CaptureWidthTextBox"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        TextAlignment="Right">
+                        <TextBox.Text>
+                            <Binding
                             Mode="TwoWay"
                             Path="CaptureWidth" />
-                    </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <x:Null />
-                    </Validation.ErrorTemplate>
-                </TextBox>
-                <TextBlock
-                    Grid.Column="2"
-                    Grid.Row="1"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    TextAlignment="Right">
-                    <TextBlock.Text>
-                        <Binding Path="ActualWidth" />
-                    </TextBlock.Text>
-                </TextBlock>
-                <Label
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Content="_Height:"
-                    HorizontalAlignment="Left"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    VerticalAlignment="Center">
-                    <Label.Target>
-                        <Binding ElementName="CaptureHeightTextBox" />
-                    </Label.Target>
-                </Label>
-                <TextBox
-                    x:Name="CaptureHeightTextBox"
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    TextAlignment="Right">
-                    <TextBox.Text>
-                        <Binding
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <x:Null />
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        TextAlignment="Right">
+                        <TextBlock.Text>
+                            <Binding Path="ActualWidth" />
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Content="_Height:"
+                        HorizontalAlignment="Left"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        VerticalAlignment="Center">
+                        <Label.Target>
+                            <Binding ElementName="CaptureHeightTextBox" />
+                        </Label.Target>
+                    </Label>
+                    <TextBox
+                        x:Name="CaptureHeightTextBox"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        TextAlignment="Right">
+                        <TextBox.Text>
+                            <Binding
                             Mode="TwoWay"
                             Path="CaptureHeight" />
-                    </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <x:Null />
-                    </Validation.ErrorTemplate>
-                </TextBox>
-                <TextBlock
-                    Grid.Column="2"
-                    Grid.Row="2"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    TextAlignment="Right">
-                    <TextBlock.Text>
-                        <Binding Path="ActualHeight" />
-                    </TextBlock.Text>
-                </TextBlock>
-            </Grid>
-            <Grid Margin="0,6,0,0">
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <x:Null />
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        TextAlignment="Right">
+                        <TextBlock.Text>
+                            <Binding Path="ActualHeight" />
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Grid>
+                <Grid Margin="0,6,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Content="800x600"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="800x600 (SVGA, 4:3)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="600" Width="800" />
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Content="1024x768"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="1024x768 (XGA, 4:3)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="768" Width="1024" />
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Content="1600x1200"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="1600x1200 (UXGA, 4:3)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="1200" Width="1600" />
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Content="1366x768"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="1366x768 (HD, 16:9)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="768" Width="1366" />
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Content="1920x1080"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="1920x1080 (FHD, 16:9)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="1080" Width="1920" />
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Content="2560x1440"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="2560x1440 (WQHD, 16:9)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="1440" Width="2560" />
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Content="1280x800"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="1280x800 (WXGA, 16:10)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="800" Width="1280" />
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Content="1280x1024"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="1280x1024 (SXGA, 5:4)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="1024" Width="1280" />
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        Content="1920x1200"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3"
+                        ToolTip="1920x1200 (WUXGA, 16:10)">
+                        <Button.Command>
+                            <Binding Path="PresetCommand" />
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Size Height="1200" Width="1920" />
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+                <Grid Margin="0,6,0,0">
+                    <Button
+                        Content="Resize"
+                        Margin="3,3,3,3"
+                        Padding="3,3,3,3">
+                        <Button.Command>
+                            <Binding Path="ResizeCommand" />
+                        </Button.Command>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <StatusBar
+            Grid.Column="0"
+            Grid.Row="2">
+            <Grid Margin="6,3,6,3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Button
-                    Grid.Column="0"
-                    Grid.Row="0"
-                    Content="800x600"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="800x600 (SVGA, 4:3)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="600" Width="800" />
-                    </Button.CommandParameter>
-                </Button>
-                <Button
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    Content="1024x768"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="1024x768 (XGA, 4:3)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="768" Width="1024" />
-                    </Button.CommandParameter>
-                </Button>
-                <Button
-                    Grid.Column="2"
-                    Grid.Row="0"
-                    Content="1600x1200"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="1600x1200 (UXGA, 4:3)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="1200" Width="1600" />
-                    </Button.CommandParameter>
-                </Button>
-                <Button
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    Content="1366x768"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="1366x768 (HD, 16:9)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="768" Width="1366" />
-                    </Button.CommandParameter>
-                </Button>
-                <Button
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Content="1920x1080"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="1920x1080 (FHD, 16:9)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="1080" Width="1920" />
-                    </Button.CommandParameter>
-                </Button>
-                <Button
-                    Grid.Column="2"
-                    Grid.Row="1"
-                    Content="2560x1440"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="2560x1440 (WQHD, 16:9)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="1440" Width="2560" />
-                    </Button.CommandParameter>
-                </Button>
-                <Button
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Content="1280x800"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="1280x800 (WXGA, 16:10)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="800" Width="1280" />
-                    </Button.CommandParameter>
-                </Button>
-                <Button
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Content="1280x1024"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="1280x1024 (SXGA, 5:4)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="1024" Width="1280" />
-                    </Button.CommandParameter>
-                </Button>
-                <Button
-                    Grid.Column="2"
-                    Grid.Row="2"
-                    Content="1920x1200"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3"
-                    ToolTip="1920x1200 (WUXGA, 16:10)">
-                    <Button.Command>
-                        <Binding Path="PresetCommand" />
-                    </Button.Command>
-                    <Button.CommandParameter>
-                        <Size Height="1200" Width="1920" />
-                    </Button.CommandParameter>
-                </Button>
+                <TextBlock>
+                    <TextBlock.Visibility>
+                        <Binding Path="SelectedInformationVisibility" />
+                    </TextBlock.Visibility>
+                    <Run Text="Width:" />
+                    <Run>
+                        <Run.Text>
+                            <Binding Path="SelectedWidth" />
+                        </Run.Text>
+                    </Run>
+                    <Run Text="Height:" />
+                    <Run>
+                        <Run.Text>
+                            <Binding Path="SelectedHeight" />
+                        </Run.Text>
+                    </Run>
+                </TextBlock>
             </Grid>
-            <Grid Margin="0,6,0,0">
-                <Button
-                    Content="Resize"
-                    Margin="3,3,3,3"
-                    Padding="3,3,3,3">
-                    <Button.Command>
-                        <Binding Path="ResizeCommand" />
-                    </Button.Command>
-                </Button>
-            </Grid>
-        </StackPanel>
+        </StatusBar>
     </Grid>
     <i:Interaction.Behaviors>
         <li:ViewModelBehavior />

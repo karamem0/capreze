@@ -2,7 +2,7 @@
 
 Window Resizing Tool for Capture
 
-[![Build status](https://ci.appveyor.com/api/projects/status/15s539p3yeafj991?svg=true)](https://ci.appveyor.com/project/karamem0/capreze)
+[![Build Status](https://dev.azure.com/karamem0jp/Capreze/_apis/build/status/Capreze?branchName=master)](https://dev.azure.com/karamem0jp/Capreze/_build/latest?definitionId=34&branchName=master)
 [![License](https://img.shields.io/github/license/karamem0/Capreze.svg)](https://github.com/karamem0/Capreze/blob/master/LICENSE)
 
 ## Screenshot
@@ -17,9 +17,11 @@ Window Resizing Tool for Capture
 
 ## Dependencies
 
-- [.NET Core 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0) (3.0.0-preview5)
-- [Microsoft.AppCenter.Analytics](https://www.nuget.org/packages/Microsoft.AppCenter.Analytics/2.3.0-preview) (2.3.0-preview)
-- [Microsoft.AppCenter.Crashes](https://www.nuget.org/packages/Microsoft.AppCenter.Crashes/2.3.0-preview) (2.3.0-preview)
-- [Microsoft.Extensions.DependencyInjection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/2.2.0) (2.2.0)
-- [Microsoft.Xaml.Behaviors.Wpf](https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf/1.0.1) (1.0.1)
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2) (12.0.2)
+- [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+- [Microsoft.AppCenter](https://www.nuget.org/packages/Microsoft.AppCenter/3.4.1) (3.4.1)
+- [Microsoft.AppCenter.Analytics](https://www.nuget.org/packages/Microsoft.AppCenter.Analytics/3.4.1) (3.4.1)
+- [Microsoft.AppCenter.Crashes](https://www.nuget.org/packages/Microsoft.AppCenter.Crashes/3.4.1) (3.4.1)
+- [Microsoft.Extensions.DependencyInjection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/3.1.8) (3.1.8)
+- [Microsoft.Xaml.Behaviors.Wpf](https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf/1.1.19) (1.1.19)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/12.0.3) (12.0.3)
+- [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/4.7.0) (4.7.0)

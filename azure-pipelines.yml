@@ -1,0 +1,129 @@
+trigger:
+- develop
+- master
+- refs/tags/*
+
+pr: none
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildVersion: '1.4.0'
+  buildId: '$(Build.BuildId)'
+  artifactName: 'Capreze'
+  solutionName: 'Capreze'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  variables:
+    solutionFile: 'source/$(solutionName).csproj'
+    buildConfiguration: 'Release'
+  jobs:
+  - job: Build
+    displayName: Build job
+    steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##vso[task.setvariable variable=buildNumber]$env:buildVersion.$env:buildId"
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '$(solutionFile)'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: '$(solutionFile)'
+        arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:version=$(buildNumber);fileversion=$(buildNumber)'
+        zipAfterPublish: false
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)/source'
+        ArtifactName: '$(artifactName)'
+        publishLocation: 'Container'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: '$(solutionFile)'
+        arguments: '-c $(buildConfiguration) --self-contained --runtime win-x64 -o $(Build.ArtifactStagingDirectory)/self-contained-win-x64 -p:version=$(buildNumber);fileversion=$(buildNumber)'
+        zipAfterPublish: false
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)/self-contained-win-x64/source'
+        ArtifactName: '$(artifactName)-self-contained-win-x64'
+        publishLocation: 'Container'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: '$(solutionFile)'
+        arguments: '-c $(buildConfiguration) --self-contained --runtime win-x86 -o $(Build.ArtifactStagingDirectory)/self-contained-win-x86 -p:version=$(buildNumber);fileversion=$(buildNumber)'
+        zipAfterPublish: false
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)/self-contained-win-x86/source'
+        ArtifactName: '$(artifactName)-self-contained-win-x86'
+        publishLocation: 'Container'
+- stage: Release
+  displayName: Release stage
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  jobs:
+  - job: Release
+    displayName: Release job
+    steps:
+    - checkout: none
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##vso[task.setvariable variable=buildNumber]$env:buildVersion.$env:buildId"
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '$(artifactName)'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.ArtifactsDirectory)/$(artifactName)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(solutionName)_$(buildNumber).zip'
+        replaceExistingArchive: true
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '$(artifactName)-self-contained-win-x64'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.ArtifactsDirectory)/$(artifactName)-self-contained-win-x64'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(solutionName)_$(buildNumber)_win-x64.zip'
+        replaceExistingArchive: true
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '$(artifactName)-self-contained-win-x86'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.ArtifactsDirectory)/$(artifactName)-self-contained-win-x86'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(solutionName)_$(buildNumber)_win-x86.zip'
+        replaceExistingArchive: true
+    - task: GitHubRelease@1
+      inputs:
+        gitHubConnection: GitHub
+        action: create
+        addChangeLog: false
+        assets: '$(Build.ArtifactStagingDirectory)/*'

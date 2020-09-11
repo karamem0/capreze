@@ -14,8 +14,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using static Karamem0.Capreze.Runtime.InteropServices.User32;
 
 namespace Karamem0.Capreze.Services
 {
@@ -28,6 +30,8 @@ namespace Karamem0.Capreze.Services
         Task<int> GetOffsetYAsync();
 
         Task<IEnumerable<WindowInformation>> GetWindowInformationsAsync();
+
+        Task<Rectangle> GetWindowRectangleAsync(IntPtr hwnd);
 
         Task ResizeWindowAsync(IntPtr hwnd, int width, int height);
 
@@ -83,6 +87,17 @@ namespace Karamem0.Capreze.Services
                     }
                 }
                 return result;
+            });
+        }
+
+        public async Task<Rectangle> GetWindowRectangleAsync(IntPtr hwnd)
+        {
+            return await Task.Run(() =>
+            {
+                var wi = new WindowInfo();
+                wi.Size = Marshal.SizeOf(wi);
+                User32.GetWindowInfo(hwnd, ref wi);
+                return wi.Window;
             });
         }
 

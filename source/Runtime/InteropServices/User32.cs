@@ -23,6 +23,9 @@ namespace Karamem0.Capreze.Runtime.InteropServices
         public extern static int GetSystemMetrics(int index);
 
         [DllImport("user32.dll")]
+        public extern static int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
+
+        [DllImport("user32.dll")]
         public static extern IntPtr SetWindowPos(IntPtr hwnd, IntPtr order, int x, int y, int width, int height, uint flags);
 
         [DllImport("user32.dll")]
@@ -100,6 +103,48 @@ namespace Karamem0.Capreze.Runtime.InteropServices
             HWND_TOPMOST = -1,
 
             HWND_NOTOPMOST = -2,
+
+        }
+
+        public struct WindowInfo
+        {
+
+            public int Size { get; set; }
+
+            public Rectangle Window { get; set; }
+
+            public Rectangle Client { get; set; }
+
+            public int Style { get; set; }
+
+            public int ExStyle { get; set; }
+
+            public int WindowStatus { get; set; }
+
+            public uint WindowBordersX { get; set; }
+
+            public uint WindowBordersY { get; set; }
+
+            public short WindowType { get; set; }
+
+            public short CreatorVersion { get; set; }
+
+        }
+
+        public struct Rectangle
+        {
+
+            public int Left { get; set; }
+
+            public int Top { get; set; }
+
+            public int Right { get; set; }
+
+            public int Bottom { get; set; }
+
+            public int Width => this.Right - this.Left;
+
+            public int Height => this.Bottom - this.Top;
 
         }
 
