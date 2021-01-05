@@ -17,11 +17,11 @@ Window Resizing Tool for Capture
 
 ## Dependencies
 
-- [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
-- [Microsoft.AppCenter](https://www.nuget.org/packages/Microsoft.AppCenter/3.4.1) (3.4.1)
-- [Microsoft.AppCenter.Analytics](https://www.nuget.org/packages/Microsoft.AppCenter.Analytics/3.4.1) (3.4.1)
-- [Microsoft.AppCenter.Crashes](https://www.nuget.org/packages/Microsoft.AppCenter.Crashes/3.4.1) (3.4.1)
-- [Microsoft.Extensions.DependencyInjection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/3.1.8) (3.1.8)
-- [Microsoft.Xaml.Behaviors.Wpf](https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf/1.1.19) (1.1.19)
+- [.NET Core 5.0](https://dotnet.microsoft.com/download/dotnet-core/5.0)
+- [Microsoft.AppCenter](https://www.nuget.org/packages/Microsoft.AppCenter/4.0.0) (4.0.0)
+- [Microsoft.AppCenter.Analytics](https://www.nuget.org/packages/Microsoft.AppCenter.Analytics/4.0.0) (4.0.0)
+- [Microsoft.AppCenter.Crashes](https://www.nuget.org/packages/Microsoft.AppCenter.Crashes/4.0.0) (4.0.0)
+- [Microsoft.Extensions.DependencyInjection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/5.0.1) (5.0.1)
+- [Microsoft.Xaml.Behaviors.Wpf](https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf/1.1.31) (1.1.31)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/12.0.3) (12.0.3)
-- [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/4.7.0) (4.7.0)
+- [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/5.0.0) (5.0.0)

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 karamem0
+// Copyright (c) 2021 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -42,7 +42,7 @@ namespace Karamem0.Capreze.Configuration
                 }
             }
             var serializer = new JsonSerializer();
-            var file = new FileInfo(Path.ChangeExtension(type.Assembly.Location, "json"));
+            var file = new FileInfo(Path.Combine(AppContext.BaseDirectory, "Capreze.json"));
             if (file.Exists)
             {
                 using (var stream = file.Open(FileMode.Open, FileAccess.Read))
@@ -63,7 +63,7 @@ namespace Karamem0.Capreze.Configuration
             {
                 var serializer = new JsonSerializer();
                 var type = this.GetType();
-                var file = new FileInfo(Path.ChangeExtension(type.Assembly.Location, "json"));
+                var file = new FileInfo(Path.Combine(AppContext.BaseDirectory, "Capreze.json"));
                 using (var stream = file.Open(FileMode.Create, FileAccess.Write))
                 using (var writer = new StreamWriter(stream, new UTF8Encoding(false)))
                 {

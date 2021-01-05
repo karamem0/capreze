@@ -9,7 +9,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  buildVersion: '1.4.0'
+  buildVersion: '1.5.0'
   buildId: '$(Build.BuildId)'
   artifactName: 'Capreze'
   solutionName: 'Capreze'
@@ -38,7 +38,7 @@ stages:
         command: 'publish'
         publishWebProjects: false
         projects: '$(solutionFile)'
-        arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:version=$(buildNumber);fileversion=$(buildNumber)'
+        arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) -p:Version=$(buildNumber);FileVersion=$(buildNumber)'
         zipAfterPublish: false
     - task: PublishBuildArtifacts@1
       inputs:
@@ -50,7 +50,7 @@ stages:
         command: 'publish'
         publishWebProjects: false
         projects: '$(solutionFile)'
-        arguments: '-c $(buildConfiguration) --self-contained --runtime win-x64 -o $(Build.ArtifactStagingDirectory)/self-contained-win-x64 -p:version=$(buildNumber);fileversion=$(buildNumber)'
+        arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/self-contained-win-x64 --self-contained -r win-x64 -p:PublishSingleFile=true;Version=$(buildNumber);FileVersion=$(buildNumber)'
         zipAfterPublish: false
     - task: PublishBuildArtifacts@1
       inputs:
@@ -62,7 +62,7 @@ stages:
         command: 'publish'
         publishWebProjects: false
         projects: '$(solutionFile)'
-        arguments: '-c $(buildConfiguration) --self-contained --runtime win-x86 -o $(Build.ArtifactStagingDirectory)/self-contained-win-x86 -p:version=$(buildNumber);fileversion=$(buildNumber)'
+        arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)/self-contained-win-x86 --self-contained -r win-x86 -p:PublishSingleFile=true;Version=$(buildNumber);FileVersion=$(buildNumber)'
         zipAfterPublish: false
     - task: PublishBuildArtifacts@1
       inputs:
