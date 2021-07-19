@@ -3,7 +3,7 @@
 //
 // This software is released under the MIT License.
 //
-// https://github.com/karamem0/Capreze/blob/master/LICENSE
+// https://github.com/karamem0/capreze/blob/master/LICENSE
 //
 
 using Microsoft.AppCenter;
@@ -41,11 +41,12 @@ namespace Karamem0.Capreze
                 var mainViewModel = viewModelLocator.MainViewModel as MainViewModel;
                 if (mainViewModel != null)
                 {
-                    AppSettings.Instance.Load();
-                    mainViewModel.CaptureHeight = AppSettings.Instance.CaptureHeight;
-                    mainViewModel.CaptureWidth = AppSettings.Instance.CaptureWidth;
-                    mainViewModel.IsOffsetEnabled = AppSettings.Instance.IsOffsetEnabled;
-                    mainViewModel.IsTopmost = AppSettings.Instance.IsTopmost;
+                    var appSettings = new AppSettings();
+                    appSettings.Load();
+                    mainViewModel.CaptureHeight = appSettings.CaptureHeight;
+                    mainViewModel.CaptureWidth = appSettings.CaptureWidth;
+                    mainViewModel.IsOffsetEnabled = appSettings.IsOffsetEnabled;
+                    mainViewModel.IsTopmost = appSettings.IsTopmost;
                 }
             }
             Analytics.TrackEvent("application start");
@@ -60,11 +61,14 @@ namespace Karamem0.Capreze
                 var mainViewModel = viewModelLocator.MainViewModel as MainViewModel;
                 if (mainViewModel != null)
                 {
-                    AppSettings.Instance.CaptureHeight = mainViewModel.CaptureHeight;
-                    AppSettings.Instance.CaptureWidth = mainViewModel.CaptureWidth;
-                    AppSettings.Instance.IsOffsetEnabled = mainViewModel.IsOffsetEnabled;
-                    AppSettings.Instance.IsTopmost = mainViewModel.IsTopmost;
-                    AppSettings.Instance.Save();
+                    var appSettings = new AppSettings()
+                    {
+                        CaptureHeight = mainViewModel.CaptureHeight,
+                        CaptureWidth = mainViewModel.CaptureWidth,
+                        IsOffsetEnabled = mainViewModel.IsOffsetEnabled,
+                        IsTopmost = mainViewModel.IsTopmost
+                    };
+                    appSettings.Save();
                 }
             }
             Analytics.TrackEvent("application exit");

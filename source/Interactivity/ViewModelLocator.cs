@@ -3,7 +3,7 @@
 //
 // This software is released under the MIT License.
 //
-// https://github.com/karamem0/Capreze/blob/master/LICENSE
+// https://github.com/karamem0/capreze/blob/master/LICENSE
 //
 
 using Karamem0.Capreze.Infrastructure;
