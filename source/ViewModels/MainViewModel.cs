@@ -37,6 +37,21 @@ namespace Karamem0.Capreze.ViewModels
             this.windowService = windowService;
         }
 
+        private IntPtr windowHandle;
+
+        public IntPtr WindowHandle
+        {
+            get { return this.windowHandle; }
+            set
+            {
+                if (this.windowHandle != value)
+                {
+                    this.windowHandle = value;
+                    this.RaisePropertyChanged(nameof(this.WindowHandle));
+                }
+            }
+        }
+
         private int actualHeight;
 
         public int ActualHeight
@@ -219,59 +234,65 @@ namespace Karamem0.Capreze.ViewModels
 
         public ObservableCollection<WindowInformation> WindowInformations { get; }
 
-        public ICommand LoadCommand =>
+        public ICommand LoadWindowCommand =>
             new DelegateCommand(async () =>
+            {
+                var oldValues = this.WindowInformations;
+                var newValues = await this.windowService.GetWindowInformationsAsync();
+                for (var index = oldValues.Count - 1; index >= 0; index--)
                 {
-                    var oldValues = this.WindowInformations;
-                    var newValues = await this.windowService.GetWindowInformationsAsync();
-                    for (var index = oldValues.Count - 1; index >= 0; index--)
+                    var newValue = newValues.SingleOrDefault(item => item.Hwnd == oldValues[index].Hwnd);
+                    if (newValue == null)
                     {
-                        var newValue = newValues.SingleOrDefault(item => item.Hwnd == oldValues[index].Hwnd);
-                        if (newValue == null)
-                        {
-                            oldValues.RemoveAt(index);
-                        }
+                        oldValues.RemoveAt(index);
                     }
-                    foreach (var newValue in newValues)
+                }
+                foreach (var newValue in newValues)
+                {
+                    var oldValue = oldValues.SingleOrDefault(item => item.Hwnd == newValue.Hwnd);
+                    if (oldValue == null)
                     {
-                        var oldValue = oldValues.SingleOrDefault(item => item.Hwnd == newValue.Hwnd);
-                        if (oldValue == null)
-                        {
-                            oldValues.Add(newValue);
-                        }
+                        oldValues.Add(newValue);
                     }
-                    if (this.selectedInformation != null)
-                    {
-                        var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
-                        this.SelectedHeight = wi.Height;
-                        this.SelectedWidth = wi.Width;
-                    }
-                });
+                }
+                if (this.selectedInformation != null)
+                {
+                    var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
+                    this.SelectedHeight = wi.Height;
+                    this.SelectedWidth = wi.Width;
+                }
+            });
+
+        public ICommand LoadOffsetCommand =>
+            new DelegateCommand(async () =>
+            {
+                this.OffsetX = await this.windowService.GetOffsetXAsync(this.WindowHandle);
+                this.OffsetY = await this.windowService.GetOffsetYAsync(this.WindowHandle);
+            });
 
         public ICommand PresetCommand =>
             new DelegateCommand<Size>(parameter =>
-                {
-                    this.CaptureHeight = (int)parameter.Height;
-                    this.CaptureWidth = (int)parameter.Width;
-                });
+            {
+                this.CaptureHeight = (int)parameter.Height;
+                this.CaptureWidth = (int)parameter.Width;
+            });
 
         public ICommand ResizeCommand =>
             new DelegateCommand(async () =>
+            {
+                if (this.SelectedInformation != null)
                 {
-                    if (this.SelectedInformation != null)
-                    {
-                        var hwnd = this.SelectedInformation.Hwnd;
-                        var width = this.ActualWidth;
-                        var height = this.ActualHeight;
-                        await this.windowService.ResizeWindowAsync(hwnd, width, height);
-                    }
-                });
+                    var hwnd = this.SelectedInformation.Hwnd;
+                    var width = this.ActualWidth;
+                    var height = this.ActualHeight;
+                    await this.windowService.ResizeWindowAsync(hwnd, width, height);
+                }
+            });
 
-        public override async void OnLoaded()
+        public override void OnLoaded()
         {
-            this.LoadCommand.Execute(null);
-            this.OffsetX = await this.windowService.GetOffsetXAsync();
-            this.OffsetY = await this.windowService.GetOffsetYAsync();
+            this.LoadWindowCommand.Execute(null);
+            this.LoadOffsetCommand.Execute(null);
             this.SelectedInformationVisibility = Visibility.Hidden;
         }
 

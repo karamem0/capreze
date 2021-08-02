@@ -25,9 +25,9 @@ namespace Karamem0.Capreze.Services
     public interface IWindowService
     {
 
-        Task<int> GetOffsetXAsync();
+        Task<int> GetOffsetXAsync(IntPtr hwnd);
 
-        Task<int> GetOffsetYAsync();
+        Task<int> GetOffsetYAsync(IntPtr hwnd);
 
         Task<IEnumerable<WindowInformation>> GetWindowInformationsAsync();
 
@@ -44,22 +44,24 @@ namespace Karamem0.Capreze.Services
         {
         }
 
-        public async Task<int> GetOffsetXAsync()
+        public async Task<int> GetOffsetXAsync(IntPtr hwnd)
         {
             return await Task.Run(() =>
             {
-                var size = User32.GetSystemMetrics((int)User32.SystemMetricIndex.SM_CXSIZEFRAME);
-                var padding = User32.GetSystemMetrics((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER);
+                var dpi = User32.GetDpiForWindow(hwnd);
+                var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXSIZEFRAME, dpi);
+                var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
                 return (size + padding) - 1;
             });
         }
 
-        public async Task<int> GetOffsetYAsync()
+        public async Task<int> GetOffsetYAsync(IntPtr hwnd)
         {
             return await Task.Run(() =>
             {
-                var size = User32.GetSystemMetrics((int)User32.SystemMetricIndex.SM_CYSIZEFRAME);
-                var padding = User32.GetSystemMetrics((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER);
+                var dpi = User32.GetDpiForWindow(hwnd);
+                var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CYSIZEFRAME, dpi);
+                var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
                 return (size + padding) - 1;
             });
         }

@@ -1,13 +1,13 @@
 on:
   push:
     branches:
-      - master
+      - main
       - develop
     tags:
       - v*.*.*
 
 env:
-  BUILD_VERSION: 1.6.0.${{github.run_number}}
+  BUILD_VERSION: 1.7.0.${{github.run_number}}
 
 jobs:
   build:
@@ -23,32 +23,32 @@ jobs:
         run: |
           dotnet restore source
           dotnet build source -c Release
-          dotnet publish source -c Release -o artifact/Capreze -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}}
+          dotnet publish source -c Release -o artifact/capreze -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}}
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Capreze
-          path: artifact/Capreze
+          name: capreze
+          path: artifact/capreze
       - name: Build source (x64)
         run: |
           dotnet restore source
           dotnet build source -c Release
-          dotnet publish source -c Release -o artifact/Capreze_win-x64 -r win-x64 -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}} -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true
+          dotnet publish source -c Release -o artifact/capreze_win-x64 -r win-x64 -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}} -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true
       - name: Upload artifact (x64)
         uses: actions/upload-artifact@v2
         with:
-          name: Capreze_win-x64
-          path: artifact/Capreze_win-x64
+          name: capreze_win-x64
+          path: artifact/capreze_win-x64
       - name: Build source (x86)
         run: |
           dotnet restore source
           dotnet build source -c Release
-          dotnet publish source -c Release -o artifact/Capreze_win-x86 -r win-x86 -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}} -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true
+          dotnet publish source -c Release -o artifact/capreze_win-x86 -r win-x86 -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}} -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true
       - name: Upload artifact (x86)
         uses: actions/upload-artifact@v2
         with:
-          name: Capreze_win-x86
-          path: artifact/Capreze_win-x86
+          name: capreze_win-x86
+          path: artifact/capreze_win-x86
   release:
     needs: build
     if: contains(github.ref, 'refs/tags/')
@@ -57,30 +57,30 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: Capreze
-          path: Capreze
+          name: capreze
+          path: capreze
       - name: Download artifact (x64)
         uses: actions/download-artifact@v2
         with:
-          name: Capreze_win-x64
-          path: Capreze_win-x64
+          name: capreze_win-x64
+          path: capreze_win-x64
       - name: Download artifact (x86)
         uses: actions/download-artifact@v2
         with:
-          name: Capreze_win-x86
-          path: Capreze_win-x86
+          name: capreze_win-x86
+          path: capreze_win-x86
       - name: Archive artifact
         shell: pwsh
         run: |
-          Compress-Archive -Path Capreze/* -DestinationPath Capreze_${{env.BUILD_VERSION}}.zip
-          Compress-Archive -Path Capreze_win-x64/* -DestinationPath Capreze_${{env.BUILD_VERSION}}_win-x64.zip
-          Compress-Archive -Path Capreze_win-x86/* -DestinationPath Capreze_${{env.BUILD_VERSION}}_win-x86.zip
+          Compress-Archive -Path capreze/* -DestinationPath capreze_${{env.BUILD_VERSION}}.zip
+          Compress-Archive -Path capreze_win-x64/* -DestinationPath capreze_${{env.BUILD_VERSION}}_win-x64.zip
+          Compress-Archive -Path capreze_win-x86/* -DestinationPath capreze_${{env.BUILD_VERSION}}_win-x86.zip
       - name: Create release
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           files: |
-            Capreze_${{env.BUILD_VERSION}}.zip
-            Capreze_${{env.BUILD_VERSION}}_win-x64.zip
-            Capreze_${{env.BUILD_VERSION}}_win-x86.zip
+            capreze_${{env.BUILD_VERSION}}.zip
+            capreze_${{env.BUILD_VERSION}}_win-x64.zip
+            capreze_${{env.BUILD_VERSION}}_win-x86.zip

@@ -522,16 +522,29 @@
             </Grid>
         </StatusBar>
     </Grid>
+    <li:WindowHandle.Handle>
+        <Binding
+            Mode="OneWayToSource"
+            Path="WindowHandle" />
+    </li:WindowHandle.Handle>
     <i:Interaction.Behaviors>
+        <li:WindowHandleBehavior />
         <li:ViewModelBehavior />
     </i:Interaction.Behaviors>
     <i:Interaction.Triggers>
         <i:TimerTrigger MillisecondsPerTick="1000">
             <i:InvokeCommandAction>
                 <i:InvokeCommandAction.Command>
-                    <Binding Path="LoadCommand" />
+                    <Binding Path="LoadWindowCommand" />
                 </i:InvokeCommandAction.Command>
             </i:InvokeCommandAction>
         </i:TimerTrigger>
+        <i:EventTrigger EventName="LocationChanged">
+            <i:InvokeCommandAction>
+                <i:InvokeCommandAction.Command>
+                    <Binding Path="LoadOffsetCommand" />
+                </i:InvokeCommandAction.Command>
+            </i:InvokeCommandAction>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
 </Window>

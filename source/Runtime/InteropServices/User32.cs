@@ -20,7 +20,10 @@ namespace Karamem0.Capreze.Runtime.InteropServices
     {
 
         [DllImport("user32.dll")]
-        public extern static int GetSystemMetrics(int index);
+        public extern static uint GetDpiForWindow(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public extern static int GetSystemMetricsForDpi(int index, uint dpi);
 
         [DllImport("user32.dll")]
         public extern static int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
