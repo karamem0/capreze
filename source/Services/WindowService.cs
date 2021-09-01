@@ -17,7 +17,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static Karamem0.Capreze.Runtime.InteropServices.User32;
 
 namespace Karamem0.Capreze.Services
 {
@@ -31,7 +30,7 @@ namespace Karamem0.Capreze.Services
 
         Task<IEnumerable<WindowInformation>> GetWindowInformationsAsync();
 
-        Task<Rectangle> GetWindowRectangleAsync(IntPtr hwnd);
+        Task<User32.Rectangle> GetWindowRectangleAsync(IntPtr hwnd);
 
         Task ResizeWindowAsync(IntPtr hwnd, int width, int height);
 
@@ -51,7 +50,7 @@ namespace Karamem0.Capreze.Services
                 var dpi = User32.GetDpiForWindow(hwnd);
                 var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXSIZEFRAME, dpi);
                 var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
-                return (size + padding) - 1;
+                return size + padding - 1;
             });
         }
 
@@ -62,7 +61,7 @@ namespace Karamem0.Capreze.Services
                 var dpi = User32.GetDpiForWindow(hwnd);
                 var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CYSIZEFRAME, dpi);
                 var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
-                return (size + padding) - 1;
+                return size + padding - 1;
             });
         }
 
@@ -79,6 +78,7 @@ namespace Karamem0.Capreze.Services
                         {
                             result.Add(new WindowInformation()
                             {
+                                Id = process.Id,
                                 Hwnd = process.MainWindowHandle,
                                 FilePath = process.MainModule.FileName,
                                 FileName = Path.GetFileName(process.MainModule.FileName),
@@ -92,13 +92,13 @@ namespace Karamem0.Capreze.Services
             });
         }
 
-        public async Task<Rectangle> GetWindowRectangleAsync(IntPtr hwnd)
+        public async Task<User32.Rectangle> GetWindowRectangleAsync(IntPtr hwnd)
         {
             return await Task.Run(() =>
             {
-                var wi = new WindowInfo();
+                var wi = new User32.WindowInfo();
                 wi.Size = Marshal.SizeOf(wi);
-                User32.GetWindowInfo(hwnd, ref wi);
+                _ = User32.GetWindowInfo(hwnd, ref wi);
                 return wi.Window;
             });
         }
@@ -107,8 +107,8 @@ namespace Karamem0.Capreze.Services
         {
             await Task.Run(() =>
             {
-                User32.ShowWindow(hwnd, (uint)User32.ShowWindowFlags.SW_RESTORE);
-                User32.SetWindowPos(
+                _ = User32.ShowWindow(hwnd, (uint)User32.ShowWindowFlags.SW_RESTORE);
+                _ = User32.SetWindowPos(
                     hwnd,
                     (IntPtr)User32.WindowOrder.HWND_TOP,
                     0, 0,

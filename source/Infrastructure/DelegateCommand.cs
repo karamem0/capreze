@@ -21,9 +21,9 @@ namespace Karamem0.Capreze.Infrastructure
 
         public event EventHandler CanExecuteChanged;
 
-        private Action onExecute;
+        private readonly Action onExecute;
 
-        private Func<bool> onCanExecute;
+        private readonly Func<bool> onCanExecute;
 
         public DelegateCommand(Action onExecute)
         {
@@ -45,7 +45,7 @@ namespace Karamem0.Capreze.Infrastructure
         protected virtual void OnCanExecuteChanged(EventArgs e)
         {
             var handler = this.CanExecuteChanged;
-            if (handler != null)
+            if (handler is not null)
             {
                 handler.Invoke(this, e);
             }
@@ -53,7 +53,7 @@ namespace Karamem0.Capreze.Infrastructure
 
         void ICommand.Execute(object parameter)
         {
-            if (this.onExecute != null)
+            if (this.onExecute is not null)
             {
                 this.onExecute.Invoke();
             }
@@ -61,7 +61,7 @@ namespace Karamem0.Capreze.Infrastructure
 
         bool ICommand.CanExecute(object parameter)
         {
-            if (this.onCanExecute != null)
+            if (this.onCanExecute is not null)
             {
                 return this.onCanExecute.Invoke();
             }

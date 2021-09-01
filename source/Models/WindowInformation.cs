@@ -23,6 +23,8 @@ namespace Karamem0.Capreze.Models
         {
         }
 
+        public int Id { get; set; }
+
         public IntPtr Hwnd { get; set; }
 
         public string FilePath { get; set; }

@@ -36,7 +36,7 @@ namespace Karamem0.Capreze.Infrastructure
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (this.PropertyChanged != null)
+            if (this.PropertyChanged is not null)
             {
                 this.PropertyChanged.Invoke(this, e);
             }

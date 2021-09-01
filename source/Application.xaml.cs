@@ -28,18 +28,16 @@ namespace Karamem0.Capreze
 
         public Application()
         {
-            Application.Current.DispatcherUnhandledException += this.OnDispatcherUnhandledException;
+            Current.DispatcherUnhandledException += this.OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += this.OnUnhandledException;
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             AppCenter.Start("94420eb3-44fa-45ca-b832-0fbafb832112", typeof(Analytics), typeof(Crashes));
-            var viewModelLocator = this.TryFindResource(nameof(ViewModelLocator)) as ViewModelLocator;
-            if (viewModelLocator != null)
+            if (this.TryFindResource(nameof(ViewModelLocator)) is ViewModelLocator viewModelLocator)
             {
-                var mainViewModel = viewModelLocator.MainViewModel as MainViewModel;
-                if (mainViewModel != null)
+                if (viewModelLocator.MainViewModel is MainViewModel mainViewModel)
                 {
                     var appSettings = new AppSettings();
                     appSettings.Load();
@@ -55,11 +53,9 @@ namespace Karamem0.Capreze
 
         protected override void OnExit(ExitEventArgs e)
         {
-            var viewModelLocator = this.TryFindResource(nameof(ViewModelLocator)) as ViewModelLocator;
-            if (viewModelLocator != null)
+            if (this.TryFindResource(nameof(ViewModelLocator)) is ViewModelLocator viewModelLocator)
             {
-                var mainViewModel = viewModelLocator.MainViewModel as MainViewModel;
-                if (mainViewModel != null)
+                if (viewModelLocator.MainViewModel is MainViewModel mainViewModel)
                 {
                     var appSettings = new AppSettings()
                     {

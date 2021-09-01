@@ -52,8 +52,7 @@ namespace Karamem0.Capreze.Configuration
                 var properties = typeof(AppSettings).GetProperties();
                 foreach (var property in properties)
                 {
-                    var attribute = Attribute.GetCustomAttribute(property, typeof(DefaultValueAttribute)) as DefaultValueAttribute;
-                    if (attribute != null)
+                    if (Attribute.GetCustomAttribute(property, typeof(DefaultValueAttribute)) is DefaultValueAttribute attribute)
                     {
                         property.SetValue(this, attribute.Value);
                     }

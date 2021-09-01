@@ -24,7 +24,7 @@ namespace Karamem0.Capreze.Interactivity
     {
 
         private static readonly Lazy<IServiceProvider> ServiceProvider =
-            new Lazy<IServiceProvider>(() => new ServiceCollection()
+            new(() => new ServiceCollection()
                 .AddTransient<IWindowService, WindowService>()
                 .AddTransient<MainViewModel>()
                 .BuildServiceProvider());

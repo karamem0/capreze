@@ -20,21 +20,21 @@ namespace Karamem0.Capreze.Runtime.InteropServices
     {
 
         [DllImport("user32.dll")]
-        public extern static uint GetDpiForWindow(IntPtr hwnd);
+        internal static extern uint GetDpiForWindow(IntPtr hwnd);
 
         [DllImport("user32.dll")]
-        public extern static int GetSystemMetricsForDpi(int index, uint dpi);
+        internal static extern int GetSystemMetricsForDpi(int index, uint dpi);
 
         [DllImport("user32.dll")]
-        public extern static int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
+        internal static extern int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr SetWindowPos(IntPtr hwnd, IntPtr order, int x, int y, int width, int height, uint flags);
+        internal static extern IntPtr SetWindowPos(IntPtr hwnd, IntPtr order, int x, int y, int width, int height, uint flags);
 
         [DllImport("user32.dll")]
-        public static extern int ShowWindow(IntPtr hwnd, uint msg);
+        internal static extern int ShowWindow(IntPtr hwnd, uint msg);
 
-        public enum SystemMetricIndex
+        internal enum SystemMetricIndex
         {
 
             SM_CXSIZEFRAME = 32,
@@ -46,7 +46,7 @@ namespace Karamem0.Capreze.Runtime.InteropServices
         }
 
         [Flags()]
-        public enum SetWindowPosFlags
+        internal enum SetWindowPosFlags
         {
 
             SWP_NOSIZE = 0x0001,

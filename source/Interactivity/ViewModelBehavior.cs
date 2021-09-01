@@ -39,8 +39,7 @@ namespace Karamem0.Capreze.Interactivity
 
         private void OnAssociatedObjectLoaded(object sender, RoutedEventArgs e)
         {
-            var viewModel = this.AssociatedObject.DataContext as ViewModelBase;
-            if (viewModel != null)
+            if (this.AssociatedObject.DataContext is ViewModelBase viewModel)
             {
                 viewModel.OnLoaded();
             }
@@ -48,8 +47,7 @@ namespace Karamem0.Capreze.Interactivity
 
         private void OnAssociatedObjectUnloaded(object sender, RoutedEventArgs e)
         {
-            var viewModel = this.AssociatedObject.DataContext as ViewModelBase;
-            if (viewModel != null)
+            if (this.AssociatedObject.DataContext is ViewModelBase viewModel)
             {
                 viewModel.OnUnloaded();
             }

@@ -25,7 +25,7 @@ namespace Karamem0.Capreze.ViewModels
     public class MainViewModel : ViewModelBase
     {
 
-        private IWindowService windowService;
+        private readonly IWindowService windowService;
 
         public MainViewModel()
         {
@@ -41,7 +41,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public IntPtr WindowHandle
         {
-            get { return this.windowHandle; }
+            get => this.windowHandle;
             set
             {
                 if (this.windowHandle != value)
@@ -56,7 +56,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public int ActualHeight
         {
-            get { return this.actualHeight; }
+            get => this.actualHeight;
             set
             {
                 if (this.actualHeight != value)
@@ -71,7 +71,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public int ActualWidth
         {
-            get { return this.actualWidth; }
+            get => this.actualWidth;
             set
             {
                 if (this.actualWidth != value)
@@ -86,7 +86,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public int CaptureHeight
         {
-            get { return this.captureHeight; }
+            get => this.captureHeight;
             set
             {
                 if (this.captureHeight != value)
@@ -101,7 +101,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public int CaptureWidth
         {
-            get { return this.captureWidth; }
+            get => this.captureWidth;
             set
             {
                 if (this.captureWidth != value)
@@ -116,7 +116,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public bool IsOffsetEnabled
         {
-            get { return this.isOffsetEnabled; }
+            get => this.isOffsetEnabled;
             set
             {
                 if (this.isOffsetEnabled != value)
@@ -131,7 +131,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public int OffsetX
         {
-            get { return this.offsetX; }
+            get => this.offsetX;
             set
             {
                 if (this.offsetX != value)
@@ -146,7 +146,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public int OffsetY
         {
-            get { return this.offsetY; }
+            get => this.offsetY;
             set
             {
                 if (this.offsetY != value)
@@ -161,7 +161,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public int SelectedHeight
         {
-            get { return this.selectedHeight; }
+            get => this.selectedHeight;
             set
             {
                 if (this.selectedHeight != value)
@@ -176,7 +176,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public int SelectedWidth
         {
-            get { return this.selectedWidth; }
+            get => this.selectedWidth;
             set
             {
                 if (this.selectedWidth != value)
@@ -191,7 +191,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public bool IsTopmost
         {
-            get { return this.isTopmost; }
+            get => this.isTopmost;
             set
             {
                 if (this.isTopmost != value)
@@ -206,7 +206,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public WindowInformation SelectedInformation
         {
-            get { return this.selectedInformation; }
+            get => this.selectedInformation;
             set
             {
                 if (this.selectedInformation != value)
@@ -221,7 +221,7 @@ namespace Karamem0.Capreze.ViewModels
 
         public Visibility SelectedInformationVisibility
         {
-            get { return this.selectedInformationVisibility; }
+            get => this.selectedInformationVisibility;
             set
             {
                 if (this.selectedInformationVisibility != value)
@@ -242,7 +242,7 @@ namespace Karamem0.Capreze.ViewModels
                 for (var index = oldValues.Count - 1; index >= 0; index--)
                 {
                     var newValue = newValues.SingleOrDefault(item => item.Hwnd == oldValues[index].Hwnd);
-                    if (newValue == null)
+                    if (newValue is null)
                     {
                         oldValues.RemoveAt(index);
                     }
@@ -250,24 +250,33 @@ namespace Karamem0.Capreze.ViewModels
                 foreach (var newValue in newValues)
                 {
                     var oldValue = oldValues.SingleOrDefault(item => item.Hwnd == newValue.Hwnd);
-                    if (oldValue == null)
+                    if (oldValue is null)
                     {
                         oldValues.Add(newValue);
                     }
                 }
-                if (this.selectedInformation != null)
+                if (this.SelectedInformation is not null)
                 {
                     var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
                     this.SelectedHeight = wi.Height;
                     this.SelectedWidth = wi.Width;
+                    this.LoadOffsetCommand.Execute(null);
                 }
             });
 
         public ICommand LoadOffsetCommand =>
             new DelegateCommand(async () =>
             {
-                this.OffsetX = await this.windowService.GetOffsetXAsync(this.WindowHandle);
-                this.OffsetY = await this.windowService.GetOffsetYAsync(this.WindowHandle);
+                if (this.SelectedInformation is null)
+                {
+                    this.OffsetX = await this.windowService.GetOffsetXAsync(this.WindowHandle);
+                    this.OffsetY = await this.windowService.GetOffsetYAsync(this.WindowHandle);
+                }
+                else
+                {
+                    this.OffsetX = await this.windowService.GetOffsetXAsync(this.SelectedInformation.Hwnd);
+                    this.OffsetY = await this.windowService.GetOffsetYAsync(this.SelectedInformation.Hwnd);
+                }
             });
 
         public ICommand PresetCommand =>
@@ -280,7 +289,7 @@ namespace Karamem0.Capreze.ViewModels
         public ICommand ResizeCommand =>
             new DelegateCommand(async () =>
             {
-                if (this.SelectedInformation != null)
+                if (this.SelectedInformation is not null)
                 {
                     var hwnd = this.SelectedInformation.Hwnd;
                     var width = this.ActualWidth;
@@ -303,25 +312,27 @@ namespace Karamem0.Capreze.ViewModels
         protected override async void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.PropertyName == nameof(this.CaptureHeight) ||
-                e.PropertyName == nameof(this.IsOffsetEnabled) ||
-                e.PropertyName == nameof(this.OffsetY))
+            if (e.PropertyName is
+                nameof(this.CaptureHeight) or
+                nameof(this.IsOffsetEnabled) or
+                nameof(this.OffsetY))
             {
                 var size = this.CaptureHeight;
                 var offset = this.IsOffsetEnabled ? this.OffsetY : 0;
                 this.ActualHeight = size + offset;
             }
-            if (e.PropertyName == nameof(this.CaptureWidth) ||
-                e.PropertyName == nameof(this.IsOffsetEnabled) ||
-                e.PropertyName == nameof(this.OffsetX))
+            if (e.PropertyName is
+                nameof(this.CaptureWidth) or
+                nameof(this.IsOffsetEnabled) or
+                nameof(this.OffsetX))
             {
                 var size = this.CaptureWidth;
                 var offset = this.IsOffsetEnabled ? this.OffsetX * 2 : 0;
                 this.ActualWidth = size + offset;
             }
-            if (e.PropertyName == nameof(this.SelectedInformation))
+            if (e.PropertyName is nameof(this.SelectedInformation))
             {
-                if (this.selectedInformation == null)
+                if (this.selectedInformation is null)
                 {
                     this.SelectedInformationVisibility = Visibility.Hidden;
                 }
@@ -331,6 +342,7 @@ namespace Karamem0.Capreze.ViewModels
                     var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
                     this.SelectedHeight = wi.Height;
                     this.SelectedWidth = wi.Width;
+                    this.LoadOffsetCommand.Execute(null);
                 }
             }
         }
@@ -338,4 +350,3 @@ namespace Karamem0.Capreze.ViewModels
     }
 
 }
-

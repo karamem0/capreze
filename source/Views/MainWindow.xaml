@@ -506,6 +506,12 @@
                     <TextBlock.Visibility>
                         <Binding Path="SelectedInformationVisibility" />
                     </TextBlock.Visibility>
+                    <Run Text="PID:" />
+                    <Run>
+                        <Run.Text>
+                            <Binding Path="SelectedInformation.Id" />
+                        </Run.Text>
+                    </Run>
                     <Run Text="Width:" />
                     <Run>
                         <Run.Text>
