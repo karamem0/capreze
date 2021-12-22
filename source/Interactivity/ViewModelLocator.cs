@@ -1,13 +1,12 @@
 //
-// Copyright (c) 2021 karamem0
+// Copyright (c) 2022 karamem0
 //
 // This software is released under the MIT License.
 //
-// https://github.com/karamem0/capreze/blob/master/LICENSE
+// https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
 using Karamem0.Capreze.Infrastructure;
-using Karamem0.Capreze.Services;
 using Karamem0.Capreze.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -23,18 +22,12 @@ namespace Karamem0.Capreze.Interactivity
     public class ViewModelLocator : DependencyObject
     {
 
-        private static readonly Lazy<IServiceProvider> ServiceProvider =
-            new(() => new ServiceCollection()
-                .AddTransient<IWindowService, WindowService>()
-                .AddTransient<MainViewModel>()
-                .BuildServiceProvider());
-
         public static readonly DependencyProperty MainViewModelProperty =
             DependencyProperty.Register(
                 "MainViewModel",
                 typeof(ViewModelBase),
                 typeof(ViewModelLocator),
-                new PropertyMetadata(ServiceProvider.Value.GetService<MainViewModel>()));
+                new PropertyMetadata(Application.Host.Services.GetService<MainViewModel>()));
 
         public ViewModelLocator()
         {

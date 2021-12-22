@@ -1,9 +1,9 @@
 //
-// Copyright (c) 2021 karamem0
+// Copyright (c) 2022 karamem0
 //
 // This software is released under the MIT License.
 //
-// https://github.com/karamem0/capreze/blob/master/LICENSE
+// https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
 using Karamem0.Capreze.Infrastructure;
@@ -108,6 +108,21 @@ namespace Karamem0.Capreze.ViewModels
                 {
                     this.captureWidth = value;
                     this.RaisePropertyChanged(nameof(this.CaptureWidth));
+                }
+            }
+        }
+
+        private bool isOffsetChanged;
+
+        public bool IsOffsetChanged
+        {
+            get => this.isOffsetChanged;
+            set
+            {
+                if (this.isOffsetChanged != value)
+                {
+                    this.isOffsetChanged = value;
+                    this.RaisePropertyChanged(nameof(this.IsOffsetChanged));
                 }
             }
         }
@@ -267,15 +282,18 @@ namespace Karamem0.Capreze.ViewModels
         public ICommand LoadOffsetCommand =>
             new DelegateCommand(async () =>
             {
-                if (this.SelectedInformation is null)
+                if (this.IsOffsetChanged is not true)
                 {
-                    this.OffsetX = await this.windowService.GetOffsetXAsync(this.WindowHandle);
-                    this.OffsetY = await this.windowService.GetOffsetYAsync(this.WindowHandle);
-                }
-                else
-                {
-                    this.OffsetX = await this.windowService.GetOffsetXAsync(this.SelectedInformation.Hwnd);
-                    this.OffsetY = await this.windowService.GetOffsetYAsync(this.SelectedInformation.Hwnd);
+                    if (this.SelectedInformation is null)
+                    {
+                        this.OffsetX = await this.windowService.GetOffsetXAsync(this.WindowHandle);
+                        this.OffsetY = await this.windowService.GetOffsetYAsync(this.WindowHandle);
+                    }
+                    else
+                    {
+                        this.OffsetX = await this.windowService.GetOffsetXAsync(this.SelectedInformation.Hwnd);
+                        this.OffsetY = await this.windowService.GetOffsetYAsync(this.SelectedInformation.Hwnd);
+                    }
                 }
             });
 
@@ -295,6 +313,15 @@ namespace Karamem0.Capreze.ViewModels
                     var width = this.ActualWidth;
                     var height = this.ActualHeight;
                     await this.windowService.ResizeWindowAsync(hwnd, width, height);
+                }
+            });
+
+        public ICommand OffsetChangedCommand =>
+            new DelegateCommand(() =>
+            {
+                if (this.SelectedInformation is not null)
+                {
+                    this.IsOffsetChanged = true;
                 }
             });
 
@@ -338,6 +365,7 @@ namespace Karamem0.Capreze.ViewModels
                 }
                 else
                 {
+                    this.IsOffsetChanged = false;
                     this.SelectedInformationVisibility = Visibility.Visible;
                     var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
                     this.SelectedHeight = wi.Height;

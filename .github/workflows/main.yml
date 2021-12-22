@@ -7,7 +7,7 @@ on:
       - v*.*.*
 
 env:
-  BUILD_VERSION: 1.8.0.${{github.run_number}}
+  BUILD_VERSION: 1.9.0.${{github.run_number}}
 
 jobs:
   build:

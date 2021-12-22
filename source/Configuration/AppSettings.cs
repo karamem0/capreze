@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2021 karamem0
+// Copyright (c) 2022 karamem0
 //
 // This software is released under the MIT License.
 //
-// https://github.com/karamem0/capreze/blob/master/LICENSE
+// https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
-using Microsoft.AppCenter.Crashes;
+using Microsoft.ApplicationInsights;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,8 +29,11 @@ namespace Karamem0.Capreze.Configuration
 
         private static readonly string FileName = "settings.json";
 
-        public AppSettings()
+        private readonly TelemetryClient telemetryClient;
+
+        public AppSettings(TelemetryClient telemetryClient)
         {
+            this.telemetryClient = telemetryClient;
         }
 
         [DefaultValue(600)]
@@ -76,7 +79,7 @@ namespace Karamem0.Capreze.Configuration
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex);
+                this.telemetryClient.TrackException(ex);
             }
         }
 
@@ -93,7 +96,7 @@ namespace Karamem0.Capreze.Configuration
             }
             catch (Exception ex)
             {
-                Crashes.TrackError(ex);
+                this.telemetryClient.TrackException(ex);
             }
         }
 

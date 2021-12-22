@@ -1,9 +1,9 @@
 //
-// Copyright (c) 2021 karamem0
+// Copyright (c) 2022 karamem0
 //
 // This software is released under the MIT License.
 //
-// https://github.com/karamem0/capreze/blob/master/LICENSE
+// https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
 using Karamem0.Capreze.Infrastructure;
@@ -50,7 +50,14 @@ namespace Karamem0.Capreze.Services
                 var dpi = User32.GetDpiForWindow(hwnd);
                 var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXSIZEFRAME, dpi);
                 var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
-                return size + padding - 1;
+                if (Environment.OSVersion.Version.Build >= 22000)
+                {
+                    return size + padding - 2;
+                }
+                else
+                {
+                    return size + padding - 1;
+                }
             });
         }
 
@@ -61,7 +68,14 @@ namespace Karamem0.Capreze.Services
                 var dpi = User32.GetDpiForWindow(hwnd);
                 var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CYSIZEFRAME, dpi);
                 var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
-                return size + padding - 1;
+                if (Environment.OSVersion.Version.Build >= 22000)
+                {
+                    return size + padding - 2;
+                }
+                else
+                {
+                    return size + padding - 1;
+                }
             });
         }
 

@@ -189,17 +189,24 @@
                         TextAlignment="Right">
                         <TextBox.IsEnabled>
                             <Binding
-                            Mode="OneWay"
-                            Path="IsOffsetEnabled" />
+                              Mode="OneWay"
+                              Path="IsOffsetEnabled" />
                         </TextBox.IsEnabled>
                         <TextBox.Text>
                             <Binding
-                            Mode="TwoWay"
-                            Path="OffsetX" />
+                                Mode="TwoWay"
+                                Path="OffsetX" />
                         </TextBox.Text>
                         <Validation.ErrorTemplate>
                             <x:Null />
                         </Validation.ErrorTemplate>
+                        <i:Interaction.Behaviors>
+                            <li:EventToCommandBehavior EventName="KeyUp">
+                                <li:EventToCommandBehavior.Command>
+                                    <Binding Path="OffsetChangedCommand" />
+                                </li:EventToCommandBehavior.Command>
+                            </li:EventToCommandBehavior>
+                        </i:Interaction.Behaviors>
                     </TextBox>
                     <TextBox
                         x:Name="OffsetYTextBox"
@@ -210,17 +217,24 @@
                         TextAlignment="Right">
                         <TextBox.IsEnabled>
                             <Binding
-                            Mode="OneWay"
-                            Path="IsOffsetEnabled" />
+                                Mode="OneWay"
+                                Path="IsOffsetEnabled" />
                         </TextBox.IsEnabled>
                         <TextBox.Text>
                             <Binding
-                            Mode="TwoWay"
-                            Path="OffsetY" />
+                                Mode="TwoWay"
+                                Path="OffsetY" />
                         </TextBox.Text>
                         <Validation.ErrorTemplate>
                             <x:Null />
                         </Validation.ErrorTemplate>
+                        <i:Interaction.Behaviors>
+                            <li:EventToCommandBehavior EventName="KeyUp">
+                                <li:EventToCommandBehavior.Command>
+                                    <Binding Path="OffsetChangedCommand" />
+                                </li:EventToCommandBehavior.Command>
+                            </li:EventToCommandBehavior>
+                        </i:Interaction.Behaviors>
                     </TextBox>
                     <StackPanel
                         Grid.Column="1"
@@ -236,8 +250,8 @@
                             VerticalContentAlignment="Center">
                             <CheckBox.IsChecked>
                                 <Binding
-                                Mode="TwoWay"
-                                Path="IsOffsetEnabled" />
+                                    Mode="TwoWay"
+                                    Path="IsOffsetEnabled" />
                             </CheckBox.IsChecked>
                         </CheckBox>
                     </StackPanel>
@@ -289,8 +303,8 @@
                         TextAlignment="Right">
                         <TextBox.Text>
                             <Binding
-                            Mode="TwoWay"
-                            Path="CaptureWidth" />
+                                Mode="TwoWay"
+                                Path="CaptureWidth" />
                         </TextBox.Text>
                         <Validation.ErrorTemplate>
                             <x:Null />
@@ -327,8 +341,8 @@
                         TextAlignment="Right">
                         <TextBox.Text>
                             <Binding
-                            Mode="TwoWay"
-                            Path="CaptureHeight" />
+                                Mode="TwoWay"
+                                Path="CaptureHeight" />
                         </TextBox.Text>
                         <Validation.ErrorTemplate>
                             <x:Null />

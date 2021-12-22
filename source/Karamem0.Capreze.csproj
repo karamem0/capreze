@@ -9,7 +9,7 @@
     <Company>karamem0</Company>
     <Product>Capreze</Product>
     <Description>Window resizing tool for capturing</Description>
-    <Copyright>Copyright (c) 2021 karamem0</Copyright>
+    <Copyright>Copyright (c) 2022 karamem0</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/karamem0/capreze</PackageProjectUrl>
     <AssemblyName>Capreze</AssemblyName>
@@ -22,12 +22,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AppCenter" Version="4.3.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.3.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.3.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.20.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App.config.json">
+      <Link>Capreze.config.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
