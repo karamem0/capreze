@@ -16,22 +16,22 @@ using System.Windows.Input;
 namespace Karamem0.Capreze.Infrastructure
 {
 
-    public class DelegateCommand<T> : ICommand
+    public class DelegateCommand : ICommand
     {
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
-        private readonly Action<T> onExecute;
+        private readonly Action onExecute;
 
-        private readonly Func<T, bool> onCanExecute;
+        private readonly Func<bool> onCanExecute;
 
-        public DelegateCommand(Action<T> onExecute)
+        public DelegateCommand(Action onExecute)
         {
             this.onExecute = onExecute;
             this.onCanExecute = delegate { return true; };
         }
 
-        public DelegateCommand(Action<T> onExecute, Func<T, bool> onCanExecute)
+        public DelegateCommand(Action onExecute, Func<bool> onCanExecute)
         {
             this.onExecute = onExecute;
             this.onCanExecute = onCanExecute;
@@ -51,19 +51,19 @@ namespace Karamem0.Capreze.Infrastructure
             }
         }
 
-        void ICommand.Execute(object parameter)
+        void ICommand.Execute(object? parameter)
         {
             if (this.onExecute is not null)
             {
-                this.onExecute.Invoke((T)(parameter ?? default(T)));
+                this.onExecute.Invoke();
             }
         }
 
-        bool ICommand.CanExecute(object parameter)
+        bool ICommand.CanExecute(object? parameter)
         {
             if (this.onCanExecute is not null)
             {
-                return this.onCanExecute.Invoke((T)(parameter ?? default(T)));
+                return this.onCanExecute.Invoke();
             }
             return false;
         }

@@ -6,7 +6,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/bin/Debug/net5.0-windows/Capreze.dll",
+      "program": "${workspaceFolder}/Karamem0.Capreze/bin/Debug/net6.0-windows/Capreze.dll",
       "args": [],
       "cwd": "${workspaceFolder}",
       "console": "internalConsole",

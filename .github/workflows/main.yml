@@ -7,7 +7,7 @@ on:
       - v*.*.*
 
 env:
-  BUILD_VERSION: 1.9.0.${{github.run_number}}
+  BUILD_VERSION: 1.10.0.${{github.run_number}}
 
 jobs:
   build:
@@ -18,37 +18,37 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.x
+          dotnet-version: 6.x
+      - name: Restore project
+        run: dotnet restore source/Karamem0.Capreze.sln
       - name: Build source
-        run: |
-          dotnet restore source
-          dotnet build source -c Release
-          dotnet publish source -c Release -o artifact/capreze -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}}
+        run: dotnet publish source/Karamem0.Capreze/Karamem0.Capreze.csproj -c Release -o artifact/capreze -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}}
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: capreze
           path: artifact/capreze
       - name: Build source (x64)
-        run: |
-          dotnet restore source
-          dotnet build source -c Release
-          dotnet publish source -c Release -o artifact/capreze_win-x64 -r win-x64 -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}} -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true
+        run: dotnet publish source/Karamem0.Capreze/Karamem0.Capreze.csproj -c Release -o artifact/capreze_win-x64 -r win-x64 --self-contained -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}} -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true
       - name: Upload artifact (x64)
         uses: actions/upload-artifact@v2
         with:
           name: capreze_win-x64
           path: artifact/capreze_win-x64
       - name: Build source (x86)
-        run: |
-          dotnet restore source
-          dotnet build source -c Release
-          dotnet publish source -c Release -o artifact/capreze_win-x86 -r win-x86 -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}} -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true
+        run: dotnet publish source/Karamem0.Capreze/Karamem0.Capreze.csproj -c Release -o artifact/capreze_win-x86 -r win-x86 --self-contained -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}} -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true
       - name: Upload artifact (x86)
         uses: actions/upload-artifact@v2
         with:
           name: capreze_win-x86
           path: artifact/capreze_win-x86
+      - name: Build msi
+        run: dotnet build source/Karamem0.Capreze.Installer/Karamem0.Capreze.Installer.csproj -p:Version=${{env.BUILD_VERSION}} -p:FileVersion=${{env.BUILD_VERSION}}
+      - name: Upload msi
+        uses: actions/upload-artifact@v2
+        with:
+          name: capreze_installer
+          path: artifact/capreze.msi
   release:
     needs: build
     if: contains(github.ref, 'refs/tags/')
@@ -59,6 +59,11 @@ jobs:
         with:
           name: capreze
           path: capreze
+      - name: Download artifact (msi)
+        uses: actions/download-artifact@v2
+        with:
+          name: capreze_installer
+          path: capreze_installer
       - name: Download artifact (x64)
         uses: actions/download-artifact@v2
         with:
@@ -69,9 +74,10 @@ jobs:
         with:
           name: capreze_win-x86
           path: capreze_win-x86
-      - name: Archive artifact
+      - name: Provision artifact
         shell: pwsh
         run: |
+          Copy-Item -Path capreze_installer/capreze.msi -Destination capreze_${{env.BUILD_VERSION}}.msi
           Compress-Archive -Path capreze/* -DestinationPath capreze_${{env.BUILD_VERSION}}.zip
           Compress-Archive -Path capreze_win-x64/* -DestinationPath capreze_${{env.BUILD_VERSION}}_win-x64.zip
           Compress-Archive -Path capreze_win-x86/* -DestinationPath capreze_${{env.BUILD_VERSION}}_win-x86.zip
@@ -81,6 +87,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           files: |
+            capreze_${{env.BUILD_VERSION}}.msi
             capreze_${{env.BUILD_VERSION}}.zip
             capreze_${{env.BUILD_VERSION}}_win-x64.zip
             capreze_${{env.BUILD_VERSION}}_win-x86.zip

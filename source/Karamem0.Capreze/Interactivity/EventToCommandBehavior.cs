@@ -28,9 +28,9 @@ namespace Karamem0.Capreze.Interactivity
                 typeof(EventToCommandBehavior)
             );
 
-        private EventInfo eventInfo;
+        private EventInfo? eventInfo;
 
-        private Delegate eventDelegate;
+        private Delegate? eventDelegate;
 
         public EventToCommandBehavior()
         {
@@ -53,16 +53,21 @@ namespace Karamem0.Capreze.Interactivity
             if (this.EventName is not null)
             {
                 this.eventInfo = this.AssociatedObject.GetType().GetEvent(this.EventName);
-                this.eventDelegate = this.GetType()
-                    .GetMethod("OnEventRaised", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
-                    .CreateDelegate(this.eventInfo.EventHandlerType, this);
-                this.eventInfo.AddEventHandler(this.AssociatedObject, this.eventDelegate);
+                if (this.eventInfo is not null &&
+                    this.eventInfo.EventHandlerType is not null)
+                {
+                    this.eventDelegate = this.GetType()
+                        .GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+                        .Single(x => x.Name is "OnEventRaised")
+                        .CreateDelegate(this.eventInfo.EventHandlerType, this);
+                    this.eventInfo.AddEventHandler(this.AssociatedObject, this.eventDelegate);
+                }
             }
         }
 
         protected override void OnDetaching()
         {
-            if (this.EventName is not null)
+            if (this.eventInfo is not null)
             {
                 this.eventInfo.RemoveEventHandler(this.AssociatedObject, this.eventDelegate);
             }

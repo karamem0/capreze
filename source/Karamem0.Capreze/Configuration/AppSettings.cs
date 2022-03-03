@@ -22,12 +22,11 @@ namespace Karamem0.Capreze.Configuration
     public class AppSettings
     {
 
-        private static readonly string BasePath = Path.Combine(
+        private readonly FileInfo fileInfo = new(Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            ".capreze"
-        );
-
-        private static readonly string FileName = "settings.json";
+            ".capreze",
+            "settings.json"
+        ));
 
         private readonly TelemetryClient telemetryClient;
 
@@ -48,6 +47,9 @@ namespace Karamem0.Capreze.Configuration
         [DefaultValue(false)]
         public bool IsTopmost { get; set; }
 
+        [DefaultValue(false)]
+        public bool AutoResize { get; set; }
+
         public void Load()
         {
             try
@@ -64,16 +66,36 @@ namespace Karamem0.Capreze.Configuration
                         property.SetValue(this, null);
                     }
                 }
-                var file = new FileInfo(Path.Combine(BasePath, FileName));
-                if (file.Exists)
+                if (this.fileInfo.Exists)
                 {
-                    using var stream = file.OpenRead();
+                    using var stream = this.fileInfo.Open(FileMode.Open, FileAccess.Read);
                     using var reader = new StreamReader(stream, Encoding.UTF8);
                     var json = reader.ReadToEnd();
-                    var value = JsonSerializer.Deserialize<AppSettings>(json);
-                    foreach (var property in properties)
+                    var values = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
+                    if (values is not null)
                     {
-                        property.SetValue(this, property.GetValue(value, null));
+                        foreach (var property in properties)
+                        {
+                            if (values.TryGetValue(property.Name, out var value))
+                            {
+                                if (value.ValueKind is JsonValueKind.True)
+                                {
+                                    property.SetValue(this, value.GetBoolean());
+                                }
+                                if (value.ValueKind is JsonValueKind.False)
+                                {
+                                    property.SetValue(this, value.GetBoolean());
+                                }
+                                if (value.ValueKind is JsonValueKind.Number)
+                                {
+                                    property.SetValue(this, value.GetInt32());
+                                }
+                                if (value.ValueKind is JsonValueKind.String)
+                                {
+                                    property.SetValue(this, value.GetString());
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -85,11 +107,11 @@ namespace Karamem0.Capreze.Configuration
 
         public void Save()
         {
+            _ = this.fileInfo.Directory ?? throw new ArgumentNullException(nameof(this.fileInfo));
             try
             {
-                var file = new FileInfo(Path.Combine(BasePath, FileName));
-                file.Directory.Create();
-                using var stream = file.OpenWrite();
+                this.fileInfo.Directory.Create();
+                using var stream = this.fileInfo.Open(FileMode.Create, FileAccess.Write);
                 using var writer = new StreamWriter(stream, Encoding.UTF8);
                 var json = JsonSerializer.Serialize(this);
                 writer.Write(json);

@@ -6,7 +6,6 @@
 // https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
-using Karamem0.Capreze.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ using System.Threading.Tasks;
 namespace Karamem0.Capreze.Models
 {
 
-    public class WindowInformation : ModelBase
+    public record WindowInformation
     {
 
         public WindowInformation()
@@ -27,11 +26,11 @@ namespace Karamem0.Capreze.Models
 
         public IntPtr Hwnd { get; set; }
 
-        public string FilePath { get; set; }
+        public string? FilePath { get; set; }
 
-        public string FileName { get; set; }
+        public string? FileName { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
     }
 

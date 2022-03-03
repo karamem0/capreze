@@ -94,8 +94,8 @@ namespace Karamem0.Capreze.Services
                             {
                                 Id = process.Id,
                                 Hwnd = process.MainWindowHandle,
-                                FilePath = process.MainModule.FileName,
-                                FileName = Path.GetFileName(process.MainModule.FileName),
+                                FilePath = process.MainModule?.FileName,
+                                FileName = Path.GetFileName(process.MainModule?.FileName),
                                 Title = string.Join("", process.MainWindowTitle)
                             });
                         }

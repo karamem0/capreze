@@ -14,6 +14,7 @@ using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,31 +37,32 @@ namespace Karamem0.Capreze
                     services
                         .AddApplicationInsightsTelemetryWorkerService()
                         .AddSingleton<AppSettings>()
+                        .AddTransient<IConfigurationService, ConfigurationService>()
                         .AddTransient<IWindowService, WindowService>()
-                        .AddTransient<MainViewModel>())
+                        .AddTransient<MainViewModel>()
+                        .AddTinyMapper())
                 .Build();
 
-        private readonly TelemetryClient telemetryClient = Host.Services.GetService<TelemetryClient>();
+        private readonly TelemetryClient telemetryClient;
 
-        private readonly AppSettings appSettings = Host.Services.GetService<AppSettings>();
+        private readonly AppSettings appSettings;
 
         public Application()
         {
-            Current.DispatcherUnhandledException += this.OnDispatcherUnhandledException;
-            AppDomain.CurrentDomain.UnhandledException += this.OnUnhandledException;
+            this.telemetryClient = Host.Services.GetService<TelemetryClient>() ?? throw new ArgumentNullException(nameof(this.telemetryClient));
+            this.appSettings = Host.Services.GetService<AppSettings>() ?? throw new ArgumentNullException(nameof(this.appSettings));
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Current.DispatcherUnhandledException += this.OnDispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += this.OnUnhandledException;
             if (this.TryFindResource(nameof(ViewModelLocator)) is ViewModelLocator viewModelLocator)
             {
                 if (viewModelLocator.MainViewModel is MainViewModel mainViewModel)
                 {
                     this.appSettings.Load();
-                    mainViewModel.CaptureHeight = this.appSettings.CaptureHeight;
-                    mainViewModel.CaptureWidth = this.appSettings.CaptureWidth;
-                    mainViewModel.IsOffsetEnabled = this.appSettings.IsOffsetEnabled;
-                    mainViewModel.IsTopmost = this.appSettings.IsTopmost;
+                    _ = TinyMapper.Map(this.appSettings, mainViewModel);
                 }
             }
             this.telemetryClient.TrackEvent("Application.OnStartup");
@@ -73,15 +75,14 @@ namespace Karamem0.Capreze
             {
                 if (viewModelLocator.MainViewModel is MainViewModel mainViewModel)
                 {
-                    this.appSettings.CaptureHeight = mainViewModel.CaptureHeight;
-                    this.appSettings.CaptureWidth = mainViewModel.CaptureWidth;
-                    this.appSettings.IsOffsetEnabled = mainViewModel.IsOffsetEnabled;
-                    this.appSettings.IsTopmost = mainViewModel.IsTopmost;
+                    _ = TinyMapper.Map(mainViewModel, this.appSettings);
                     this.appSettings.Save();
                 }
             }
             this.telemetryClient.TrackEvent("Application.OnExit");
             this.telemetryClient.Flush();
+            Current.DispatcherUnhandledException -= this.OnDispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException -= this.OnUnhandledException;
             base.OnExit(e);
         }
 

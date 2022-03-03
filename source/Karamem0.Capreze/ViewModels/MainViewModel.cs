@@ -25,15 +25,13 @@ namespace Karamem0.Capreze.ViewModels
     public class MainViewModel : ViewModelBase
     {
 
+        private readonly IConfigurationService configurationService;
+
         private readonly IWindowService windowService;
 
-        public MainViewModel()
+        public MainViewModel(IConfigurationService configurationService, IWindowService windowService)
         {
-            this.WindowInformations = new ObservableCollection<WindowInformation>();
-        }
-
-        public MainViewModel(IWindowService windowService) : this()
-        {
+            this.configurationService = configurationService;
             this.windowService = windowService;
         }
 
@@ -217,9 +215,24 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
-        private WindowInformation selectedInformation;
+        private bool autoResize;
 
-        public WindowInformation SelectedInformation
+        public bool AutoResize
+        {
+            get => this.autoResize;
+            set
+            {
+                if (this.autoResize != value)
+                {
+                    this.autoResize = value;
+                    this.RaisePropertyChanged(nameof(this.AutoResize));
+                }
+            }
+        }
+
+        private WindowInformation? selectedInformation;
+
+        public WindowInformation? SelectedInformation
         {
             get => this.selectedInformation;
             set
@@ -247,9 +260,11 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
-        public ObservableCollection<WindowInformation> WindowInformations { get; }
+        public ObservableCollection<WindowInformation> WindowInformations { get; } = new ObservableCollection<WindowInformation>();
 
-        public ICommand LoadWindowCommand =>
+        public ObservableCollection<WindowSize> WindowSizes { get; } = new ObservableCollection<WindowSize>();
+
+        public ICommand LoadWindowInformationsCommand =>
             new DelegateCommand(async () =>
             {
                 var oldValues = this.WindowInformations;
@@ -279,6 +294,20 @@ namespace Karamem0.Capreze.ViewModels
                 }
             });
 
+        public ICommand LoadWindowSizesCommand =>
+            new DelegateCommand(async () =>
+            {
+                this.WindowSizes.Clear();
+                var values = await this.configurationService.GetWindowSizesAsync();
+                if (values is not null)
+                {
+                    foreach (var value in values)
+                    {
+                        this.WindowSizes.Add(value);
+                    }
+                }
+            });
+
         public ICommand LoadOffsetCommand =>
             new DelegateCommand(async () =>
             {
@@ -298,10 +327,17 @@ namespace Karamem0.Capreze.ViewModels
             });
 
         public ICommand PresetCommand =>
-            new DelegateCommand<Size>(parameter =>
+            new DelegateCommand<WindowSize>(parameter =>
             {
-                this.CaptureHeight = (int)parameter.Height;
-                this.CaptureWidth = (int)parameter.Width;
+                if (parameter is not null)
+                {
+                    this.CaptureHeight = parameter.Height;
+                    this.CaptureWidth = parameter.Width;
+                    if (this.AutoResize)
+                    {
+                        this.ResizeCommand.Execute(null);
+                    }
+                }
             });
 
         public ICommand ResizeCommand =>
@@ -327,7 +363,8 @@ namespace Karamem0.Capreze.ViewModels
 
         public override void OnLoaded()
         {
-            this.LoadWindowCommand.Execute(null);
+            this.LoadWindowSizesCommand.Execute(null);
+            this.LoadWindowInformationsCommand.Execute(null);
             this.LoadOffsetCommand.Execute(null);
             this.SelectedInformationVisibility = Visibility.Hidden;
         }
@@ -359,7 +396,7 @@ namespace Karamem0.Capreze.ViewModels
             }
             if (e.PropertyName is nameof(this.SelectedInformation))
             {
-                if (this.selectedInformation is null)
+                if (this.SelectedInformation is null)
                 {
                     this.SelectedInformationVisibility = Visibility.Hidden;
                 }

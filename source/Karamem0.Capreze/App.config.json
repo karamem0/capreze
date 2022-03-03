@@ -1,0 +1,86 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "ApplicationInsights": {
+    "InstrumentationKey": "c3f90d0f-1346-4a17-95c4-3a939321f117"
+  },
+  "WindowSize": [
+    {
+      "Name": "800x600",
+      "Description": "SVGA, 4:3",
+      "Width": 800,
+      "Height": 600
+    },
+    {
+      "Name": "1024x768",
+      "Description": "XGA, 4:3",
+      "Width": 1024,
+      "Height": 768
+    },
+    {
+      "Name": "1600x1200",
+      "Description": "UXGA, 4:3",
+      "Width": 1600,
+      "Height": 1200
+    },
+    {
+      "Name": "3200x2400",
+      "Description": "QUXGA, 4:3",
+      "Width": 3200,
+      "Height": 2400
+    },
+    {
+      "Name": "1366x768",
+      "Description": "HD, 16:9",
+      "Width": 1366,
+      "Height": 768
+    },
+    {
+      "Name": "1920x1080",
+      "Description": "FHD, 16:9",
+      "Width": 1920,
+      "Height": 1080
+    },
+    {
+      "Name": "2560x1440",
+      "Description": "WQHD, 16:9",
+      "Width": 2560,
+      "Height": 1440
+    },
+    {
+      "Name": "3840x2160",
+      "Description": "QFHD, 16:9",
+      "Width": 3840,
+      "Height": 2160
+    },
+    {
+      "Name": "1280x1024",
+      "Description": "SXGA, 5:4",
+      "Width": 1280,
+      "Height": 1024
+    },
+    {
+      "Name": "1280x800",
+      "Description": "WXGA, 16:10",
+      "Width": 1280,
+      "Height": 800
+    },
+    {
+      "Name": "1920x1200",
+      "Description": "WUXGA, 16:10",
+      "Width": 1920,
+      "Height": 1200
+    },
+    {
+      "Name": "2560x1600",
+      "Description": "WQXGA, 16:10",
+      "Width": 2560,
+      "Height": 1600
+    }
+  ]
+}

@@ -1,33 +1,37 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <PackageId>Capreze</PackageId>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <PackageId>Karamem0.Capreze</PackageId>
     <Version>0.0.0.0</Version>
     <Authors>karamem0</Authors>
     <Company>karamem0</Company>
     <Product>Capreze</Product>
-    <Description>Window resizing tool for capturing</Description>
+    <Description>Window resize tool for capture</Description>
     <Copyright>Copyright (c) 2022 karamem0</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/karamem0/capreze</PackageProjectUrl>
+		<PackageIconUrl>App.png</PackageIconUrl>
     <AssemblyName>Capreze</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <FileVersion>0.0.0.0</FileVersion>
     <RootNamespace>Karamem0.Capreze</RootNamespace>
     <ApplicationManifest>App.manifest</ApplicationManifest>
+    <ApplicationIcon>App.ico</ApplicationIcon>
     <UseWpf>true</UseWpf>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.20.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
-    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageReference Include="TinyMapper" Version="3.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +41,11 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<Resource Include="App.png" />
+	</ItemGroup>
+
+	<ItemGroup>
     <Page Remove="Application.xaml" />
   </ItemGroup>
 

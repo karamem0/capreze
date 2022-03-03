@@ -9,6 +9,7 @@
     x:Name="Window"
     mc:Ignorable="d"
     Height="480"
+    Icon="/App.png"
     ResizeMode="CanResize"
     Title="Capreze"
     Width="720">
@@ -60,6 +61,15 @@
                         <Binding
                             Mode="TwoWay"
                             Path="IsTopmost" />
+                    </MenuItem.IsChecked>
+                </MenuItem>
+                <MenuItem
+                    IsCheckable="True"
+                    Header="Auto _Resize">
+                    <MenuItem.IsChecked>
+                        <Binding
+                            Mode="TwoWay"
+                            Path="AutoResize" />
                     </MenuItem.IsChecked>
                 </MenuItem>
             </MenuItem>
@@ -359,147 +369,47 @@
                         </TextBlock.Text>
                     </TextBlock>
                 </Grid>
-                <Grid Margin="0,6,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Button
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        Content="800x600"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="800x600 (SVGA, 4:3)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="600" Width="800" />
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        Content="1024x768"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="1024x768 (XGA, 4:3)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="768" Width="1024" />
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button
-                        Grid.Column="2"
-                        Grid.Row="0"
-                        Content="1600x1200"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="1600x1200 (UXGA, 4:3)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="1200" Width="1600" />
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button
-                        Grid.Column="0"
-                        Grid.Row="1"
-                        Content="1366x768"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="1366x768 (HD, 16:9)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="768" Width="1366" />
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        Content="1920x1080"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="1920x1080 (FHD, 16:9)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="1080" Width="1920" />
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button
-                        Grid.Column="2"
-                        Grid.Row="1"
-                        Content="2560x1440"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="2560x1440 (WQHD, 16:9)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="1440" Width="2560" />
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button
-                        Grid.Column="0"
-                        Grid.Row="2"
-                        Content="1280x800"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="1280x800 (WXGA, 16:10)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="800" Width="1280" />
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button
-                        Grid.Column="1"
-                        Grid.Row="2"
-                        Content="1280x1024"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="1280x1024 (SXGA, 5:4)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="1024" Width="1280" />
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button
-                        Grid.Column="2"
-                        Grid.Row="2"
-                        Content="1920x1200"
-                        Margin="3,3,3,3"
-                        Padding="3,3,3,3"
-                        ToolTip="1920x1200 (WUXGA, 16:10)">
-                        <Button.Command>
-                            <Binding Path="PresetCommand" />
-                        </Button.Command>
-                        <Button.CommandParameter>
-                            <Size Height="1200" Width="1920" />
-                        </Button.CommandParameter>
-                    </Button>
-                </Grid>
+                <ItemsControl>
+                    <ItemsControl.ItemsSource>
+                        <Binding Path="WindowSizes" />
+                    </ItemsControl.ItemsSource>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button
+                                Margin="3,3,3,3"
+                                Padding="3,3,3,3">
+                                <Button.Content>
+                                    <Binding Path="Name" />
+                                </Button.Content>
+                                <Button.Command>
+                                    <Binding Path="DataContext.PresetCommand">
+                                        <Binding.RelativeSource>
+                                            <RelativeSource Mode="FindAncestor">
+                                                <RelativeSource.AncestorType>
+                                                    <x:Type TypeName="Window" />
+                                                </RelativeSource.AncestorType>
+                                            </RelativeSource>
+                                        </Binding.RelativeSource>
+                                    </Binding>
+                                </Button.Command>
+                                <Button.CommandParameter>
+                                    <Binding />
+                                </Button.CommandParameter>
+                                <Button.ToolTip>
+                                    <Binding Path="DisplayName" />
+                                </Button.ToolTip>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
                 <Grid Margin="0,6,0,0">
                     <Button
-                        Content="Resize"
+                        Content="_Resize"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3">
                         <Button.Command>
@@ -555,7 +465,7 @@
         <i:TimerTrigger MillisecondsPerTick="1000">
             <i:InvokeCommandAction>
                 <i:InvokeCommandAction.Command>
-                    <Binding Path="LoadWindowCommand" />
+                    <Binding Path="LoadWindowInformationsCommand" />
                 </i:InvokeCommandAction.Command>
             </i:InvokeCommandAction>
         </i:TimerTrigger>

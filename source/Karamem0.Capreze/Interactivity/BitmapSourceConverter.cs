@@ -32,10 +32,13 @@ namespace Karamem0.Capreze.Interactivity
         {
             if (value is string path)
             {
-                var hicon = Icon.ExtractAssociatedIcon(path).Handle;
-                var rect = Int32Rect.Empty;
-                var options = BitmapSizeOptions.FromEmptyOptions();
-                return Imaging.CreateBitmapSourceFromHIcon(hicon, rect, options);
+                var icon = Icon.ExtractAssociatedIcon(path);
+                if (icon is not null)
+                {
+                    var rect = Int32Rect.Empty;
+                    var options = BitmapSizeOptions.FromEmptyOptions();
+                    return Imaging.CreateBitmapSourceFromHIcon(icon.Handle, rect, options);
+                }
             }
             return DependencyProperty.UnsetValue;
         }
