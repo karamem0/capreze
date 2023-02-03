@@ -7,7 +7,7 @@ Window resize tool for capture
 
 ## Screenshot
 
-![Screenshot](./screenshot.png)
+![Screenshot](./assets/screenshot.png)
 
 ## Features
 
@@ -18,7 +18,7 @@ Window resize tool for capture
 ## Dependencies
 
 - [.NET Core 6.0](https://dotnet.microsoft.com/download/dotnet-core/6.0)
-- [Microsoft.ApplicationInsights.WorkerService](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService/2.20.0) (2.20.0)
+- [Microsoft.ApplicationInsights.WorkerService](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService/2.21.0) (2.21.0)
 - [Microsoft.Extensions.Configuration.Json](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json/6.0.0) (6.0.0)
 - [Microsoft.Extensions.DependencyInjection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/6.0.0) (6.0.0)
 - [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/5.0.0) (6.0.1)
