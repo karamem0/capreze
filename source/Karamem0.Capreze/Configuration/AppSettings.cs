@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 karamem0
+// Copyright (c) 2019-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace Karamem0.Capreze.Configuration
 {
 
-    public class AppSettings
+    public class AppSettings(TelemetryClient telemetryClient)
     {
 
         private readonly FileInfo fileInfo = new(Path.Combine(
@@ -28,12 +28,7 @@ namespace Karamem0.Capreze.Configuration
             "settings.json"
         ));
 
-        private readonly TelemetryClient telemetryClient;
-
-        public AppSettings(TelemetryClient telemetryClient)
-        {
-            this.telemetryClient = telemetryClient;
-        }
+        private readonly TelemetryClient telemetryClient = telemetryClient;
 
         [DefaultValue(600)]
         public int CaptureHeight { get; set; }

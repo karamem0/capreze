@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 karamem0
+// Copyright (c) 2019-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -36,10 +36,7 @@ namespace Karamem0.Capreze.Infrastructure
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (this.PropertyChanged is not null)
-            {
-                this.PropertyChanged.Invoke(this, e);
-            }
+            this.PropertyChanged?.Invoke(this, e);
         }
 
     }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 karamem0
+// Copyright (c) 2019-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -16,23 +16,23 @@ using System.Threading.Tasks;
 namespace Karamem0.Capreze.Runtime.InteropServices
 {
 
-    public static class User32
+    public static partial class User32
     {
 
-        [DllImport("user32.dll")]
-        internal static extern uint GetDpiForWindow(IntPtr hwnd);
+        [LibraryImport("user32.dll")]
+        internal static partial uint GetDpiForWindow(IntPtr hwnd);
 
-        [DllImport("user32.dll")]
-        internal static extern int GetSystemMetricsForDpi(int index, uint dpi);
+        [LibraryImport("user32.dll")]
+        internal static partial int GetSystemMetricsForDpi(int index, uint dpi);
 
-        [DllImport("user32.dll")]
-        internal static extern int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
+        [LibraryImport("user32.dll")]
+        internal static partial int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
 
-        [DllImport("user32.dll")]
-        internal static extern IntPtr SetWindowPos(IntPtr hwnd, IntPtr order, int x, int y, int width, int height, uint flags);
+        [LibraryImport("user32.dll")]
+        internal static partial IntPtr SetWindowPos(IntPtr hwnd, IntPtr order, int x, int y, int width, int height, uint flags);
 
-        [DllImport("user32.dll")]
-        internal static extern int ShowWindow(IntPtr hwnd, uint msg);
+        [LibraryImport("user32.dll")]
+        internal static partial int ShowWindow(IntPtr hwnd, uint msg);
 
         internal enum SystemMetricIndex
         {
@@ -145,9 +145,9 @@ namespace Karamem0.Capreze.Runtime.InteropServices
 
             public int Bottom { get; set; }
 
-            public int Width => this.Right - this.Left;
+            public readonly int Width => this.Right - this.Left;
 
-            public int Height => this.Bottom - this.Top;
+            public readonly int Height => this.Bottom - this.Top;
 
         }
 

@@ -1,3 +1,11 @@
+//
+// Copyright (c) 2019-2024 karamem0
+//
+// This software is released under the MIT License.
+//
+// https://github.com/karamem0/capreze/blob/main/LICENSE
+//
+
 using Microsoft.Xaml.Behaviors;
 using System;
 using System.Collections.Generic;

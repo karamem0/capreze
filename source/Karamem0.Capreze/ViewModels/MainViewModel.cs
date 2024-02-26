@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 karamem0
+// Copyright (c) 2019-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -22,19 +22,12 @@ using System.Windows.Input;
 namespace Karamem0.Capreze.ViewModels
 {
 
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel(IConfigurationService configurationService, IWindowService windowService) : ViewModelBase
     {
 
-        private readonly IConfigurationService configurationService;
+        private readonly IConfigurationService configurationService = configurationService;
 
-        private readonly IWindowService windowService;
-
-        public MainViewModel(IConfigurationService configurationService, IWindowService windowService)
-        {
-            this.configurationService = configurationService;
-            this.windowService = windowService;
-        }
-
+        private readonly IWindowService windowService = windowService;
         private IntPtr windowHandle;
 
         public IntPtr WindowHandle
@@ -260,9 +253,9 @@ namespace Karamem0.Capreze.ViewModels
             }
         }
 
-        public ObservableCollection<WindowInformation> WindowInformations { get; } = new ObservableCollection<WindowInformation>();
+        public ObservableCollection<WindowInformation> WindowInformations { get; } = [];
 
-        public ObservableCollection<WindowSize> WindowSizes { get; } = new ObservableCollection<WindowSize>();
+        public ObservableCollection<WindowSize> WindowSizes { get; } = [];
 
         public ICommand LoadWindowInformationsCommand =>
             new DelegateCommand(async () =>

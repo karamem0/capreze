@@ -9,7 +9,7 @@
     <Company>karamem0</Company>
     <Product>Capreze</Product>
     <Description>Window resize tool for capture</Description>
-    <Copyright>Copyright (c) 2022 karamem0</Copyright>
+    <Copyright>Copyright (c) 2019-2024 karamem0</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/karamem0/capreze</PackageProjectUrl>
     <AssemblyName>Karamem0.Capreze.Installer</AssemblyName>

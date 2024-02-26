@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 karamem0
+// Copyright (c) 2019-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -24,15 +24,10 @@ namespace Karamem0.Capreze.Services
 
     }
 
-    public class ConfigurationService : IConfigurationService
+    public class ConfigurationService(IConfiguration configuration) : IConfigurationService
     {
 
-        private readonly IConfiguration configuration;
-
-        public ConfigurationService(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-        }
+        private readonly IConfiguration configuration = configuration;
 
         public async Task<IEnumerable<WindowSize>?> GetWindowSizesAsync()
         {

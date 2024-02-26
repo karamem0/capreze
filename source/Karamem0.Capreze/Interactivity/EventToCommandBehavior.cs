@@ -1,3 +1,11 @@
+//
+// Copyright (c) 2019-2024 karamem0
+//
+// This software is released under the MIT License.
+//
+// https://github.com/karamem0/capreze/blob/main/LICENSE
+//
+
 using Microsoft.Xaml.Behaviors;
 using System;
 using System.Collections.Generic;
@@ -67,10 +75,7 @@ namespace Karamem0.Capreze.Interactivity
 
         protected override void OnDetaching()
         {
-            if (this.eventInfo is not null)
-            {
-                this.eventInfo.RemoveEventHandler(this.AssociatedObject, this.eventDelegate);
-            }
+            this.eventInfo?.RemoveEventHandler(this.AssociatedObject, this.eventDelegate);
         }
 
         protected void OnEventRaised(object sender, EventArgs e)

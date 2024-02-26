@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 karamem0
+// Copyright (c) 2019-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -50,14 +50,7 @@ namespace Karamem0.Capreze.Services
                 var dpi = User32.GetDpiForWindow(hwnd);
                 var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXSIZEFRAME, dpi);
                 var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
-                if (Environment.OSVersion.Version.Build >= 22000)
-                {
-                    return size + padding - 2;
-                }
-                else
-                {
-                    return size + padding - 1;
-                }
+                return size + padding - 1;
             });
         }
 
@@ -68,14 +61,7 @@ namespace Karamem0.Capreze.Services
                 var dpi = User32.GetDpiForWindow(hwnd);
                 var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CYSIZEFRAME, dpi);
                 var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
-                if (Environment.OSVersion.Version.Build >= 22000)
-                {
-                    return size + padding - 2;
-                }
-                else
-                {
-                    return size + padding - 1;
-                }
+                return size + padding - 1;
             });
         }
 

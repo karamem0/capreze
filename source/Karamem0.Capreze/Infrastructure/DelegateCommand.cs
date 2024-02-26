@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 karamem0
+// Copyright (c) 2019-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -44,28 +44,17 @@ namespace Karamem0.Capreze.Infrastructure
 
         protected virtual void OnCanExecuteChanged(EventArgs e)
         {
-            var handler = this.CanExecuteChanged;
-            if (handler is not null)
-            {
-                handler.Invoke(this, e);
-            }
+            this.CanExecuteChanged?.Invoke(this, e);
         }
 
         void ICommand.Execute(object? parameter)
         {
-            if (this.onExecute is not null)
-            {
-                this.onExecute.Invoke();
-            }
+            this.onExecute?.Invoke();
         }
 
         bool ICommand.CanExecute(object? parameter)
         {
-            if (this.onCanExecute is not null)
-            {
-                return this.onCanExecute.Invoke();
-            }
-            return false;
+            return this.onCanExecute is not null && this.onCanExecute.Invoke();
         }
 
     }

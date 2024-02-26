@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 karamem0
+// Copyright (c) 2019-2024 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -43,7 +43,7 @@ namespace Karamem0.Capreze
                 },
                 Version = new Version(
                     FileVersionInfo.GetVersionInfo(
-                        System.Reflection.Assembly.GetEntryAssembly().Location).ProductVersion)
+                        System.Reflection.Assembly.GetEntryAssembly().Location).FileVersion)
             };
             project
                 .ResolveWildCards()
