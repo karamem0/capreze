@@ -19,392 +19,389 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Karamem0.Capreze.ViewModels
+namespace Karamem0.Capreze.ViewModels;
+
+public class MainViewModel(IConfigurationService configurationService, IWindowService windowService) : ViewModelBase
 {
 
-    public class MainViewModel(IConfigurationService configurationService, IWindowService windowService) : ViewModelBase
+    private readonly IConfigurationService configurationService = configurationService;
+
+    private readonly IWindowService windowService = windowService;
+    private IntPtr windowHandle;
+
+    public IntPtr WindowHandle
     {
-
-        private readonly IConfigurationService configurationService = configurationService;
-
-        private readonly IWindowService windowService = windowService;
-        private IntPtr windowHandle;
-
-        public IntPtr WindowHandle
+        get => this.windowHandle;
+        set
         {
-            get => this.windowHandle;
-            set
+            if (this.windowHandle != value)
             {
-                if (this.windowHandle != value)
-                {
-                    this.windowHandle = value;
-                    this.RaisePropertyChanged(nameof(this.WindowHandle));
-                }
+                this.windowHandle = value;
+                this.RaisePropertyChanged(nameof(this.WindowHandle));
             }
         }
+    }
 
-        private int actualHeight;
+    private int actualHeight;
 
-        public int ActualHeight
+    public int ActualHeight
+    {
+        get => this.actualHeight;
+        set
         {
-            get => this.actualHeight;
-            set
+            if (this.actualHeight != value)
             {
-                if (this.actualHeight != value)
-                {
-                    this.actualHeight = value;
-                    this.RaisePropertyChanged(nameof(this.ActualHeight));
-                }
+                this.actualHeight = value;
+                this.RaisePropertyChanged(nameof(this.ActualHeight));
             }
         }
+    }
 
-        private int actualWidth;
+    private int actualWidth;
 
-        public int ActualWidth
+    public int ActualWidth
+    {
+        get => this.actualWidth;
+        set
         {
-            get => this.actualWidth;
-            set
+            if (this.actualWidth != value)
             {
-                if (this.actualWidth != value)
-                {
-                    this.actualWidth = value;
-                    this.RaisePropertyChanged(nameof(this.ActualWidth));
-                }
+                this.actualWidth = value;
+                this.RaisePropertyChanged(nameof(this.ActualWidth));
             }
         }
+    }
 
-        private int captureHeight;
+    private int captureHeight;
 
-        public int CaptureHeight
+    public int CaptureHeight
+    {
+        get => this.captureHeight;
+        set
         {
-            get => this.captureHeight;
-            set
+            if (this.captureHeight != value)
             {
-                if (this.captureHeight != value)
-                {
-                    this.captureHeight = value;
-                    this.RaisePropertyChanged(nameof(this.CaptureHeight));
-                }
+                this.captureHeight = value;
+                this.RaisePropertyChanged(nameof(this.CaptureHeight));
             }
         }
+    }
 
-        private int captureWidth;
+    private int captureWidth;
 
-        public int CaptureWidth
+    public int CaptureWidth
+    {
+        get => this.captureWidth;
+        set
         {
-            get => this.captureWidth;
-            set
+            if (this.captureWidth != value)
             {
-                if (this.captureWidth != value)
-                {
-                    this.captureWidth = value;
-                    this.RaisePropertyChanged(nameof(this.CaptureWidth));
-                }
+                this.captureWidth = value;
+                this.RaisePropertyChanged(nameof(this.CaptureWidth));
             }
         }
+    }
 
-        private bool isOffsetChanged;
+    private bool isOffsetChanged;
 
-        public bool IsOffsetChanged
+    public bool IsOffsetChanged
+    {
+        get => this.isOffsetChanged;
+        set
         {
-            get => this.isOffsetChanged;
-            set
+            if (this.isOffsetChanged != value)
             {
-                if (this.isOffsetChanged != value)
-                {
-                    this.isOffsetChanged = value;
-                    this.RaisePropertyChanged(nameof(this.IsOffsetChanged));
-                }
+                this.isOffsetChanged = value;
+                this.RaisePropertyChanged(nameof(this.IsOffsetChanged));
             }
         }
+    }
 
-        private bool isOffsetEnabled;
+    private bool isOffsetEnabled;
 
-        public bool IsOffsetEnabled
+    public bool IsOffsetEnabled
+    {
+        get => this.isOffsetEnabled;
+        set
         {
-            get => this.isOffsetEnabled;
-            set
+            if (this.isOffsetEnabled != value)
             {
-                if (this.isOffsetEnabled != value)
-                {
-                    this.isOffsetEnabled = value;
-                    this.RaisePropertyChanged(nameof(this.IsOffsetEnabled));
-                }
+                this.isOffsetEnabled = value;
+                this.RaisePropertyChanged(nameof(this.IsOffsetEnabled));
             }
         }
+    }
 
-        private int offsetX;
+    private int offsetX;
 
-        public int OffsetX
+    public int OffsetX
+    {
+        get => this.offsetX;
+        set
         {
-            get => this.offsetX;
-            set
+            if (this.offsetX != value)
             {
-                if (this.offsetX != value)
-                {
-                    this.offsetX = value;
-                    this.RaisePropertyChanged(nameof(this.OffsetX));
-                }
+                this.offsetX = value;
+                this.RaisePropertyChanged(nameof(this.OffsetX));
             }
         }
+    }
 
-        private int offsetY;
+    private int offsetY;
 
-        public int OffsetY
+    public int OffsetY
+    {
+        get => this.offsetY;
+        set
         {
-            get => this.offsetY;
-            set
+            if (this.offsetY != value)
             {
-                if (this.offsetY != value)
-                {
-                    this.offsetY = value;
-                    this.RaisePropertyChanged(nameof(this.OffsetY));
-                }
+                this.offsetY = value;
+                this.RaisePropertyChanged(nameof(this.OffsetY));
             }
         }
+    }
 
-        private int selectedHeight;
+    private int selectedHeight;
 
-        public int SelectedHeight
+    public int SelectedHeight
+    {
+        get => this.selectedHeight;
+        set
         {
-            get => this.selectedHeight;
-            set
+            if (this.selectedHeight != value)
             {
-                if (this.selectedHeight != value)
-                {
-                    this.selectedHeight = value;
-                    this.RaisePropertyChanged(nameof(this.SelectedHeight));
-                }
+                this.selectedHeight = value;
+                this.RaisePropertyChanged(nameof(this.SelectedHeight));
             }
         }
+    }
 
-        private int selectedWidth;
+    private int selectedWidth;
 
-        public int SelectedWidth
+    public int SelectedWidth
+    {
+        get => this.selectedWidth;
+        set
         {
-            get => this.selectedWidth;
-            set
+            if (this.selectedWidth != value)
             {
-                if (this.selectedWidth != value)
-                {
-                    this.selectedWidth = value;
-                    this.RaisePropertyChanged(nameof(this.SelectedWidth));
-                }
+                this.selectedWidth = value;
+                this.RaisePropertyChanged(nameof(this.SelectedWidth));
             }
         }
+    }
 
-        private bool isTopmost;
+    private bool isTopmost;
 
-        public bool IsTopmost
+    public bool IsTopmost
+    {
+        get => this.isTopmost;
+        set
         {
-            get => this.isTopmost;
-            set
+            if (this.isTopmost != value)
             {
-                if (this.isTopmost != value)
-                {
-                    this.isTopmost = value;
-                    this.RaisePropertyChanged(nameof(this.IsTopmost));
-                }
+                this.isTopmost = value;
+                this.RaisePropertyChanged(nameof(this.IsTopmost));
             }
         }
+    }
 
-        private bool autoResize;
+    private bool autoResize;
 
-        public bool AutoResize
+    public bool AutoResize
+    {
+        get => this.autoResize;
+        set
         {
-            get => this.autoResize;
-            set
+            if (this.autoResize != value)
             {
-                if (this.autoResize != value)
-                {
-                    this.autoResize = value;
-                    this.RaisePropertyChanged(nameof(this.AutoResize));
-                }
+                this.autoResize = value;
+                this.RaisePropertyChanged(nameof(this.AutoResize));
             }
         }
+    }
 
-        private WindowInformation? selectedInformation;
+    private WindowInformation? selectedInformation;
 
-        public WindowInformation? SelectedInformation
+    public WindowInformation? SelectedInformation
+    {
+        get => this.selectedInformation;
+        set
         {
-            get => this.selectedInformation;
-            set
+            if (this.selectedInformation != value)
             {
-                if (this.selectedInformation != value)
-                {
-                    this.selectedInformation = value;
-                    this.RaisePropertyChanged(nameof(this.SelectedInformation));
-                }
+                this.selectedInformation = value;
+                this.RaisePropertyChanged(nameof(this.SelectedInformation));
             }
         }
+    }
 
-        private Visibility selectedInformationVisibility;
+    private Visibility selectedInformationVisibility;
 
-        public Visibility SelectedInformationVisibility
+    public Visibility SelectedInformationVisibility
+    {
+        get => this.selectedInformationVisibility;
+        set
         {
-            get => this.selectedInformationVisibility;
-            set
+            if (this.selectedInformationVisibility != value)
             {
-                if (this.selectedInformationVisibility != value)
-                {
-                    this.selectedInformationVisibility = value;
-                    this.RaisePropertyChanged(nameof(this.SelectedInformationVisibility));
-                }
+                this.selectedInformationVisibility = value;
+                this.RaisePropertyChanged(nameof(this.SelectedInformationVisibility));
             }
         }
+    }
 
-        public ObservableCollection<WindowInformation> WindowInformations { get; } = [];
+    public ObservableCollection<WindowInformation> WindowInformations { get; } = [];
 
-        public ObservableCollection<WindowSize> WindowSizes { get; } = [];
+    public ObservableCollection<WindowSize> WindowSizes { get; } = [];
 
-        public ICommand LoadWindowInformationsCommand =>
-            new DelegateCommand(async () =>
-            {
-                var oldValues = this.WindowInformations;
-                var newValues = await this.windowService.GetWindowInformationsAsync();
-                for (var index = oldValues.Count - 1; index >= 0; index--)
-                {
-                    var newValue = newValues.SingleOrDefault(item => item.Hwnd == oldValues[index].Hwnd);
-                    if (newValue is null)
-                    {
-                        oldValues.RemoveAt(index);
-                    }
-                }
-                foreach (var newValue in newValues)
-                {
-                    var oldValue = oldValues.SingleOrDefault(item => item.Hwnd == newValue.Hwnd);
-                    if (oldValue is null)
-                    {
-                        oldValues.Add(newValue);
-                    }
-                }
-                if (this.SelectedInformation is not null)
-                {
-                    var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
-                    this.SelectedHeight = wi.Height;
-                    this.SelectedWidth = wi.Width;
-                    this.LoadOffsetCommand.Execute(null);
-                }
-            });
-
-        public ICommand LoadWindowSizesCommand =>
-            new DelegateCommand(async () =>
-            {
-                this.WindowSizes.Clear();
-                var values = await this.configurationService.GetWindowSizesAsync();
-                if (values is not null)
-                {
-                    foreach (var value in values)
-                    {
-                        this.WindowSizes.Add(value);
-                    }
-                }
-            });
-
-        public ICommand LoadOffsetCommand =>
-            new DelegateCommand(async () =>
-            {
-                if (this.IsOffsetChanged is not true)
-                {
-                    if (this.SelectedInformation is null)
-                    {
-                        this.OffsetX = await this.windowService.GetOffsetXAsync(this.WindowHandle);
-                        this.OffsetY = await this.windowService.GetOffsetYAsync(this.WindowHandle);
-                    }
-                    else
-                    {
-                        this.OffsetX = await this.windowService.GetOffsetXAsync(this.SelectedInformation.Hwnd);
-                        this.OffsetY = await this.windowService.GetOffsetYAsync(this.SelectedInformation.Hwnd);
-                    }
-                }
-            });
-
-        public ICommand PresetCommand =>
-            new DelegateCommand<WindowSize>(parameter =>
-            {
-                if (parameter is not null)
-                {
-                    this.CaptureHeight = parameter.Height;
-                    this.CaptureWidth = parameter.Width;
-                    if (this.AutoResize)
-                    {
-                        this.ResizeCommand.Execute(null);
-                    }
-                }
-            });
-
-        public ICommand ResizeCommand =>
-            new DelegateCommand(async () =>
-            {
-                if (this.SelectedInformation is not null)
-                {
-                    var hwnd = this.SelectedInformation.Hwnd;
-                    var width = this.ActualWidth;
-                    var height = this.ActualHeight;
-                    await this.windowService.ResizeWindowAsync(hwnd, width, height);
-                }
-            });
-
-        public ICommand OffsetChangedCommand =>
-            new DelegateCommand(() =>
-            {
-                if (this.SelectedInformation is not null)
-                {
-                    this.IsOffsetChanged = true;
-                }
-            });
-
-        public override void OnLoaded()
+    public ICommand LoadWindowInformationsCommand =>
+        new DelegateCommand(async () =>
         {
-            this.LoadWindowSizesCommand.Execute(null);
-            this.LoadWindowInformationsCommand.Execute(null);
-            this.LoadOffsetCommand.Execute(null);
-            this.SelectedInformationVisibility = Visibility.Hidden;
-        }
-
-        public override void OnUnloaded()
-        {
-        }
-
-        protected override async void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-            if (e.PropertyName is
-                nameof(this.CaptureHeight) or
-                nameof(this.IsOffsetEnabled) or
-                nameof(this.OffsetY))
+            var oldValues = this.WindowInformations;
+            var newValues = await this.windowService.GetWindowInformationsAsync();
+            for (var index = oldValues.Count - 1; index >= 0; index--)
             {
-                var size = this.CaptureHeight;
-                var offset = this.IsOffsetEnabled ? this.OffsetY : 0;
-                this.ActualHeight = size + offset;
+                var newValue = newValues.SingleOrDefault(item => item.Hwnd == oldValues[index].Hwnd);
+                if (newValue is null)
+                {
+                    oldValues.RemoveAt(index);
+                }
             }
-            if (e.PropertyName is
-                nameof(this.CaptureWidth) or
-                nameof(this.IsOffsetEnabled) or
-                nameof(this.OffsetX))
+            foreach (var newValue in newValues)
             {
-                var size = this.CaptureWidth;
-                var offset = this.IsOffsetEnabled ? this.OffsetX * 2 : 0;
-                this.ActualWidth = size + offset;
+                var oldValue = oldValues.SingleOrDefault(item => item.Hwnd == newValue.Hwnd);
+                if (oldValue is null)
+                {
+                    oldValues.Add(newValue);
+                }
             }
-            if (e.PropertyName is nameof(this.SelectedInformation))
+            if (this.SelectedInformation is not null)
+            {
+                var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
+                this.SelectedHeight = wi.Height;
+                this.SelectedWidth = wi.Width;
+                this.LoadOffsetCommand.Execute(null);
+            }
+        });
+
+    public ICommand LoadWindowSizesCommand =>
+        new DelegateCommand(async () =>
+        {
+            this.WindowSizes.Clear();
+            var values = await this.configurationService.GetWindowSizesAsync();
+            if (values is not null)
+            {
+                foreach (var value in values)
+                {
+                    this.WindowSizes.Add(value);
+                }
+            }
+        });
+
+    public ICommand LoadOffsetCommand =>
+        new DelegateCommand(async () =>
+        {
+            if (this.IsOffsetChanged is not true)
             {
                 if (this.SelectedInformation is null)
                 {
-                    this.SelectedInformationVisibility = Visibility.Hidden;
+                    this.OffsetX = await this.windowService.GetOffsetXAsync(this.WindowHandle);
+                    this.OffsetY = await this.windowService.GetOffsetYAsync(this.WindowHandle);
                 }
                 else
                 {
-                    this.IsOffsetChanged = false;
-                    this.SelectedInformationVisibility = Visibility.Visible;
-                    var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
-                    this.SelectedHeight = wi.Height;
-                    this.SelectedWidth = wi.Width;
-                    this.LoadOffsetCommand.Execute(null);
+                    this.OffsetX = await this.windowService.GetOffsetXAsync(this.SelectedInformation.Hwnd);
+                    this.OffsetY = await this.windowService.GetOffsetYAsync(this.SelectedInformation.Hwnd);
                 }
             }
-        }
+        });
 
+    public ICommand PresetCommand =>
+        new DelegateCommand<WindowSize>(parameter =>
+        {
+            if (parameter is not null)
+            {
+                this.CaptureHeight = parameter.Height;
+                this.CaptureWidth = parameter.Width;
+                if (this.AutoResize)
+                {
+                    this.ResizeCommand.Execute(null);
+                }
+            }
+        });
+
+    public ICommand ResizeCommand =>
+        new DelegateCommand(async () =>
+        {
+            if (this.SelectedInformation is not null)
+            {
+                var hwnd = this.SelectedInformation.Hwnd;
+                var width = this.ActualWidth;
+                var height = this.ActualHeight;
+                await this.windowService.ResizeWindowAsync(hwnd, width, height);
+            }
+        });
+
+    public ICommand OffsetChangedCommand =>
+        new DelegateCommand(() =>
+        {
+            if (this.SelectedInformation is not null)
+            {
+                this.IsOffsetChanged = true;
+            }
+        });
+
+    public override void OnLoaded()
+    {
+        this.LoadWindowSizesCommand.Execute(null);
+        this.LoadWindowInformationsCommand.Execute(null);
+        this.LoadOffsetCommand.Execute(null);
+        this.SelectedInformationVisibility = Visibility.Hidden;
+    }
+
+    public override void OnUnloaded()
+    {
+    }
+
+    protected override async void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+        if (e.PropertyName is
+            nameof(this.CaptureHeight) or
+            nameof(this.IsOffsetEnabled) or
+            nameof(this.OffsetY))
+        {
+            var size = this.CaptureHeight;
+            var offset = this.IsOffsetEnabled ? this.OffsetY : 0;
+            this.ActualHeight = size + offset;
+        }
+        if (e.PropertyName is
+            nameof(this.CaptureWidth) or
+            nameof(this.IsOffsetEnabled) or
+            nameof(this.OffsetX))
+        {
+            var size = this.CaptureWidth;
+            var offset = this.IsOffsetEnabled ? this.OffsetX * 2 : 0;
+            this.ActualWidth = size + offset;
+        }
+        if (e.PropertyName is nameof(this.SelectedInformation))
+        {
+            if (this.SelectedInformation is null)
+            {
+                this.SelectedInformationVisibility = Visibility.Hidden;
+            }
+            else
+            {
+                this.IsOffsetChanged = false;
+                this.SelectedInformationVisibility = Visibility.Visible;
+                var wi = await this.windowService.GetWindowRectangleAsync(this.SelectedInformation.Hwnd);
+                this.SelectedHeight = wi.Height;
+                this.SelectedWidth = wi.Width;
+                this.LoadOffsetCommand.Execute(null);
+            }
+        }
     }
 
 }

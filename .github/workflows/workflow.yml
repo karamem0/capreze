@@ -7,7 +7,7 @@ on:
       - v*.*.*
 
 env:
-  BUILD_VERSION: 1.10.2.${{github.run_number}}
+  BUILD_VERSION: '1.11.0'
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repos
         uses: actions/checkout@v4
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x
       - name: Restore project
@@ -38,14 +38,14 @@ jobs:
         shell: pwsh
         run: |
           dotnet publish source/Karamem0.Capreze/Karamem0.Capreze.csproj `
-          -c Release `
-          -o artifact/capreze_win-x64 `
-          -r win-x64 `
-          --self-contained `
-          -p:Version=${{env.BUILD_VERSION}} `
-          -p:FileVersion=${{env.BUILD_VERSION}} `
-          -p:PublishSingleFile=true `
-          -p:IncludeAllContentForSelfExtract=true
+            -c Release `
+            -o artifact/capreze_win-x64 `
+            -r win-x64 `
+            --self-contained `
+            -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
+            -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}} `
+            -p:PublishSingleFile=true `
+            -p:IncludeAllContentForSelfExtract=true
       - name: Upload artifact (x64)
         uses: actions/upload-artifact@v4
         with:
@@ -55,14 +55,14 @@ jobs:
         shell: pwsh
         run: |
           dotnet publish source/Karamem0.Capreze/Karamem0.Capreze.csproj `
-          -c Release `
-          -o artifact/capreze_win-x86 `
-          -r win-x86 `
-          --self-contained `
-          -p:Version=${{env.BUILD_VERSION}} `
-          -p:FileVersion=${{env.BUILD_VERSION}} `
-          -p:PublishSingleFile=true `
-          -p:IncludeAllContentForSelfExtract=true
+            -c Release `
+            -o artifact/capreze_win-x86 `
+            -r win-x86 `
+            --self-contained `
+            -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
+            -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}} `
+            -p:PublishSingleFile=true `
+            -p:IncludeAllContentForSelfExtract=true
       - name: Upload artifact (x86)
         uses: actions/upload-artifact@v4
         with:
@@ -71,8 +71,8 @@ jobs:
       - name: Build msi
         run: |
           dotnet build source/Karamem0.Capreze.Installer/Karamem0.Capreze.Installer.csproj `
-          -p:Version=${{env.BUILD_VERSION}} `
-          -p:FileVersion=${{env.BUILD_VERSION}}
+            -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
+            -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}}
       - name: Upload msi
         uses: actions/upload-artifact@v4
         with:
@@ -81,7 +81,7 @@ jobs:
   release:
     needs: build
     if: contains(github.ref, 'refs/tags/')
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
@@ -120,3 +120,11 @@ jobs:
             capreze_${{env.BUILD_VERSION}}.zip
             capreze_${{env.BUILD_VERSION}}_win-x64.zip
             capreze_${{env.BUILD_VERSION}}_win-x86.zip
+      - name: Connect to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: Deploy MSI package
+        uses: azure/cli@v2
+        with:
+          inlineScript: az storage blob upload --file capreze_${{env.BUILD_VERSION}}.msi --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --container-name msi --auth-mode login

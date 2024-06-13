@@ -13,17 +13,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Karamem0.Capreze.Views
+namespace Karamem0.Capreze.Views;
+
+public partial class MainWindow : Window
 {
 
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-
-        public MainWindow()
-        {
-            this.InitializeComponent();
-        }
-
+        this.InitializeComponent();
     }
 
 }

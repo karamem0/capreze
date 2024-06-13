@@ -16,107 +16,105 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze.Services
+namespace Karamem0.Capreze.Services;
+
+public interface IWindowService
 {
 
-    public interface IWindowService
+    Task<int> GetOffsetXAsync(IntPtr hwnd, CancellationToken cancellationToken = default);
+
+    Task<int> GetOffsetYAsync(IntPtr hwnd, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<WindowInformation>> GetWindowInformationsAsync(CancellationToken cancellationToken = default);
+
+    Task<User32.Rectangle> GetWindowRectangleAsync(IntPtr hwnd, CancellationToken cancellationToken = default);
+
+    Task ResizeWindowAsync(IntPtr hwnd, int width, int height, CancellationToken cancellationToken = default);
+
+}
+
+public class WindowService : ServiceBase, IWindowService
+{
+
+    public WindowService()
     {
-
-        Task<int> GetOffsetXAsync(IntPtr hwnd);
-
-        Task<int> GetOffsetYAsync(IntPtr hwnd);
-
-        Task<IEnumerable<WindowInformation>> GetWindowInformationsAsync();
-
-        Task<User32.Rectangle> GetWindowRectangleAsync(IntPtr hwnd);
-
-        Task ResizeWindowAsync(IntPtr hwnd, int width, int height);
-
     }
 
-    public class WindowService : ServiceBase, IWindowService
+    public async Task<int> GetOffsetXAsync(IntPtr hwnd, CancellationToken cancellationToken = default)
     {
-
-        public WindowService()
+        return await Task.Run(() =>
         {
-        }
+            var dpi = User32.GetDpiForWindow(hwnd);
+            var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXSIZEFRAME, dpi);
+            var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
+            return size + padding - 1;
+        }, cancellationToken);
+    }
 
-        public async Task<int> GetOffsetXAsync(IntPtr hwnd)
+    public async Task<int> GetOffsetYAsync(IntPtr hwnd, CancellationToken cancellationToken = default)
+    {
+        return await Task.Run(() =>
         {
-            return await Task.Run(() =>
+            var dpi = User32.GetDpiForWindow(hwnd);
+            var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CYSIZEFRAME, dpi);
+            var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
+            return size + padding - 1;
+        }, cancellationToken);
+    }
+
+    public async Task<IEnumerable<WindowInformation>> GetWindowInformationsAsync(CancellationToken cancellationToken = default)
+    {
+        return await Task.Run(() =>
+        {
+            var result = new List<WindowInformation>();
+            foreach (var process in Process.GetProcesses())
             {
-                var dpi = User32.GetDpiForWindow(hwnd);
-                var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXSIZEFRAME, dpi);
-                var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
-                return size + padding - 1;
-            });
-        }
-
-        public async Task<int> GetOffsetYAsync(IntPtr hwnd)
-        {
-            return await Task.Run(() =>
-            {
-                var dpi = User32.GetDpiForWindow(hwnd);
-                var size = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CYSIZEFRAME, dpi);
-                var padding = User32.GetSystemMetricsForDpi((int)User32.SystemMetricIndex.SM_CXPADDEDBORDER, dpi);
-                return size + padding - 1;
-            });
-        }
-
-        public async Task<IEnumerable<WindowInformation>> GetWindowInformationsAsync()
-        {
-            return await Task.Run(() =>
-            {
-                var result = new List<WindowInformation>();
-                foreach (var process in Process.GetProcesses())
+                if (process.MainWindowHandle != IntPtr.Zero)
                 {
-                    if (process.MainWindowHandle != IntPtr.Zero)
+                    try
                     {
-                        try
+                        result.Add(new WindowInformation()
                         {
-                            result.Add(new WindowInformation()
-                            {
-                                Id = process.Id,
-                                Hwnd = process.MainWindowHandle,
-                                FilePath = process.MainModule?.FileName,
-                                FileName = Path.GetFileName(process.MainModule?.FileName),
-                                Title = string.Join("", process.MainWindowTitle)
-                            });
-                        }
-                        catch { }
+                            Id = process.Id,
+                            Hwnd = process.MainWindowHandle,
+                            FilePath = process.MainModule?.FileName,
+                            FileName = Path.GetFileName(process.MainModule?.FileName),
+                            Title = string.Join("", process.MainWindowTitle)
+                        });
                     }
+                    catch { }
                 }
-                return result;
-            });
-        }
+            }
+            return result;
+        }, cancellationToken);
+    }
 
-        public async Task<User32.Rectangle> GetWindowRectangleAsync(IntPtr hwnd)
+    public async Task<User32.Rectangle> GetWindowRectangleAsync(IntPtr hwnd, CancellationToken cancellationToken = default)
+    {
+        return await Task.Run(() =>
         {
-            return await Task.Run(() =>
-            {
-                var wi = new User32.WindowInfo();
-                wi.Size = Marshal.SizeOf(wi);
-                _ = User32.GetWindowInfo(hwnd, ref wi);
-                return wi.Window;
-            });
-        }
+            var wi = new User32.WindowInfo();
+            wi.Size = Marshal.SizeOf(wi);
+            _ = User32.GetWindowInfo(hwnd, ref wi);
+            return wi.Window;
+        }, cancellationToken);
+    }
 
-        public async Task ResizeWindowAsync(IntPtr hwnd, int width, int height)
+    public async Task ResizeWindowAsync(IntPtr hwnd, int width, int height, CancellationToken cancellationToken = default)
+    {
+        await Task.Run(() =>
         {
-            await Task.Run(() =>
-            {
-                _ = User32.ShowWindow(hwnd, (uint)User32.ShowWindowFlags.SW_RESTORE);
-                _ = User32.SetWindowPos(
-                    hwnd,
-                    (IntPtr)User32.WindowOrder.HWND_TOP,
-                    0, 0,
-                    width, height,
-                    (uint)User32.SetWindowPosFlags.SWP_NOMOVE);
-            });
-        }
-
+            _ = User32.ShowWindow(hwnd, (uint)User32.ShowWindowFlags.SW_RESTORE);
+            _ = User32.SetWindowPos(
+                hwnd,
+                (IntPtr)User32.WindowOrder.HWND_TOP,
+                0, 0,
+                width, height,
+                (uint)User32.SetWindowPosFlags.SWP_NOMOVE);
+        }, cancellationToken);
     }
 
 }

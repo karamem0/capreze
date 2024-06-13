@@ -13,32 +13,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze.Infrastructure
+namespace Karamem0.Capreze.Infrastructure;
+
+public abstract class ViewModelBase : INotifyPropertyChanged
 {
 
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected ViewModelBase()
     {
+    }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+    public abstract void OnLoaded();
 
-        protected ViewModelBase()
-        {
-        }
+    public abstract void OnUnloaded();
 
-        public abstract void OnLoaded();
+    public void RaisePropertyChanged(string propertyName)
+    {
+        this.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+    }
 
-        public abstract void OnUnloaded();
-
-        public void RaisePropertyChanged(string propertyName)
-        {
-            this.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            this.PropertyChanged?.Invoke(this, e);
-        }
-
+    protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        this.PropertyChanged?.Invoke(this, e);
     }
 
 }

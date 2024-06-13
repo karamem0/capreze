@@ -12,26 +12,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze.Models
+namespace Karamem0.Capreze.Models;
+
+public record WindowInformation
 {
 
-    public record WindowInformation
+    public WindowInformation()
     {
-
-        public WindowInformation()
-        {
-        }
-
-        public int Id { get; set; }
-
-        public IntPtr Hwnd { get; set; }
-
-        public string? FilePath { get; set; }
-
-        public string? FileName { get; set; }
-
-        public string? Title { get; set; }
-
     }
+
+    public int Id { get; set; }
+
+    public IntPtr Hwnd { get; set; }
+
+    public string? FilePath { get; set; }
+
+    public string? FileName { get; set; }
+
+    public string? Title { get; set; }
 
 }

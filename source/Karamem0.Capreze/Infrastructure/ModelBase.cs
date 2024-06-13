@@ -12,16 +12,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze.Infrastructure
+namespace Karamem0.Capreze.Infrastructure;
+
+public abstract class ModelBase
 {
 
-    public abstract class ModelBase
+    protected ModelBase()
     {
-
-        protected ModelBase()
-        {
-        }
-
     }
 
 }

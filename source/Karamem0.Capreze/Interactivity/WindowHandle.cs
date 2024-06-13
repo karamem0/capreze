@@ -13,29 +13,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Karamem0.Capreze.Interactivity
+namespace Karamem0.Capreze.Interactivity;
+
+public class WindowHandle : DependencyObject
 {
 
-    public class WindowHandle : DependencyObject
+    public static readonly DependencyProperty HandleProperty = DependencyProperty.RegisterAttached(
+        "Handle",
+        typeof(IntPtr),
+        typeof(DependencyObject),
+        new PropertyMetadata(IntPtr.Zero)
+    );
+
+    public static void SetHandle(DependencyObject element, IntPtr value)
     {
+        element.SetValue(HandleProperty, value);
+    }
 
-        public static readonly DependencyProperty HandleProperty = DependencyProperty.RegisterAttached(
-            "Handle",
-            typeof(IntPtr),
-            typeof(DependencyObject),
-            new PropertyMetadata(IntPtr.Zero)
-        );
-
-        public static void SetHandle(DependencyObject element, IntPtr value)
-        {
-            element.SetValue(HandleProperty, value);
-        }
-
-        public static IntPtr GetHandle(DependencyObject element)
-        {
-            return (IntPtr)element.GetValue(HandleProperty);
-        }
-
+    public static IntPtr GetHandle(DependencyObject element)
+    {
+        return (IntPtr)element.GetValue(HandleProperty);
     }
 
 }

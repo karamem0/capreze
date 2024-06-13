@@ -9,7 +9,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +22,12 @@ namespace Karamem0.Capreze
 
         private static void Main()
         {
-            var project = new Project("Capreze",
-                new InstallDir(@"%LocalAppData%\Programs\Capreze",
-                    new Files(@"..\..\artifact\capreze\*.*"))
+            var project = new Project(
+                "Capreze",
+                new InstallDir(
+                    @"%LocalAppData%\Programs\Capreze",
+                    new Files(@"..\..\artifact\capreze\*.*")
+                )
             )
             {
                 ControlPanelInfo = new ProductInfo()
@@ -43,7 +45,9 @@ namespace Karamem0.Capreze
                 },
                 Version = new Version(
                     FileVersionInfo.GetVersionInfo(
-                        System.Reflection.Assembly.GetEntryAssembly().Location).FileVersion)
+                        System.Reflection.Assembly.GetEntryAssembly().Location
+                    ).FileVersion
+                )
             };
             project
                 .ResolveWildCards()

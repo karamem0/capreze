@@ -14,28 +14,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze.Services
+namespace Karamem0.Capreze.Services;
+
+public interface IConfigurationService
 {
 
-    public interface IConfigurationService
+    Task<IEnumerable<WindowSize>?> GetWindowSizesAsync();
+
+}
+
+public class ConfigurationService(IConfiguration configuration) : IConfigurationService
+{
+
+    private readonly IConfiguration configuration = configuration;
+
+    public async Task<IEnumerable<WindowSize>?> GetWindowSizesAsync()
     {
-
-        Task<IEnumerable<WindowSize>?> GetWindowSizesAsync();
-
-    }
-
-    public class ConfigurationService(IConfiguration configuration) : IConfigurationService
-    {
-
-        private readonly IConfiguration configuration = configuration;
-
-        public async Task<IEnumerable<WindowSize>?> GetWindowSizesAsync()
-        {
-            return await Task.Run(() => this.configuration
-                .GetSection(nameof(WindowSize))
-                .Get<IEnumerable<WindowSize>?>());
-        }
-
+        return await Task.Run(() => this.configuration
+            .GetSection(nameof(WindowSize))
+            .Get<IEnumerable<WindowSize>?>());
     }
 
 }

@@ -13,50 +13,47 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Karamem0.Capreze.Infrastructure
+namespace Karamem0.Capreze.Infrastructure;
+
+public class DelegateCommand : ICommand
 {
 
-    public class DelegateCommand : ICommand
+    public event EventHandler? CanExecuteChanged;
+
+    private readonly Action onExecute;
+
+    private readonly Func<bool> onCanExecute;
+
+    public DelegateCommand(Action onExecute)
     {
+        this.onExecute = onExecute;
+        this.onCanExecute = delegate { return true; };
+    }
 
-        public event EventHandler? CanExecuteChanged;
+    public DelegateCommand(Action onExecute, Func<bool> onCanExecute)
+    {
+        this.onExecute = onExecute;
+        this.onCanExecute = onCanExecute;
+    }
 
-        private readonly Action onExecute;
+    public void RaiseCanExecuteChanged()
+    {
+        this.OnCanExecuteChanged(new EventArgs());
+    }
 
-        private readonly Func<bool> onCanExecute;
+    protected virtual void OnCanExecuteChanged(EventArgs e)
+    {
+        this.CanExecuteChanged?.Invoke(this, e);
+    }
 
-        public DelegateCommand(Action onExecute)
-        {
-            this.onExecute = onExecute;
-            this.onCanExecute = delegate { return true; };
-        }
+    void ICommand.Execute(object? parameter)
+    {
+        this.onExecute?.Invoke();
+    }
 
-        public DelegateCommand(Action onExecute, Func<bool> onCanExecute)
-        {
-            this.onExecute = onExecute;
-            this.onCanExecute = onCanExecute;
-        }
-
-        public void RaiseCanExecuteChanged()
-        {
-            this.OnCanExecuteChanged(new EventArgs());
-        }
-
-        protected virtual void OnCanExecuteChanged(EventArgs e)
-        {
-            this.CanExecuteChanged?.Invoke(this, e);
-        }
-
-        void ICommand.Execute(object? parameter)
-        {
-            this.onExecute?.Invoke();
-        }
-
-        bool ICommand.CanExecute(object? parameter)
-        {
-            return this.onCanExecute is not null && this.onCanExecute.Invoke();
-        }
-
+    bool ICommand.CanExecute(object? parameter)
+    {
+        return this.onCanExecute is not null && this.onCanExecute.Invoke();
     }
 
 }

@@ -1,23 +1,23 @@
 # Capreze
 
-[日本語で見る](README.ja-jp.md)
+[View in English](README.md)
 
-A window size adjustment tool optimized for capturing
+キャプチャに最適化されたウィンドウ サイズ変更ツール
 
 [![.github/workflows/main.yml](https://github.com/karamem0/capreze/actions/workflows/workflow.yml/badge.svg)](https://github.com/karamem0/capreze/actions/workflows/workflow.yml)
 [![License](https://img.shields.io/github/license/karamem0/capreze.svg)](https://github.com/karamem0/capreze/blob/main/LICENSE)
 
-## Screenshot
+## スクリーンショット
 
-![Screenshot](./assets/screenshot.png)
+![スクリーンショット](./assets/screenshot.png)
 
-## Features
+## 機能
 
-- Automatically adjust to size for capturing
-- Supports high DPI screen
-- Easily change the size by the preset size definition
+- キャプチャのためにサイズを自動的に調整します
+- 高 DPI スクリーンに対応しています
+- プリセットされたサイズにより簡単にサイズの変更が可能です
 
-## Dependencies
+## 依存関係
 
 - [.NET Core 8.0](https://dotnet.microsoft.com/download/dotnet-core/8.0)
 - [Microsoft.ApplicationInsights.WorkerService](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService/2.22.0) (2.22.0)

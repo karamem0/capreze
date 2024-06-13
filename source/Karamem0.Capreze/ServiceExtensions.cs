@@ -16,19 +16,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze
+namespace Karamem0.Capreze;
+
+
+public static class ServiceExtensions
 {
 
-    public static class ServiceExtensions
+    public static IServiceCollection AddTinyMapper(this IServiceCollection services)
     {
-
-        public static IServiceCollection AddTinyMapper(this IServiceCollection services)
-        {
-            TinyMapper.Bind<AppSettings, MainViewModel>();
-            TinyMapper.Bind<MainViewModel, AppSettings>();
-            return services;
-        }
-
+        TinyMapper.Bind<AppSettings, MainViewModel>();
+        TinyMapper.Bind<MainViewModel, AppSettings>();
+        return services;
     }
 
 }

@@ -13,143 +13,140 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze.Runtime.InteropServices
+namespace Karamem0.Capreze.Runtime.InteropServices;
+
+public static partial class User32
 {
 
-    public static partial class User32
+    [LibraryImport("user32.dll")]
+    internal static partial uint GetDpiForWindow(IntPtr hwnd);
+
+    [LibraryImport("user32.dll")]
+    internal static partial int GetSystemMetricsForDpi(int index, uint dpi);
+
+    [LibraryImport("user32.dll")]
+    internal static partial int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
+
+    [LibraryImport("user32.dll")]
+    internal static partial IntPtr SetWindowPos(IntPtr hwnd, IntPtr order, int x, int y, int width, int height, uint flags);
+
+    [LibraryImport("user32.dll")]
+    internal static partial int ShowWindow(IntPtr hwnd, uint msg);
+
+    internal enum SystemMetricIndex
     {
 
-        [LibraryImport("user32.dll")]
-        internal static partial uint GetDpiForWindow(IntPtr hwnd);
+        SM_CXSIZEFRAME = 32,
 
-        [LibraryImport("user32.dll")]
-        internal static partial int GetSystemMetricsForDpi(int index, uint dpi);
+        SM_CYSIZEFRAME = 33,
 
-        [LibraryImport("user32.dll")]
-        internal static partial int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
+        SM_CXPADDEDBORDER = 92,
 
-        [LibraryImport("user32.dll")]
-        internal static partial IntPtr SetWindowPos(IntPtr hwnd, IntPtr order, int x, int y, int width, int height, uint flags);
+    }
 
-        [LibraryImport("user32.dll")]
-        internal static partial int ShowWindow(IntPtr hwnd, uint msg);
+    [Flags()]
+    internal enum SetWindowPosFlags
+    {
 
-        internal enum SystemMetricIndex
-        {
+        SWP_NOSIZE = 0x0001,
 
-            SM_CXSIZEFRAME = 32,
+        SWP_NOMOVE = 0x0002,
 
-            SM_CYSIZEFRAME = 33,
+        SWP_NOZORDER = 0x0004,
 
-            SM_CXPADDEDBORDER = 92,
+        SWP_NOREDRAW = 0x0008,
 
-        }
+        SWP_NOACTIVATE = 0x0010,
 
-        [Flags()]
-        internal enum SetWindowPosFlags
-        {
+        SWP_FRAMECHANGED = 0x0020,
 
-            SWP_NOSIZE = 0x0001,
+        SWP_SHOWWINDOW = 0x0040,
 
-            SWP_NOMOVE = 0x0002,
+    }
 
-            SWP_NOZORDER = 0x0004,
+    public enum ShowWindowFlags
+    {
 
-            SWP_NOREDRAW = 0x0008,
+        SW_HIDE = 0,
 
-            SWP_NOACTIVATE = 0x0010,
+        SW_SHOWNORMAL = 1,
 
-            SWP_FRAMECHANGED = 0x0020,
+        SW_SHOWMINIMIZED = 2,
 
-            SWP_SHOWWINDOW = 0x0040,
+        SW_MAXIMIZE = 3,
 
-        }
+        SW_SHOWMAXIMIZED = 3,
 
-        public enum ShowWindowFlags
-        {
+        SW_SHOWNOACTIVATE = 4,
 
-            SW_HIDE = 0,
+        SW_SHOW = 5,
 
-            SW_SHOWNORMAL = 1,
+        SW_MINIMIZE = 6,
 
-            SW_SHOWMINIMIZED = 2,
+        SW_SHOWMINNOACTIVE = 7,
 
-            SW_MAXIMIZE = 3,
+        SW_SHOWNA = 8,
 
-            SW_SHOWMAXIMIZED = 3,
+        SW_RESTORE = 9,
 
-            SW_SHOWNOACTIVATE = 4,
+        SW_SHOWDEFAULT = 10,
 
-            SW_SHOW = 5,
+        SW_FORCEMINIMIZE = 11,
 
-            SW_MINIMIZE = 6,
+    }
 
-            SW_SHOWMINNOACTIVE = 7,
+    public enum WindowOrder
+    {
 
-            SW_SHOWNA = 8,
+        HWND_TOP = 0,
 
-            SW_RESTORE = 9,
+        HWND_BOTTOM = 1,
 
-            SW_SHOWDEFAULT = 10,
+        HWND_TOPMOST = -1,
 
-            SW_FORCEMINIMIZE = 11,
+        HWND_NOTOPMOST = -2,
 
-        }
+    }
 
-        public enum WindowOrder
-        {
+    public struct WindowInfo
+    {
 
-            HWND_TOP = 0,
+        public int Size { get; set; }
 
-            HWND_BOTTOM = 1,
+        public Rectangle Window { get; set; }
 
-            HWND_TOPMOST = -1,
+        public Rectangle Client { get; set; }
 
-            HWND_NOTOPMOST = -2,
+        public int Style { get; set; }
 
-        }
+        public int ExStyle { get; set; }
 
-        public struct WindowInfo
-        {
+        public int WindowStatus { get; set; }
 
-            public int Size { get; set; }
+        public uint WindowBordersX { get; set; }
 
-            public Rectangle Window { get; set; }
+        public uint WindowBordersY { get; set; }
 
-            public Rectangle Client { get; set; }
+        public short WindowType { get; set; }
 
-            public int Style { get; set; }
+        public short CreatorVersion { get; set; }
 
-            public int ExStyle { get; set; }
+    }
 
-            public int WindowStatus { get; set; }
+    public struct Rectangle
+    {
 
-            public uint WindowBordersX { get; set; }
+        public int Left { get; set; }
 
-            public uint WindowBordersY { get; set; }
+        public int Top { get; set; }
 
-            public short WindowType { get; set; }
+        public int Right { get; set; }
 
-            public short CreatorVersion { get; set; }
+        public int Bottom { get; set; }
 
-        }
+        public readonly int Width => this.Right - this.Left;
 
-        public struct Rectangle
-        {
-
-            public int Left { get; set; }
-
-            public int Top { get; set; }
-
-            public int Right { get; set; }
-
-            public int Bottom { get; set; }
-
-            public readonly int Width => this.Right - this.Left;
-
-            public readonly int Height => this.Bottom - this.Top;
-
-        }
+        public readonly int Height => this.Bottom - this.Top;
 
     }
 

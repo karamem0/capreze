@@ -5,13 +5,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:li="clr-namespace:Karamem0.Capreze.Interactivity"
+    xmlns:properties="clr-namespace:Karamem0.Capreze.Properties"
     x:Class="Karamem0.Capreze.Views.MainWindow"
     x:Name="Window"
     mc:Ignorable="d"
     Height="480"
     Icon="/App.png"
     ResizeMode="CanResize"
-    Title="Capreze"
     Width="720">
     <Window.Background>
         <x:Static Member="SystemColors.ControlBrush" />
@@ -23,6 +23,9 @@
             </Binding.Source>
         </Binding>
     </Window.DataContext>
+    <Window.Title>
+        <x:Static Member="properties:Resources.WindowTitle" />
+    </Window.Title>
     <Window.Topmost>
         <Binding
             Mode="OneWay"
@@ -40,8 +43,14 @@
         <Menu
             Grid.Column="0"
             Grid.Row="0">
-            <MenuItem Header="_File">
-                <MenuItem Header="_Exit">
+            <MenuItem>
+                <MenuItem.Header>
+                    <x:Static Member="properties:Resources.MenuItemFileHeader" />
+                </MenuItem.Header>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <x:Static Member="properties:Resources.MenuItemExitHeader" />
+                    </MenuItem.Header>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:CallMethodAction MethodName="Close">
@@ -53,24 +62,29 @@
                     </i:Interaction.Triggers>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="_Option">
-                <MenuItem
-                    IsCheckable="True"
-                    Header="_Always On Top">
+            <MenuItem>
+                <MenuItem.Header>
+                    <x:Static Member="properties:Resources.MenuItemOptionsHeader" />
+                </MenuItem.Header>
+                <MenuItem IsCheckable="True">
                     <MenuItem.IsChecked>
                         <Binding
                             Mode="TwoWay"
                             Path="IsTopmost" />
                     </MenuItem.IsChecked>
+                    <MenuItem.Header>
+                        <x:Static Member="properties:Resources.MenuItemAlwaysOnTopHeader" />
+                    </MenuItem.Header>
                 </MenuItem>
-                <MenuItem
-                    IsCheckable="True"
-                    Header="Auto _Resize">
+                <MenuItem IsCheckable="True">
                     <MenuItem.IsChecked>
                         <Binding
                             Mode="TwoWay"
                             Path="AutoResize" />
                     </MenuItem.IsChecked>
+                    <MenuItem.Header>
+                        <x:Static Member="properties:Resources.MenuItemAutoResizeHeader" />
+                    </MenuItem.Header>
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -162,11 +176,13 @@
                     <Label
                         Grid.Column="1"
                         Grid.Row="0"
-                        Content="_X"
                         HorizontalContentAlignment="Center"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         VerticalContentAlignment="Stretch">
+                        <Label.Content>
+                            <x:Static Member="properties:Resources.LabelXContent" />
+                        </Label.Content>
                         <Label.Target>
                             <Binding ElementName="OffsetXTextBox" />
                         </Label.Target>
@@ -174,11 +190,13 @@
                     <Label
                         Grid.Column="2"
                         Grid.Row="0"
-                        Content="_Y"
                         HorizontalContentAlignment="Center"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         VerticalContentAlignment="Stretch">
+                        <Label.Content>
+                            <x:Static Member="properties:Resources.LabelYContent" />
+                        </Label.Content>
                         <Label.Target>
                             <Binding ElementName="OffsetYTextBox" />
                         </Label.Target>
@@ -188,8 +206,9 @@
                         Grid.Row="1"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
-                        Text="Offset:"
-                        TextAlignment="Left" />
+                        TextAlignment="Left">
+                        <x:Static Member="properties:Resources.TextBlockOffsetText" />
+                    </TextBlock>
                     <TextBox
                         x:Name="OffsetXTextBox"
                         Grid.Column="1"
@@ -251,13 +270,15 @@
                         Grid.ColumnSpan="2"
                         Grid.Row="2">
                         <CheckBox
-                            Content="Enable offsets"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
                             Margin="3,3,3,3"
                             Padding="3,3,3,3"
                             VerticalAlignment="Center"
                             VerticalContentAlignment="Center">
+                            <CheckBox.Content>
+                                <x:Static Member="properties:Resources.LabelEnableOffsetContent" />
+                            </CheckBox.Content>
                             <CheckBox.IsChecked>
                                 <Binding
                                     Mode="TwoWay"
@@ -283,23 +304,27 @@
                         Grid.Row="0"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
-                        Text="Capture"
-                        TextAlignment="Center" />
+                        TextAlignment="Center">
+                        <x:Static Member="properties:Resources.TextBlockCaptureText" />
+                    </TextBlock>
                     <TextBlock
                         Grid.Column="2"
                         Grid.Row="0"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
-                        Text="Actual"
-                        TextAlignment="Center" />
+                        TextAlignment="Center">
+                        <x:Static Member="properties:Resources.TextBlockActualText" />
+                    </TextBlock>
                     <Label
                         Grid.Column="0"
                         Grid.Row="1"
-                        Content="_Width:"
                         HorizontalAlignment="Left"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         VerticalAlignment="Center">
+                        <Label.Content>
+                            <x:Static Member="properties:Resources.LabelWidthContent" />
+                        </Label.Content>
                         <Label.Target>
                             <Binding ElementName="CaptureWidthTextBox" />
                         </Label.Target>
@@ -333,11 +358,13 @@
                     <Label
                         Grid.Column="0"
                         Grid.Row="2"
-                        Content="_Height:"
                         HorizontalAlignment="Left"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         VerticalAlignment="Center">
+                        <Label.Content>
+                            <x:Static Member="properties:Resources.LabelHeightContent" />
+                        </Label.Content>
                         <Label.Target>
                             <Binding ElementName="CaptureHeightTextBox" />
                         </Label.Target>
@@ -409,12 +436,14 @@
                 </ItemsControl>
                 <Grid Margin="0,6,0,0">
                     <Button
-                        Content="_Resize"
                         Margin="3,3,3,3"
                         Padding="3,3,3,3">
                         <Button.Command>
                             <Binding Path="ResizeCommand" />
                         </Button.Command>
+                        <Button.Content>
+                            <x:Static Member="properties:Resources.ButtonResizeContent" />
+                        </Button.Content>
                     </Button>
                 </Grid>
             </StackPanel>
@@ -430,19 +459,31 @@
                     <TextBlock.Visibility>
                         <Binding Path="SelectedInformationVisibility" />
                     </TextBlock.Visibility>
-                    <Run Text="PID:" />
+                    <Run>
+                        <Run.Text>
+                            <x:Static Member="properties:Resources.TextBlockPidText" />
+                        </Run.Text>
+                    </Run>
                     <Run>
                         <Run.Text>
                             <Binding Path="SelectedInformation.Id" />
                         </Run.Text>
                     </Run>
-                    <Run Text="Width:" />
+                    <Run>
+                        <Run.Text>
+                            <x:Static Member="properties:Resources.TextBlockWidthText" />
+                        </Run.Text>
+                    </Run>
                     <Run>
                         <Run.Text>
                             <Binding Path="SelectedWidth" />
                         </Run.Text>
                     </Run>
-                    <Run Text="Height:" />
+                    <Run>
+                        <Run.Text>
+                            <x:Static Member="properties:Resources.TextBlockHeightText" />
+                        </Run.Text>
+                    </Run>
                     <Run>
                         <Run.Text>
                             <Binding Path="SelectedHeight" />

@@ -12,26 +12,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze.Models
+namespace Karamem0.Capreze.Models;
+
+public record WindowSize
 {
 
-    public record WindowSize
+    public WindowSize()
     {
-
-        public WindowSize()
-        {
-        }
-
-        public string? Name { get; set; }
-
-        public string? Description { get; set; }
-
-        public int Width { get; set; }
-
-        public int Height { get; set; }
-
-        public string? DisplayName => this.Name + (this.Description is null ? null : $"({this.Description})");
-
     }
+
+    public string? Name { get; set; }
+
+    public string? Description { get; set; }
+
+    public int Width { get; set; }
+
+    public int Height { get; set; }
+
+    public string? DisplayName => this.Name + (this.Description is null ? null : $"({this.Description})");
 
 }

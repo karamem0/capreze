@@ -12,31 +12,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karamem0.Capreze.Infrastructure
+namespace Karamem0.Capreze.Infrastructure;
+
+public abstract class ServiceBase : IDisposable
 {
 
-    public abstract class ServiceBase : IDisposable
+    protected ServiceBase()
     {
+    }
 
-        protected ServiceBase()
-        {
-        }
+    ~ServiceBase()
+    {
+        this.Dispose(false);
+    }
 
-        ~ServiceBase()
-        {
-            this.Dispose(false);
-        }
+    public void Dispose()
+    {
+        this.Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-        }
-
+    protected virtual void Dispose(bool disposing)
+    {
     }
 
 }

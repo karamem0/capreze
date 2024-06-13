@@ -18,36 +18,33 @@ using System.Windows.Data;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
-namespace Karamem0.Capreze.Interactivity
+namespace Karamem0.Capreze.Interactivity;
+
+public class BitmapSourceConverter : IValueConverter
 {
 
-    public class BitmapSourceConverter : IValueConverter
+    public BitmapSourceConverter()
     {
+    }
 
-        public BitmapSourceConverter()
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is string path)
         {
-        }
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is string path)
+            var icon = Icon.ExtractAssociatedIcon(path);
+            if (icon is not null)
             {
-                var icon = Icon.ExtractAssociatedIcon(path);
-                if (icon is not null)
-                {
-                    var rect = Int32Rect.Empty;
-                    var options = BitmapSizeOptions.FromEmptyOptions();
-                    return Imaging.CreateBitmapSourceFromHIcon(icon.Handle, rect, options);
-                }
+                var rect = Int32Rect.Empty;
+                var options = BitmapSizeOptions.FromEmptyOptions();
+                return Imaging.CreateBitmapSourceFromHIcon(icon.Handle, rect, options);
             }
-            return DependencyProperty.UnsetValue;
         }
+        return DependencyProperty.UnsetValue;
+    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return DependencyProperty.UnsetValue;
-        }
-
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return DependencyProperty.UnsetValue;
     }
 
 }

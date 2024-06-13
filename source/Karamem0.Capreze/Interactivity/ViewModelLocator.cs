@@ -16,29 +16,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Karamem0.Capreze.Interactivity
+namespace Karamem0.Capreze.Interactivity;
+
+public class ViewModelLocator : DependencyObject
 {
 
-    public class ViewModelLocator : DependencyObject
+    public static readonly DependencyProperty MainViewModelProperty =
+        DependencyProperty.Register(
+            "MainViewModel",
+            typeof(ViewModelBase),
+            typeof(ViewModelLocator),
+            new PropertyMetadata(Application.Host.Services.GetService<MainViewModel>()));
+
+    public ViewModelLocator()
     {
+    }
 
-        public static readonly DependencyProperty MainViewModelProperty =
-            DependencyProperty.Register(
-                "MainViewModel",
-                typeof(ViewModelBase),
-                typeof(ViewModelLocator),
-                new PropertyMetadata(Application.Host.Services.GetService<MainViewModel>()));
-
-        public ViewModelLocator()
-        {
-        }
-
-        public ViewModelBase MainViewModel
-        {
-            get => (ViewModelBase)this.GetValue(MainViewModelProperty);
-            set => this.SetValue(MainViewModelProperty, value);
-        }
-
+    public ViewModelBase MainViewModel
+    {
+        get => (ViewModelBase)this.GetValue(MainViewModelProperty);
+        set => this.SetValue(MainViewModelProperty, value);
     }
 
 }
