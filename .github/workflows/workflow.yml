@@ -2,12 +2,8 @@ on:
   push:
     branches:
       - main
-      - develop
     tags:
       - v*.*.*
-
-env:
-  BUILD_VERSION: '1.11.0'
 
 jobs:
   build:
@@ -24,11 +20,12 @@ jobs:
       - name: Build source
         shell: pwsh
         run: |
-          dotnet publish source/Karamem0.Capreze/Karamem0.Capreze.csproj `
+          dotnet publish `
+            source/Karamem0.Capreze/Karamem0.Capreze.csproj `
             -c Release `
             -o artifact/capreze `
-            -p:Version=${{env.BUILD_VERSION}} `
-            -p:FileVersion=${{env.BUILD_VERSION}}
+            -p:Version=${{vars.BUILD_VERSION}} `
+            -p:FileVersion=${{vars.BUILD_VERSION}}
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -37,13 +34,14 @@ jobs:
       - name: Build source (x64)
         shell: pwsh
         run: |
-          dotnet publish source/Karamem0.Capreze/Karamem0.Capreze.csproj `
+          dotnet publish `
+            source/Karamem0.Capreze/Karamem0.Capreze.csproj `
             -c Release `
             -o artifact/capreze_win-x64 `
             -r win-x64 `
             --self-contained `
-            -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
-            -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}} `
+            -p:Version=${{vars.BUILD_VERSION}}.${{github.run_number}} `
+            -p:FileVersion=${{vars.BUILD_VERSION}}.${{github.run_number}} `
             -p:PublishSingleFile=true `
             -p:IncludeAllContentForSelfExtract=true
       - name: Upload artifact (x64)
@@ -54,13 +52,14 @@ jobs:
       - name: Build source (x86)
         shell: pwsh
         run: |
-          dotnet publish source/Karamem0.Capreze/Karamem0.Capreze.csproj `
+          dotnet publish `
+            source/Karamem0.Capreze/Karamem0.Capreze.csproj `
             -c Release `
             -o artifact/capreze_win-x86 `
             -r win-x86 `
             --self-contained `
-            -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
-            -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}} `
+            -p:Version=${{vars.BUILD_VERSION}}.${{github.run_number}} `
+            -p:FileVersion=${{vars.BUILD_VERSION}}.${{github.run_number}} `
             -p:PublishSingleFile=true `
             -p:IncludeAllContentForSelfExtract=true
       - name: Upload artifact (x86)
@@ -70,9 +69,10 @@ jobs:
           path: artifact/capreze_win-x86
       - name: Build msi
         run: |
-          dotnet build source/Karamem0.Capreze.Installer/Karamem0.Capreze.Installer.csproj `
-            -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
-            -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}}
+          dotnet build `
+            source/Karamem0.Capreze.Installer/Karamem0.Capreze.Installer.csproj `
+            -p:Version=${{vars.BUILD_VERSION}}.${{github.run_number}} `
+            -p:FileVersion=${{vars.BUILD_VERSION}}.${{github.run_number}}
       - name: Upload msi
         uses: actions/upload-artifact@v4
         with:
@@ -81,7 +81,7 @@ jobs:
   release:
     needs: build
     if: contains(github.ref, 'refs/tags/')
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
@@ -106,20 +106,18 @@ jobs:
       - name: Provision artifact
         shell: pwsh
         run: |
-          Copy-Item -Path capreze_installer/capreze.msi -Destination capreze_${{env.BUILD_VERSION}}.msi
-          Compress-Archive -Path capreze/* -DestinationPath capreze_${{env.BUILD_VERSION}}.zip
-          Compress-Archive -Path capreze_win-x64/* -DestinationPath capreze_${{env.BUILD_VERSION}}_win-x64.zip
-          Compress-Archive -Path capreze_win-x86/* -DestinationPath capreze_${{env.BUILD_VERSION}}_win-x86.zip
+          Copy-Item -Path capreze_installer/capreze.msi -Destination capreze_${{vars.BUILD_VERSION}}.msi
+          Compress-Archive -Path capreze/* -DestinationPath capreze_${{vars.BUILD_VERSION}}.zip
+          Compress-Archive -Path capreze_win-x64/* -DestinationPath capreze_${{vars.BUILD_VERSION}}_win-x64.zip
+          Compress-Archive -Path capreze_win-x86/* -DestinationPath capreze_${{vars.BUILD_VERSION}}_win-x86.zip
       - name: Create release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        uses: softprops/action-gh-release@v2
         with:
           files: |
-            capreze_${{env.BUILD_VERSION}}.msi
-            capreze_${{env.BUILD_VERSION}}.zip
-            capreze_${{env.BUILD_VERSION}}_win-x64.zip
-            capreze_${{env.BUILD_VERSION}}_win-x86.zip
+            capreze_${{vars.BUILD_VERSION}}.msi
+            capreze_${{vars.BUILD_VERSION}}.zip
+            capreze_${{vars.BUILD_VERSION}}_win-x64.zip
+            capreze_${{vars.BUILD_VERSION}}_win-x86.zip
       - name: Connect to Azure
         uses: azure/login@v2
         with:
@@ -127,4 +125,4 @@ jobs:
       - name: Deploy MSI package
         uses: azure/cli@v2
         with:
-          inlineScript: az storage blob upload --file capreze_${{env.BUILD_VERSION}}.msi --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --container-name msi --auth-mode login
+          inlineScript: az storage blob upload --file capreze_${{vars.BUILD_VERSION}}.msi --account-name ${{secrets.AZURE_STORAGE_ACCOUNT_NAME}} --container-name msi --auth-mode login

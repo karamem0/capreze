@@ -3,35 +3,35 @@
   "tasks": [
     {
       "label": "clean",
+      "type": "shell",
       "command": "dotnet",
       "args": [
         "clean",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
-      "type": "process",
       "problemMatcher": "$msCompile"
     },
     {
       "label": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "type": "shell",
       "command": "dotnet",
       "args": [
         "build",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
-      "type": "process",
       "dependsOn": "clean",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
       "problemMatcher": "$msCompile"
     },
     {
       "label": "publish",
+      "type": "shell",
       "command": "dotnet",
-      "type": "process",
       "args": [
         "publish",
         "/property:GenerateFullPaths=true",

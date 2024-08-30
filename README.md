@@ -9,7 +9,7 @@ A window size adjustment tool optimized for capturing
 
 ## Screenshot
 
-![Screenshot](./assets/screenshot.png)
+![Screenshot](./assets/Screenshot.png)
 
 ## Features
 

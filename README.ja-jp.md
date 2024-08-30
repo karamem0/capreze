@@ -9,7 +9,7 @@
 
 ## スクリーンショット
 
-![スクリーンショット](./assets/screenshot.png)
+![スクリーンショット](./assets/Screenshot.png)
 
 ## 機能
 
