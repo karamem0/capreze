@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -25,23 +25,21 @@ using System.Windows.Threading;
 
 namespace Karamem0.Capreze;
 
-
 public partial class Application : System.Windows.Application
 {
 
-    public static readonly IHost Host =
-        new HostBuilder()
-            .ConfigureAppConfiguration((context, configuration) =>
-                configuration.AddJsonFile("Capreze.config.json"))
-            .ConfigureServices((context, services) =>
-                services
-                    .AddApplicationInsightsTelemetryWorkerService()
-                    .AddSingleton<AppSettings>()
-                    .AddTransient<IConfigurationService, ConfigurationService>()
-                    .AddTransient<IWindowService, WindowService>()
-                    .AddTransient<MainViewModel>()
-                    .AddTinyMapper())
-            .Build();
+    public static readonly IHost Host = new HostBuilder()
+        .ConfigureAppConfiguration((context, configuration) => configuration.AddJsonFile("Capreze.config.json"))
+        .ConfigureServices((context, services) => services
+            .AddApplicationInsightsTelemetryWorkerService()
+            .AddSingleton<AppSettings>()
+            .AddTransient<IConfigurationService, ConfigurationService>()
+            .AddTransient<IProcessService, ProcessService>()
+            .AddTransient<IWindowService, WindowService>()
+            .AddTransient<MainViewModel>()
+            .AddTinyMapper()
+        )
+        .Build();
 
     private readonly TelemetryClient telemetryClient;
 

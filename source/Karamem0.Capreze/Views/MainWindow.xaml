@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:system="clr-namespace:System;assembly=System"
     xmlns:li="clr-namespace:Karamem0.Capreze.Interactivity"
     xmlns:properties="clr-namespace:Karamem0.Capreze.Properties"
     x:Class="Karamem0.Capreze.Views.MainWindow"
@@ -87,6 +88,26 @@
                     </MenuItem.Header>
                 </MenuItem>
             </MenuItem>
+            <MenuItem>
+                <MenuItem.Header>
+                    <x:Static Member="properties:Resources.MenuItemHelpHeader" />
+                </MenuItem.Header>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <x:Static Member="properties:Resources.MenuItemGitHubText" />
+                    </MenuItem.Header>
+                    <i:Interaction.Behaviors>
+                        <li:EventToCommandBehavior EventName="Click">
+                            <li:EventToCommandBehavior.Command>
+                                <Binding Path="OpenBrowserCommand" />
+                            </li:EventToCommandBehavior.Command>
+                            <li:EventToCommandBehavior.CommandParameter>
+                                <system:Uri>https://github.com/karamem0/capreze</system:Uri>
+                            </li:EventToCommandBehavior.CommandParameter>
+                        </li:EventToCommandBehavior>
+                    </i:Interaction.Behaviors>
+                </MenuItem>
+            </MenuItem>
         </Menu>
         <Grid
             Grid.Column="0"
@@ -104,12 +125,19 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Margin="6,6,6,6">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter
+                            Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemsSource>
                     <Binding Path="WindowInformations" />
                 </ListBox.ItemsSource>
                 <ListBox.ItemTemplate>
                     <ItemContainerTemplate>
-                        <Grid>
+                        <Grid Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -117,6 +145,61 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
+                            <Grid.Tag>
+                                <Binding Path="DataContext">
+                                    <Binding.RelativeSource>
+                                        <RelativeSource Mode="FindAncestor">
+                                            <RelativeSource.AncestorType>
+                                                <x:Type TypeName="Window" />
+                                            </RelativeSource.AncestorType>
+                                        </RelativeSource>
+                                    </Binding.RelativeSource>
+                                </Binding>
+                            </Grid.Tag>
+                            <Grid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem>
+                                        <MenuItem.Header>
+                                            <x:Static Member="properties:Resources.MenuItemShowWindowToTopText" />
+                                        </MenuItem.Header>
+                                        <i:Interaction.Behaviors>
+                                            <li:EventToCommandBehavior EventName="Click">
+                                                <li:EventToCommandBehavior.Command>
+                                                    <Binding Path="PlacementTarget.Tag.ShowWindowToTopCommand">
+                                                        <Binding.RelativeSource>
+                                                            <RelativeSource Mode="FindAncestor">
+                                                                <RelativeSource.AncestorType>
+                                                                    <x:Type TypeName="ContextMenu" />
+                                                                </RelativeSource.AncestorType>
+                                                            </RelativeSource>
+                                                        </Binding.RelativeSource>
+                                                    </Binding>
+                                                </li:EventToCommandBehavior.Command>
+                                            </li:EventToCommandBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <MenuItem.Header>
+                                            <x:Static Member="properties:Resources.MenuItemApplyToCaptureSizeText" />
+                                        </MenuItem.Header>
+                                        <i:Interaction.Behaviors>
+                                            <li:EventToCommandBehavior EventName="Click">
+                                                <li:EventToCommandBehavior.Command>
+                                                    <Binding Path="PlacementTarget.Tag.ApplyToCaptureSizeCommand">
+                                                        <Binding.RelativeSource>
+                                                            <RelativeSource Mode="FindAncestor">
+                                                                <RelativeSource.AncestorType>
+                                                                    <x:Type TypeName="ContextMenu" />
+                                                                </RelativeSource.AncestorType>
+                                                            </RelativeSource>
+                                                        </Binding.RelativeSource>
+                                                    </Binding>
+                                                </li:EventToCommandBehavior.Command>
+                                            </li:EventToCommandBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </Grid.ContextMenu>
                             <StackPanel
                                 Grid.Column="0"
                                 Grid.Row="0"
@@ -218,8 +301,8 @@
                         TextAlignment="Right">
                         <TextBox.IsEnabled>
                             <Binding
-                              Mode="OneWay"
-                              Path="IsOffsetEnabled" />
+                                Mode="OneWay"
+                                Path="IsOffsetEnabled" />
                         </TextBox.IsEnabled>
                         <TextBox.Text>
                             <Binding
@@ -305,7 +388,7 @@
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         TextAlignment="Center">
-                        <x:Static Member="properties:Resources.TextBlockCaptureText" />
+                        <x:Static Member="properties:Resources.TextBlockCaptureSizeText" />
                     </TextBlock>
                     <TextBlock
                         Grid.Column="2"
@@ -313,7 +396,7 @@
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         TextAlignment="Center">
-                        <x:Static Member="properties:Resources.TextBlockActualText" />
+                        <x:Static Member="properties:Resources.TextBlockActualSizeText" />
                     </TextBlock>
                     <Label
                         Grid.Column="0"

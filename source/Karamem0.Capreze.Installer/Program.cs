@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -22,13 +22,7 @@ namespace Karamem0.Capreze
 
         private static void Main()
         {
-            var project = new Project(
-                "Capreze",
-                new InstallDir(
-                    @"%LocalAppData%\Programs\Capreze",
-                    new Files(@"..\..\artifact\capreze\*.*")
-                )
-            )
+            var project = new Project("Capreze", new InstallDir(@"%LocalAppData%\Programs\Capreze", new Files(@"..\..\artifact\capreze\*.*")))
             {
                 ControlPanelInfo = new ProductInfo()
                 {
@@ -45,8 +39,10 @@ namespace Karamem0.Capreze
                 },
                 Version = new Version(
                     FileVersionInfo.GetVersionInfo(
-                        System.Reflection.Assembly.GetEntryAssembly().Location
-                    ).FileVersion
+                            System.Reflection.Assembly.GetEntryAssembly()
+                                .Location
+                        )
+                        .FileVersion
                 )
             };
             project
@@ -54,9 +50,9 @@ namespace Karamem0.Capreze
                 .FindFile(f => f.Name.EndsWith("Capreze.exe"))
                 .First()
                 .Shortcuts = new[]
-                {
-                    new FileShortcut("Capreze", @"%ProgramMenu%")
-                };
+            {
+                new FileShortcut("Capreze", @"%ProgramMenu%")
+            };
             _ = Compiler.BuildMsi(project, @"..\..\artifact\capreze.msi");
         }
 

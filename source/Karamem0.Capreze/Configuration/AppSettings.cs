@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -22,11 +22,13 @@ namespace Karamem0.Capreze.Configuration;
 public class AppSettings(TelemetryClient telemetryClient)
 {
 
-    private readonly FileInfo fileInfo = new(Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-        ".capreze",
-        "settings.json"
-    ));
+    private readonly FileInfo fileInfo = new(
+        Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            ".capreze",
+            "settings.json"
+        )
+    );
 
     private readonly TelemetryClient telemetryClient = telemetryClient;
 

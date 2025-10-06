@@ -2,9 +2,9 @@
 
 [View in English](README.md)
 
-キャプチャに最適化されたウィンドウ サイズ変更ツール
+ピクセル単位で正確なキャプチャを行うためのウィンドウ サイズ自動調整ツール
 
-[![.github/workflows/main.yml](https://github.com/karamem0/capreze/actions/workflows/workflow.yml/badge.svg)](https://github.com/karamem0/capreze/actions/workflows/workflow.yml)
+[![.github/workflows/trigger-on-main.yml](https://github.com/karamem0/capreze/actions/workflows/trigger-on-main.yml/badge.svg)](https://github.com/karamem0/capreze/actions/workflows/trigger-on-main.yml)
 [![License](https://img.shields.io/github/license/karamem0/capreze.svg)](https://github.com/karamem0/capreze/blob/main/LICENSE)
 
 ## スクリーンショット
@@ -13,9 +13,11 @@
 
 ## 機能
 
-- キャプチャのためにサイズを自動的に調整します
-- 高 DPI スクリーンに対応しています
-- プリセットされたサイズにより簡単にサイズの変更が可能です
+キャプチャ精度を高めるために、ウィンドウの表示サイズと実際の画像サイズとの差異 (オフセット) を自動検出し、指定どおりのサイズでキャプチャできるようにするツールです。マルチ モニター環境では、対象ウィンドウが表示されているモニターごとに補正を適用できます。
+
+- ウィンドウと取得画像の境界差分 (オフセット) 自動検出
+- マルチ モニター対応
+- 指定ピクセル単位の正確なサイズ設定支援
 
 ## 依存関係
 

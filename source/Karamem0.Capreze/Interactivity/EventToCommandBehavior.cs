@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -21,27 +21,27 @@ namespace Karamem0.Capreze.Interactivity;
 public class EventToCommandBehavior : Behavior<DependencyObject>
 {
 
-    public static readonly DependencyProperty EventNameProperty =
-        DependencyProperty.Register(
-            "EventName",
-            typeof(string),
-            typeof(EventToCommandBehavior)
-        );
+    public static readonly DependencyProperty EventNameProperty = DependencyProperty.Register(
+        "EventName",
+        typeof(string),
+        typeof(EventToCommandBehavior)
+    );
 
-    public static readonly DependencyProperty CommandProperty =
-        DependencyProperty.Register(
-            "Command",
-            typeof(ICommand),
-            typeof(EventToCommandBehavior)
-        );
+    public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
+        "Command",
+        typeof(ICommand),
+        typeof(EventToCommandBehavior)
+    );
+
+    public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
+        "CommandParameter",
+        typeof(object),
+        typeof(EventToCommandBehavior)
+    );
 
     private EventInfo? eventInfo;
 
     private Delegate? eventDelegate;
-
-    public EventToCommandBehavior()
-    {
-    }
 
     public string EventName
     {
@@ -55,15 +55,23 @@ public class EventToCommandBehavior : Behavior<DependencyObject>
         set => this.SetValue(CommandProperty, value);
     }
 
+    public object CommandParameter
+    {
+        get => this.GetValue(CommandParameterProperty);
+        set => this.SetValue(CommandParameterProperty, value);
+    }
+
     protected override void OnAttached()
     {
         if (this.EventName is not null)
         {
-            this.eventInfo = this.AssociatedObject.GetType().GetEvent(this.EventName);
-            if (this.eventInfo is not null &&
-                this.eventInfo.EventHandlerType is not null)
+            this.eventInfo = this
+                .AssociatedObject.GetType()
+                .GetEvent(this.EventName);
+            if (this.eventInfo is not null && this.eventInfo.EventHandlerType is not null)
             {
-                this.eventDelegate = this.GetType()
+                this.eventDelegate = this
+                    .GetType()
                     .GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
                     .Single(x => x.Name is "OnEventRaised")
                     .CreateDelegate(this.eventInfo.EventHandlerType, this);
@@ -81,9 +89,9 @@ public class EventToCommandBehavior : Behavior<DependencyObject>
     {
         if (this.Command is not null)
         {
-            if (this.Command.CanExecute(e))
+            if (this.Command.CanExecute(this.CommandParameter))
             {
-                this.Command.Execute(e);
+                this.Command.Execute(this.CommandParameter);
             }
         }
     }

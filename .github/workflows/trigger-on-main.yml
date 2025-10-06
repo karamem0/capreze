@@ -10,5 +10,11 @@ permissions: {}
 jobs:
   build-source:
     name: Build source
-    uses: ./.github/workflows/build-source.yml
-    secrets: inherit
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repos
+        uses: actions/checkout@v4
+      - name: Build source
+        uses: ./.github/actions/build-source
+        env:
+          BUILD_VERSION: ${{vars.BUILD_VERSION}}

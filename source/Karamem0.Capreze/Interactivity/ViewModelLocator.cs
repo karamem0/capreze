@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -21,16 +21,12 @@ namespace Karamem0.Capreze.Interactivity;
 public class ViewModelLocator : DependencyObject
 {
 
-    public static readonly DependencyProperty MainViewModelProperty =
-        DependencyProperty.Register(
-            "MainViewModel",
-            typeof(ViewModelBase),
-            typeof(ViewModelLocator),
-            new PropertyMetadata(Application.Host.Services.GetService<MainViewModel>()));
-
-    public ViewModelLocator()
-    {
-    }
+    public static readonly DependencyProperty MainViewModelProperty = DependencyProperty.Register(
+        "MainViewModel",
+        typeof(ViewModelBase),
+        typeof(ViewModelLocator),
+        new PropertyMetadata(Application.Host.Services.GetService<MainViewModel>())
+    );
 
     public ViewModelBase MainViewModel
     {

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -15,26 +15,14 @@ using System.Windows.Input;
 
 namespace Karamem0.Capreze.Infrastructure;
 
-public class DelegateCommand<T> : ICommand
+public class DelegateCommand<T>(Action<T?> onExecute, Func<T?, bool>? onCanExecute = null) : ICommand
 {
 
     public event EventHandler? CanExecuteChanged;
 
-    private readonly Action<T?> onExecute;
+    private readonly Action<T?> onExecute = onExecute;
 
-    private readonly Func<T?, bool> onCanExecute;
-
-    public DelegateCommand(Action<T?> onExecute)
-    {
-        this.onExecute = onExecute;
-        this.onCanExecute = delegate { return true; };
-    }
-
-    public DelegateCommand(Action<T?> onExecute, Func<T?, bool> onCanExecute)
-    {
-        this.onExecute = onExecute;
-        this.onCanExecute = onCanExecute;
-    }
+    private readonly Func<T?, bool> onCanExecute = onCanExecute ?? delegate { return true; };
 
     public void RaiseCanExecuteChanged()
     {

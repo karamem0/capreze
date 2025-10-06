@@ -2,9 +2,9 @@
 
 [日本語で見る](README.ja-jp.md)
 
-A window size adjustment tool optimized for capturing
+A window size auto-adjust tool for pixel-perfect captures
 
-[![.github/workflows/main.yml](https://github.com/karamem0/capreze/actions/workflows/workflow.yml/badge.svg)](https://github.com/karamem0/capreze/actions/workflows/workflow.yml)
+[![.github/workflows/trigger-on-main.yml](https://github.com/karamem0/capreze/actions/workflows/trigger-on-main.yml/badge.svg)](https://github.com/karamem0/capreze/actions/workflows/trigger-on-main.yml)
 [![License](https://img.shields.io/github/license/karamem0/capreze.svg)](https://github.com/karamem0/capreze/blob/main/LICENSE)
 
 ## Screenshot
@@ -13,9 +13,11 @@ A window size adjustment tool optimized for capturing
 
 ## Features
 
-- Automatically adjust to size for capturing
-- Supports high DPI screen
-- Easily change the size by the preset size definition
+This tool automatically detects the difference (offset) between the displayed window size and the actual image size to improve capture accuracy, allowing you to capture at the exact specified size. In multi-monitor environments, corrections can be applied for each monitor on which the target window appears.
+
+- Automatic detection of window and captured image border difference (offset)
+- Multi-monitor support
+- Assistance for precise size setting at exact pixel units
 
 ## Dependencies
 

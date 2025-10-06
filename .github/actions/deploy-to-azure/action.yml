@@ -1,0 +1,29 @@
+name: Deploy to Azure
+
+description: This GitHub Action deploys built artifacts to Azure.
+
+runs:
+  using: composite
+  steps:
+    - name: Download artifatcs
+      uses: actions/download-artifact@v4
+      with:
+        name: capreze_installer
+        path: artifact
+    - name: Provision artifact
+      shell: pwsh
+      run: Copy-Item -Path artifact/capreze.msi -Destination capreze_${{env.BUILD_VERSION}}.msi
+    - name: Connect to Azure
+      uses: azure/login@a65d910e8af852a8061c627c456678983e180302
+      with:
+        creds: ${{env.AZURE_CREDENTIALS}}
+    - name: Deploy MSI package
+      uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956
+      with:
+        inlineScript: |
+          az storage blob upload \
+            --file capreze_${{env.BUILD_VERSION}}.msi \
+            --account-name ${{env.AZURE_STORAGE_ACCOUNT_NAME}} \
+            --container-name msi \
+            --auth-mode login \
+            --overwrite

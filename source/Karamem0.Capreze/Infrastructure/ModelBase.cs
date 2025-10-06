@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -14,11 +14,4 @@ using System.Threading.Tasks;
 
 namespace Karamem0.Capreze.Infrastructure;
 
-public abstract class ModelBase
-{
-
-    protected ModelBase()
-    {
-    }
-
-}
+public abstract class ModelBase;

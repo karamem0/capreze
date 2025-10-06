@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -17,9 +17,7 @@ namespace Karamem0.Capreze.Infrastructure;
 public abstract class ServiceBase : IDisposable
 {
 
-    protected ServiceBase()
-    {
-    }
+    protected ServiceBase() { }
 
     ~ServiceBase()
     {
@@ -32,8 +30,6 @@ public abstract class ServiceBase : IDisposable
         GC.SuppressFinalize(this);
     }
 
-    protected virtual void Dispose(bool disposing)
-    {
-    }
+    protected virtual void Dispose(bool disposing) { }
 
 }

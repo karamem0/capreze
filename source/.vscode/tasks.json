@@ -47,17 +47,6 @@
         "format"
       ],
       "problemMatcher": []
-    },
-    {
-      "label": "resharper",
-      "type": "shell",
-      "command": "jb",
-      "args": [
-        "cleanupcode",
-        "--profile=\"Built-in: Reformat Code\"",
-        "${workspaceFolder}/Karamem0.Capreze.sln"
-      ],
-      "problemMatcher": []
     }
   ]
 }

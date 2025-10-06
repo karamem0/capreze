@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -23,11 +23,12 @@ namespace Karamem0.Capreze.Interactivity;
 public class BitmapSourceConverter : IValueConverter
 {
 
-    public BitmapSourceConverter()
-    {
-    }
-
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        CultureInfo culture
+    )
     {
         if (value is string path)
         {
@@ -36,13 +37,22 @@ public class BitmapSourceConverter : IValueConverter
             {
                 var rect = Int32Rect.Empty;
                 var options = BitmapSizeOptions.FromEmptyOptions();
-                return Imaging.CreateBitmapSourceFromHIcon(icon.Handle, rect, options);
+                return Imaging.CreateBitmapSourceFromHIcon(
+                    icon.Handle,
+                    rect,
+                    options
+                );
             }
         }
         return DependencyProperty.UnsetValue;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+        CultureInfo culture
+    )
     {
         return DependencyProperty.UnsetValue;
     }

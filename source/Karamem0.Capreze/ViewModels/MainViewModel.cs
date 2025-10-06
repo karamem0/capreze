@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -21,12 +21,19 @@ using System.Windows.Input;
 
 namespace Karamem0.Capreze.ViewModels;
 
-public class MainViewModel(IConfigurationService configurationService, IWindowService windowService) : ViewModelBase
+public class MainViewModel(
+    IConfigurationService configurationService,
+    IProcessService processService,
+    IWindowService windowService
+) : ViewModelBase
 {
 
     private readonly IConfigurationService configurationService = configurationService;
 
+    private readonly IProcessService processService = processService;
+
     private readonly IWindowService windowService = windowService;
+
     private IntPtr windowHandle;
 
     public IntPtr WindowHandle
@@ -256,8 +263,14 @@ public class MainViewModel(IConfigurationService configurationService, IWindowSe
 
     public ObservableCollection<WindowSize> WindowSizes { get; } = [];
 
-    public ICommand LoadWindowInformationsCommand =>
-        new DelegateCommand(async () =>
+    public ICommand ApplyToCaptureSizeCommand => new DelegateCommand(() =>
+        {
+            this.CaptureHeight = this.SelectedHeight;
+            this.CaptureWidth = this.SelectedWidth;
+        }
+    );
+
+    public ICommand LoadWindowInformationsCommand => new DelegateCommand(async () =>
         {
             var oldValues = this.WindowInformations;
             var newValues = await this.windowService.GetWindowInformationsAsync();
@@ -284,10 +297,10 @@ public class MainViewModel(IConfigurationService configurationService, IWindowSe
                 this.SelectedWidth = wi.Width;
                 this.LoadOffsetCommand.Execute(null);
             }
-        });
+        }
+    );
 
-    public ICommand LoadWindowSizesCommand =>
-        new DelegateCommand(async () =>
+    public ICommand LoadWindowSizesCommand => new DelegateCommand(async () =>
         {
             this.WindowSizes.Clear();
             var values = await this.configurationService.GetWindowSizesAsync();
@@ -298,10 +311,10 @@ public class MainViewModel(IConfigurationService configurationService, IWindowSe
                     this.WindowSizes.Add(value);
                 }
             }
-        });
+        }
+    );
 
-    public ICommand LoadOffsetCommand =>
-        new DelegateCommand(async () =>
+    public ICommand LoadOffsetCommand => new DelegateCommand(async () =>
         {
             if (this.IsOffsetChanged is not true)
             {
@@ -316,10 +329,28 @@ public class MainViewModel(IConfigurationService configurationService, IWindowSe
                     this.OffsetY = await this.windowService.GetOffsetYAsync(this.SelectedInformation.Hwnd);
                 }
             }
-        });
+        }
+    );
 
-    public ICommand PresetCommand =>
-        new DelegateCommand<WindowSize>(parameter =>
+    public ICommand OffsetChangedCommand => new DelegateCommand(() =>
+        {
+            if (this.SelectedInformation is not null)
+            {
+                this.IsOffsetChanged = true;
+            }
+        }
+    );
+
+    public ICommand OpenBrowserCommand => new DelegateCommand<Uri>(async (parameter) =>
+        {
+            if (parameter is not null)
+            {
+                await this.processService.OpenBrowserAsync(parameter);
+            }
+        }
+    );
+
+    public ICommand PresetCommand => new DelegateCommand<WindowSize>(parameter =>
         {
             if (parameter is not null)
             {
@@ -330,28 +361,30 @@ public class MainViewModel(IConfigurationService configurationService, IWindowSe
                     this.ResizeCommand.Execute(null);
                 }
             }
-        });
+        }
+    );
 
-    public ICommand ResizeCommand =>
-        new DelegateCommand(async () =>
+    public ICommand ResizeCommand => new DelegateCommand(async () =>
         {
             if (this.SelectedInformation is not null)
             {
-                var hwnd = this.SelectedInformation.Hwnd;
-                var width = this.ActualWidth;
-                var height = this.ActualHeight;
-                await this.windowService.ResizeWindowAsync(hwnd, width, height);
+                await this.windowService.ResizeWindowAsync(
+                    this.SelectedInformation.Hwnd,
+                    this.ActualWidth,
+                    this.ActualHeight
+                );
             }
-        });
+        }
+    );
 
-    public ICommand OffsetChangedCommand =>
-        new DelegateCommand(() =>
+    public ICommand ShowWindowToTopCommand => new DelegateCommand(async () =>
         {
             if (this.SelectedInformation is not null)
             {
-                this.IsOffsetChanged = true;
+                await this.windowService.BringWindowToTopAsync(this.SelectedInformation.Hwnd);
             }
-        });
+        }
+    );
 
     public override void OnLoaded()
     {
@@ -361,26 +394,18 @@ public class MainViewModel(IConfigurationService configurationService, IWindowSe
         this.SelectedInformationVisibility = Visibility.Hidden;
     }
 
-    public override void OnUnloaded()
-    {
-    }
+    public override void OnUnloaded() { }
 
     protected override async void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
-        if (e.PropertyName is
-            nameof(this.CaptureHeight) or
-            nameof(this.IsOffsetEnabled) or
-            nameof(this.OffsetY))
+        if (e.PropertyName is nameof(this.CaptureHeight) or nameof(this.IsOffsetEnabled) or nameof(this.OffsetY))
         {
             var size = this.CaptureHeight;
             var offset = this.IsOffsetEnabled ? this.OffsetY : 0;
             this.ActualHeight = size + offset;
         }
-        if (e.PropertyName is
-            nameof(this.CaptureWidth) or
-            nameof(this.IsOffsetEnabled) or
-            nameof(this.OffsetX))
+        if (e.PropertyName is nameof(this.CaptureWidth) or nameof(this.IsOffsetEnabled) or nameof(this.OffsetX))
         {
             var size = this.CaptureWidth;
             var offset = this.IsOffsetEnabled ? this.OffsetX * 2 : 0;

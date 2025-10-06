@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2024 karamem0
+// Copyright (c) 2019-2025 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -28,7 +28,23 @@ public static partial class User32
     internal static partial int GetWindowInfo(IntPtr hwnd, ref WindowInfo wi);
 
     [LibraryImport("user32.dll")]
-    internal static partial IntPtr SetWindowPos(IntPtr hwnd, IntPtr order, int x, int y, int width, int height, uint flags);
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool IsIconic(IntPtr hWnd);
+
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool SetForegroundWindow(IntPtr hWnd);
+
+    [LibraryImport("user32.dll")]
+    internal static partial IntPtr SetWindowPos(
+        IntPtr hwnd,
+        IntPtr order,
+        int x,
+        int y,
+        int width,
+        int height,
+        uint flags
+    );
 
     [LibraryImport("user32.dll")]
     internal static partial int ShowWindow(IntPtr hwnd, uint msg);

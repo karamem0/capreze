@@ -1,0 +1,80 @@
+name: Build source
+
+description: This GitHub Action builds sources and uploads its artifacts.
+
+runs:
+  using: composite
+  steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.x
+    - name: Restore project
+      shell: pwsh
+      run: dotnet restore source/Karamem0.Capreze.sln
+    - name: Build source
+      shell: pwsh
+      run: |
+        dotnet publish `
+          source/Karamem0.Capreze/Karamem0.Capreze.csproj `
+          -c Release `
+          -o artifact/capreze `
+          -p:Version=${{env.BUILD_VERSION}} `
+          -p:FileVersion=${{env.BUILD_VERSION}}
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: capreze
+        path: artifact/capreze
+        include-hidden-files: true
+    - name: Build source (x64)
+      shell: pwsh
+      run: |
+        dotnet publish `
+          source/Karamem0.Capreze/Karamem0.Capreze.csproj `
+          -c Release `
+          -o artifact/capreze_win-x64 `
+          -r win-x64 `
+          --self-contained `
+          -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
+          -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}} `
+          -p:PublishSingleFile=true `
+          -p:IncludeAllContentForSelfExtract=true
+    - name: Upload artifact (x64)
+      uses: actions/upload-artifact@v4
+      with:
+        name: capreze_win-x64
+        path: artifact/capreze_win-x64
+        include-hidden-files: true
+    - name: Build source (x86)
+      shell: pwsh
+      run: |
+        dotnet publish `
+          source/Karamem0.Capreze/Karamem0.Capreze.csproj `
+          -c Release `
+          -o artifact/capreze_win-x86 `
+          -r win-x86 `
+          --self-contained `
+          -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
+          -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}} `
+          -p:PublishSingleFile=true `
+          -p:IncludeAllContentForSelfExtract=true
+    - name: Upload artifact (x86)
+      uses: actions/upload-artifact@v4
+      with:
+        name: capreze_win-x86
+        path: artifact/capreze_win-x86
+        include-hidden-files: true
+    - name: Build msi
+      shell: pwsh
+      run: |
+        dotnet build `
+          source/Karamem0.Capreze.Installer/Karamem0.Capreze.Installer.csproj `
+          -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
+          -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}}
+    - name: Upload msi
+      uses: actions/upload-artifact@v4
+      with:
+        name: capreze_installer
+        path: artifact/capreze.msi
+        include-hidden-files: true
