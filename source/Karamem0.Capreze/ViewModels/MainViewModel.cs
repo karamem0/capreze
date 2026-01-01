@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2025 karamem0
+// Copyright (c) 2019-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,13 +9,8 @@
 using Karamem0.Capreze.Infrastructure;
 using Karamem0.Capreze.Models;
 using Karamem0.Capreze.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -34,226 +29,196 @@ public class MainViewModel(
 
     private readonly IWindowService windowService = windowService;
 
-    private IntPtr windowHandle;
-
     public IntPtr WindowHandle
     {
-        get => this.windowHandle;
+        get;
         set
         {
-            if (this.windowHandle != value)
+            if (field != value)
             {
-                this.windowHandle = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.WindowHandle));
             }
         }
     }
 
-    private int actualHeight;
-
     public int ActualHeight
     {
-        get => this.actualHeight;
+        get;
         set
         {
-            if (this.actualHeight != value)
+            if (field != value)
             {
-                this.actualHeight = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.ActualHeight));
             }
         }
     }
 
-    private int actualWidth;
-
     public int ActualWidth
     {
-        get => this.actualWidth;
+        get;
         set
         {
-            if (this.actualWidth != value)
+            if (field != value)
             {
-                this.actualWidth = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.ActualWidth));
             }
         }
     }
 
-    private int captureHeight;
-
     public int CaptureHeight
     {
-        get => this.captureHeight;
+        get;
         set
         {
-            if (this.captureHeight != value)
+            if (field != value)
             {
-                this.captureHeight = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.CaptureHeight));
             }
         }
     }
 
-    private int captureWidth;
-
     public int CaptureWidth
     {
-        get => this.captureWidth;
+        get;
         set
         {
-            if (this.captureWidth != value)
+            if (field != value)
             {
-                this.captureWidth = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.CaptureWidth));
             }
         }
     }
 
-    private bool isOffsetChanged;
-
     public bool IsOffsetChanged
     {
-        get => this.isOffsetChanged;
+        get;
         set
         {
-            if (this.isOffsetChanged != value)
+            if (field != value)
             {
-                this.isOffsetChanged = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.IsOffsetChanged));
             }
         }
     }
 
-    private bool isOffsetEnabled;
-
     public bool IsOffsetEnabled
     {
-        get => this.isOffsetEnabled;
+        get;
         set
         {
-            if (this.isOffsetEnabled != value)
+            if (field != value)
             {
-                this.isOffsetEnabled = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.IsOffsetEnabled));
             }
         }
     }
 
-    private int offsetX;
-
     public int OffsetX
     {
-        get => this.offsetX;
+        get;
         set
         {
-            if (this.offsetX != value)
+            if (field != value)
             {
-                this.offsetX = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.OffsetX));
             }
         }
     }
 
-    private int offsetY;
-
     public int OffsetY
     {
-        get => this.offsetY;
+        get;
         set
         {
-            if (this.offsetY != value)
+            if (field != value)
             {
-                this.offsetY = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.OffsetY));
             }
         }
     }
 
-    private int selectedHeight;
-
     public int SelectedHeight
     {
-        get => this.selectedHeight;
+        get;
         set
         {
-            if (this.selectedHeight != value)
+            if (field != value)
             {
-                this.selectedHeight = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.SelectedHeight));
             }
         }
     }
 
-    private int selectedWidth;
-
     public int SelectedWidth
     {
-        get => this.selectedWidth;
+        get;
         set
         {
-            if (this.selectedWidth != value)
+            if (field != value)
             {
-                this.selectedWidth = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.SelectedWidth));
             }
         }
     }
 
-    private bool isTopmost;
-
     public bool IsTopmost
     {
-        get => this.isTopmost;
+        get;
         set
         {
-            if (this.isTopmost != value)
+            if (field != value)
             {
-                this.isTopmost = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.IsTopmost));
             }
         }
     }
 
-    private bool autoResize;
-
     public bool AutoResize
     {
-        get => this.autoResize;
+        get;
         set
         {
-            if (this.autoResize != value)
+            if (field != value)
             {
-                this.autoResize = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.AutoResize));
             }
         }
     }
 
-    private WindowInformation? selectedInformation;
-
     public WindowInformation? SelectedInformation
     {
-        get => this.selectedInformation;
+        get;
         set
         {
-            if (this.selectedInformation != value)
+            if (field != value)
             {
-                this.selectedInformation = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.SelectedInformation));
             }
         }
     }
 
-    private Visibility selectedInformationVisibility;
-
     public Visibility SelectedInformationVisibility
     {
-        get => this.selectedInformationVisibility;
+        get;
         set
         {
-            if (this.selectedInformationVisibility != value)
+            if (field != value)
             {
-                this.selectedInformationVisibility = value;
+                field = value;
                 this.RaisePropertyChanged(nameof(this.SelectedInformationVisibility));
             }
         }

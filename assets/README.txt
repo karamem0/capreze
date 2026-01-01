@@ -14,7 +14,7 @@ Capreze v{{BUILD_VERSION}}
 
 【ライセンス】
 本ソフトウェアは MIT ライセンスで提供されます。
-Copyright (c) 2019-2025 karamem0
+Copyright (c) 2019-2026 karamem0
 ライセンス全文: https://github.com/karamem0/capreze/blob/main/LICENSE
 
 【利用規約】

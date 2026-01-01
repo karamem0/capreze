@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2025 karamem0
+// Copyright (c) 2019-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -7,15 +7,9 @@
 //
 
 using Microsoft.ApplicationInsights;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Karamem0.Capreze.Configuration;
 

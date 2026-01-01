@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2025 karamem0
+// Copyright (c) 2019-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -15,11 +15,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Nelibur.ObjectMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 

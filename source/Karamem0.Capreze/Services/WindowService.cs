@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2025 karamem0
+// Copyright (c) 2019-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -9,15 +9,10 @@
 using Karamem0.Capreze.Infrastructure;
 using Karamem0.Capreze.Models;
 using Karamem0.Capreze.Runtime.InteropServices;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Karamem0.Capreze.Services;
 

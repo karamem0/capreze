@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "github.vscode-github-actions",
+    "ms-azuretools.vscode-bicep",
+    "ms-dotnettools.csdevkit",
+    "redhat.vscode-yaml",
+    "redhat.vscode-xml"
+  ]
+}

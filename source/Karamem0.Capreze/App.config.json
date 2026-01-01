@@ -7,7 +7,12 @@
     }
   },
   "ApplicationInsights": {
-    "InstrumentationKey": "650ac3f1-95c8-4a69-bc00-800a4344e49b"
+    "LogLevel": {
+      "Default": "Information"
+    },
+    "ConnectionString": "InstrumentationKey=650ac3f1-95c8-4a69-bc00-800a4344e49b",
+    "EnableDependencyTrackingTelemetryModule": false,
+    "EnablePerformanceCounterCollectionModule": false
   },
   "WindowSize": [
     {

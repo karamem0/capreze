@@ -1,17 +1,12 @@
 //
-// Copyright (c) 2019-2025 karamem0
+// Copyright (c) 2019-2026 karamem0
 //
 // This software is released under the MIT License.
 //
 // https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Karamem0.Capreze.Runtime.InteropServices;
 

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019-2025 karamem0
+// Copyright (c) 2019-2026 karamem0
 //
 // This software is released under the MIT License.
 //
@@ -8,11 +8,6 @@
 
 using Karamem0.Capreze.Infrastructure;
 using Microsoft.Xaml.Behaviors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Karamem0.Capreze.Interactivity;
