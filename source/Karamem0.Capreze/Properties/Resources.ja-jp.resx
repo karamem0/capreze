@@ -117,70 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonResizeContent" xml:space="preserve">
-    <value>サイズ変更 (_R)</value>
+  <data name="AboutMenuItemText" xml:space="preserve">
+    <value>バージョン情報 (_A)</value>
   </data>
-  <data name="LabelEnableOffsetContent" xml:space="preserve">
-    <value>オフセットを有効にする (_E)</value>
+  <data name="AboutWindowTitle" xml:space="preserve">
+    <value>バージョン情報</value>
   </data>
-  <data name="LabelHeightContent" xml:space="preserve">
-    <value>高さ (_H):</value>
-  </data>
-  <data name="LabelWidthContent" xml:space="preserve">
-    <value>幅 (_W):</value>
-  </data>
-  <data name="LabelXContent" xml:space="preserve">
-    <value>_X</value>
-  </data>
-  <data name="LabelYContent" xml:space="preserve">
-    <value>_Y</value>
-  </data>
-  <data name="MenuItemAlwaysOnTopHeader" xml:space="preserve">
-    <value>常に手前に表示 (_T)</value>
-  </data>
-  <data name="MenuItemApplyToCaptureSizeText" xml:space="preserve">
-    <value>切り取るサイズに適用 (_A)</value>
-  </data>
-  <data name="MenuItemAutoResizeHeader" xml:space="preserve">
-    <value>自動的にサイズ変更(_R)</value>
-  </data>
-  <data name="MenuItemExitHeader" xml:space="preserve">
-    <value>終了 (_X)</value>
-  </data>
-  <data name="MenuItemFileHeader" xml:space="preserve">
-    <value>ファイル (_F)</value>
-  </data>
-  <data name="MenuItemGitHubText" xml:space="preserve">
-    <value>GitHub (_G)</value>
-  </data>
-  <data name="MenuItemHelpHeader" xml:space="preserve">
-    <value>ヘルプ (_H)</value>
-  </data>
-  <data name="MenuItemOptionsHeader" xml:space="preserve">
-    <value>オプション (_O)</value>
-  </data>
-  <data name="MenuItemShowWindowToTopText" xml:space="preserve">
-    <value>ウィンドウを最前面に表示 (_S)</value>
-  </data>
-  <data name="TextBlockActualSizeText" xml:space="preserve">
+  <data name="ActualSizeTextBlockText" xml:space="preserve">
     <value>実際のサイズ</value>
   </data>
-  <data name="TextBlockCaptureSizeText" xml:space="preserve">
+  <data name="AlwaysOnTopMenuItemHeader" xml:space="preserve">
+    <value>常に手前に表示 (_T)</value>
+  </data>
+  <data name="ApplyToCaptureSizeMenuItemText" xml:space="preserve">
+    <value>切り取るサイズに適用 (_A)</value>
+  </data>
+  <data name="AutoResizeMenuItemHeader" xml:space="preserve">
+    <value>自動的にサイズ変更(_R)</value>
+  </data>
+  <data name="CaptureSizeTextBlockText" xml:space="preserve">
     <value>切り取るサイズ</value>
   </data>
-  <data name="TextBlockHeightText" xml:space="preserve">
+  <data name="EnableLabelOffsetContent" xml:space="preserve">
+    <value>オフセットを有効にする (_E)</value>
+  </data>
+  <data name="ExitMenuItemHeader" xml:space="preserve">
+    <value>終了 (_X)</value>
+  </data>
+  <data name="FileMenuItemHeader" xml:space="preserve">
+    <value>ファイル (_F)</value>
+  </data>
+  <data name="GitHubMenuItemText" xml:space="preserve">
+    <value>GitHub (_G)</value>
+  </data>
+  <data name="HeightLabelContent" xml:space="preserve">
+    <value>高さ (_H):</value>
+  </data>
+  <data name="HeightTextBlockText" xml:space="preserve">
     <value>高さ:</value>
   </data>
-  <data name="TextBlockOffsetText" xml:space="preserve">
+  <data name="HelpMenuItemHeader" xml:space="preserve">
+    <value>ヘルプ (_H)</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Capreze</value>
+  </data>
+  <data name="OffsetTextBlockText" xml:space="preserve">
     <value>オフセット:</value>
   </data>
-  <data name="TextBlockPidText" xml:space="preserve">
+  <data name="OkButtonContent" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OptionsMenuItemOHeader" xml:space="preserve">
+    <value>オプション (_O)</value>
+  </data>
+  <data name="PidTextBlockText" xml:space="preserve">
     <value>PID:</value>
   </data>
-  <data name="TextBlockWidthText" xml:space="preserve">
+  <data name="ResizeButtonContent" xml:space="preserve">
+    <value>サイズ変更 (_R)</value>
+  </data>
+  <data name="ShowWindowToTopMenuItemText" xml:space="preserve">
+    <value>ウィンドウを最前面に表示 (_S)</value>
+  </data>
+  <data name="WidthLabelContent" xml:space="preserve">
+    <value>幅 (_W):</value>
+  </data>
+  <data name="WidthTextBlockText" xml:space="preserve">
     <value>幅:</value>
   </data>
-  <data name="WindowTitle" xml:space="preserve">
-    <value>Capreze</value>
+  <data name="XLabelContent" xml:space="preserve">
+    <value>_X</value>
+  </data>
+  <data name="YLabelContent" xml:space="preserve">
+    <value>_Y</value>
   </data>
 </root>

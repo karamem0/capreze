@@ -117,70 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonResizeContent" xml:space="preserve">
-    <value>_Resize</value>
+  <data name="AboutMenuItemText" xml:space="preserve">
+    <value>_About</value>
   </data>
-  <data name="LabelEnableOffsetContent" xml:space="preserve">
-    <value>_Enable offsets</value>
+  <data name="AboutWindowTitle" xml:space="preserve">
+    <value>About</value>
   </data>
-  <data name="LabelHeightContent" xml:space="preserve">
-    <value>_Height:</value>
-  </data>
-  <data name="LabelWidthContent" xml:space="preserve">
-    <value>_Width:</value>
-  </data>
-  <data name="LabelXContent" xml:space="preserve">
-    <value>_X</value>
-  </data>
-  <data name="LabelYContent" xml:space="preserve">
-    <value>_Y</value>
-  </data>
-  <data name="MenuItemAlwaysOnTopHeader" xml:space="preserve">
-    <value>Always On _Top</value>
-  </data>
-  <data name="MenuItemApplyToCaptureSizeText" xml:space="preserve">
-    <value>_Apply to Capture Size</value>
-  </data>
-  <data name="MenuItemAutoResizeHeader" xml:space="preserve">
-    <value>Auto _Resize</value>
-  </data>
-  <data name="MenuItemExitHeader" xml:space="preserve">
-    <value>_Exit</value>
-  </data>
-  <data name="MenuItemFileHeader" xml:space="preserve">
-    <value>_File</value>
-  </data>
-  <data name="MenuItemGitHubText" xml:space="preserve">
-    <value>_GitHub</value>
-  </data>
-  <data name="MenuItemHelpHeader" xml:space="preserve">
-    <value>_Help</value>
-  </data>
-  <data name="MenuItemOptionsHeader" xml:space="preserve">
-    <value>_Options</value>
-  </data>
-  <data name="MenuItemShowWindowToTopText" xml:space="preserve">
-    <value>_Show Window to Top</value>
-  </data>
-  <data name="TextBlockActuaSizelText" xml:space="preserve">
+  <data name="ActualSizeTextBlockText" xml:space="preserve">
     <value>Actual Size</value>
   </data>
-  <data name="TextBlockCaptureSizeText" xml:space="preserve">
+  <data name="AlwaysOnTopMenuItemHeader" xml:space="preserve">
+    <value>Always On _Top</value>
+  </data>
+  <data name="ApplyToCaptureSizeMenuItemText" xml:space="preserve">
+    <value>_Apply to Capture Size</value>
+  </data>
+  <data name="AutoResizeMenuItemHeader" xml:space="preserve">
+    <value>Auto _Resize</value>
+  </data>
+  <data name="CaptureSizeTextBlockText" xml:space="preserve">
     <value>Capture Size</value>
   </data>
-  <data name="TextBlockHeightText" xml:space="preserve">
+  <data name="EnableLabelOffsetContent" xml:space="preserve">
+    <value>_Enable offsets</value>
+  </data>
+  <data name="ExitMenuItemHeader" xml:space="preserve">
+    <value>_Exit</value>
+  </data>
+  <data name="FileMenuItemHeader" xml:space="preserve">
+    <value>_File</value>
+  </data>
+  <data name="GitHubMenuItemText" xml:space="preserve">
+    <value>_GitHub</value>
+  </data>
+  <data name="HeightLabelContent" xml:space="preserve">
+    <value>_Height:</value>
+  </data>
+  <data name="HeightTextBlockText" xml:space="preserve">
     <value>Height:</value>
   </data>
-  <data name="TextBlockOffsetText" xml:space="preserve">
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Capreze</value>
+  </data>
+  <data name="HelpMenuItemHeader" xml:space="preserve">
+    <value>_Help</value>
+  </data>
+  <data name="OffsetTextBlockText" xml:space="preserve">
     <value>Offset:</value>
   </data>
-  <data name="TextBlockPidText" xml:space="preserve">
+  <data name="OkButtonContent" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OptionsMenuItemOHeader" xml:space="preserve">
+    <value>_Options</value>
+  </data>
+  <data name="PidTextBlockText" xml:space="preserve">
     <value>PID:</value>
   </data>
-  <data name="TextBlockWidthText" xml:space="preserve">
+  <data name="ResizeButtonContent" xml:space="preserve">
+    <value>_Resize</value>
+  </data>
+  <data name="ShowWindowToTopMenuItemText" xml:space="preserve">
+    <value>_Show Window to Top</value>
+  </data>
+  <data name="WidthLabelContent" xml:space="preserve">
+    <value>_Width:</value>
+  </data>
+  <data name="WidthTextBlockText" xml:space="preserve">
     <value>Width:</value>
   </data>
-  <data name="WindowTitle" xml:space="preserve">
-    <value>Capreze</value>
+  <data name="XLabelContent" xml:space="preserve">
+    <value>_X</value>
+  </data>
+  <data name="YLabelContent" xml:space="preserve">
+    <value>_Y</value>
   </data>
 </root>

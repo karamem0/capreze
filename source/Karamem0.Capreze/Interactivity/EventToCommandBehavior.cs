@@ -38,19 +38,19 @@ public class EventToCommandBehavior : Behavior<DependencyObject>
 
     private Delegate? eventDelegate;
 
-    public string EventName
+    public string? EventName
     {
         get => (string)this.GetValue(EventNameProperty);
         set => this.SetValue(EventNameProperty, value);
     }
 
-    public ICommand Command
+    public ICommand? Command
     {
-        get => (ICommand)this.GetValue(CommandProperty);
+        get => (ICommand?)this.GetValue(CommandProperty);
         set => this.SetValue(CommandProperty, value);
     }
 
-    public object CommandParameter
+    public object? CommandParameter
     {
         get => this.GetValue(CommandParameterProperty);
         set => this.SetValue(CommandParameterProperty, value);

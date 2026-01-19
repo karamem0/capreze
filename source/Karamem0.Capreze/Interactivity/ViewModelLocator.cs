@@ -16,6 +16,19 @@ namespace Karamem0.Capreze.Interactivity;
 public class ViewModelLocator : DependencyObject
 {
 
+    public static readonly DependencyProperty AboutViewModelProperty = DependencyProperty.Register(
+        "AboutViewModel",
+        typeof(ViewModelBase),
+        typeof(ViewModelLocator),
+        new PropertyMetadata(Application.Host.Services.GetService<AboutViewModel>())
+    );
+
+    public ViewModelBase? AboutViewModel
+    {
+        get => (ViewModelBase?)this.GetValue(AboutViewModelProperty);
+        set => this.SetValue(AboutViewModelProperty, value);
+    }
+
     public static readonly DependencyProperty MainViewModelProperty = DependencyProperty.Register(
         "MainViewModel",
         typeof(ViewModelBase),
@@ -23,9 +36,9 @@ public class ViewModelLocator : DependencyObject
         new PropertyMetadata(Application.Host.Services.GetService<MainViewModel>())
     );
 
-    public ViewModelBase MainViewModel
+    public ViewModelBase? MainViewModel
     {
-        get => (ViewModelBase)this.GetValue(MainViewModelProperty);
+        get => (ViewModelBase?)this.GetValue(MainViewModelProperty);
         set => this.SetValue(MainViewModelProperty, value);
     }
 

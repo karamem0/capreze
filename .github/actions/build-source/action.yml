@@ -65,16 +65,22 @@ runs:
         name: capreze_win-x86
         path: artifact/capreze_win-x86
         include-hidden-files: true
-    - name: Build msi
+    - name: Build source (Installer)
       shell: pwsh
       run: |
         dotnet build `
           source/Karamem0.Capreze.Installer/Karamem0.Capreze.Installer.csproj `
           -p:Version=${{env.BUILD_VERSION}}.${{github.run_number}} `
           -p:FileVersion=${{env.BUILD_VERSION}}.${{github.run_number}}
-    - name: Upload msi
+    - name: Update README.txt
+      shell: pwsh
+      run: |
+        $content = Get-Content -Path assets/README.txt
+        $content = $content -Replace "{{BUILD_VERSION}}", "${{env.BUILD_VERSION}}"
+        Out-File -FilePath artifact/capreze_installer/README.txt -InputObject $content -Encoding UTF8
+    - name: Upload artifact (Installer)
       uses: actions/upload-artifact@v4
       with:
         name: capreze_installer
-        path: artifact/capreze.msi
+        path: artifact/capreze_installer
         include-hidden-files: true

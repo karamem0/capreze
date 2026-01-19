@@ -15,10 +15,6 @@ public abstract class ViewModelBase : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected ViewModelBase()
-    {
-    }
-
     public abstract void OnLoaded();
 
     public abstract void OnUnloaded();

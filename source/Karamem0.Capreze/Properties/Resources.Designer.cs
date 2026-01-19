@@ -61,202 +61,229 @@ namespace Karamem0.Capreze.Properties {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to _Resize.
+        ///   Looks up a localized string similar to _About.
         /// </summary>
-        public static string ButtonResizeContent {
+        public static string AboutMenuItemText {
             get {
-                return ResourceManager.GetString("ButtonResizeContent", resourceCulture);
+                return ResourceManager.GetString("AboutMenuItemText", resourceCulture);
             }
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to _Enable offsets.
+        ///   Looks up a localized string similar to About.
         /// </summary>
-        public static string LabelEnableOffsetContent {
+        public static string AboutWindowTitle {
             get {
-                return ResourceManager.GetString("LabelEnableOffsetContent", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _Height:.
-        /// </summary>
-        public static string LabelHeightContent {
-            get {
-                return ResourceManager.GetString("LabelHeightContent", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _Width:.
-        /// </summary>
-        public static string LabelWidthContent {
-            get {
-                return ResourceManager.GetString("LabelWidthContent", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _X.
-        /// </summary>
-        public static string LabelXContent {
-            get {
-                return ResourceManager.GetString("LabelXContent", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _Y.
-        /// </summary>
-        public static string LabelYContent {
-            get {
-                return ResourceManager.GetString("LabelYContent", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Always On _Top.
-        /// </summary>
-        public static string MenuItemAlwaysOnTopHeader {
-            get {
-                return ResourceManager.GetString("MenuItemAlwaysOnTopHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Apply to Capture Size.
-        /// </summary>
-        public static string MenuItemApplyToCaptureSizeText {
-            get {
-                return ResourceManager.GetString("MenuItemApplyToCaptureSizeText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Auto _Resize.
-        /// </summary>
-        public static string MenuItemAutoResizeHeader {
-            get {
-                return ResourceManager.GetString("MenuItemAutoResizeHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _Exit.
-        /// </summary>
-        public static string MenuItemExitHeader {
-            get {
-                return ResourceManager.GetString("MenuItemExitHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _File.
-        /// </summary>
-        public static string MenuItemFileHeader {
-            get {
-                return ResourceManager.GetString("MenuItemFileHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _GitHub.
-        /// </summary>
-        public static string MenuItemGitHubText {
-            get {
-                return ResourceManager.GetString("MenuItemGitHubText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _Help.
-        /// </summary>
-        public static string MenuItemHelpHeader {
-            get {
-                return ResourceManager.GetString("MenuItemHelpHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _Options.
-        /// </summary>
-        public static string MenuItemOptionsHeader {
-            get {
-                return ResourceManager.GetString("MenuItemOptionsHeader", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Show Window to Top.
-        /// </summary>
-        public static string MenuItemShowWindowToTopText {
-            get {
-                return ResourceManager.GetString("MenuItemShowWindowToTopText", resourceCulture);
+                return ResourceManager.GetString("AboutWindowTitle", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Actual Size.
         /// </summary>
-        public static string TextBlockActualSizeText
+        public static string ActualSizeTextBlockText
         {
             get
             {
-                return ResourceManager.GetString("TextBlockActualSizeText", resourceCulture);
+                return ResourceManager.GetString("ActualSizeTextBlockText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Always On _Top.
+        /// </summary>
+        public static string AlwaysOnTopMenuItemHeader {
+            get {
+                return ResourceManager.GetString("AlwaysOnTopMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Apply to Capture Size.
+        /// </summary>
+        public static string ApplyToCaptureSizeMenuItemText {
+            get {
+                return ResourceManager.GetString("ApplyToCaptureSizeMenuItemText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Auto _Resize.
+        /// </summary>
+        public static string AutoResizeMenuItemHeader {
+            get {
+                return ResourceManager.GetString("AutoResizeMenuItemHeader", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Capture Size.
         /// </summary>
-        public static string TextBlockCaptureSizeText {
+        public static string CaptureSizeTextBlockText {
             get {
-                return ResourceManager.GetString("TextBlockCaptureSizeText", resourceCulture);
+                return ResourceManager.GetString("CaptureSizeTextBlockText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Enable offsets.
+        /// </summary>
+        public static string EnableLabelOffsetContent {
+            get {
+                return ResourceManager.GetString("EnableLabelOffsetContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Exit.
+        /// </summary>
+        public static string ExitMenuItemHeader {
+            get {
+                return ResourceManager.GetString("ExitMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _File.
+        /// </summary>
+        public static string FileMenuItemHeader {
+            get {
+                return ResourceManager.GetString("FileMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _GitHub.
+        /// </summary>
+        public static string GitHubMenuItemText {
+            get {
+                return ResourceManager.GetString("GitHubMenuItemText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Help.
+        /// </summary>
+        public static string HelpMenuItemHeader {
+            get {
+                return ResourceManager.GetString("HelpMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Height:.
+        /// </summary>
+        public static string HeightLabelContent {
+            get {
+                return ResourceManager.GetString("HeightLabelContent", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Height:.
         /// </summary>
-        public static string TextBlockHeightText {
+        public static string HeightTextBlockText {
             get {
-                return ResourceManager.GetString("TextBlockHeightText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Offset:.
-        /// </summary>
-        public static string TextBlockOffsetText {
-            get {
-                return ResourceManager.GetString("TextBlockOffsetText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to PID:.
-        /// </summary>
-        public static string TextBlockPidText {
-            get {
-                return ResourceManager.GetString("TextBlockPidText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Width:.
-        /// </summary>
-        public static string TextBlockWidthText {
-            get {
-                return ResourceManager.GetString("TextBlockWidthText", resourceCulture);
+                return ResourceManager.GetString("HeightTextBlockText", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Capreze.
         /// </summary>
-        public static string WindowTitle {
+        public static string MainWindowTitle {
             get {
-                return ResourceManager.GetString("WindowTitle", resourceCulture);
+                return ResourceManager.GetString("MainWindowTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Offset:.
+        /// </summary>
+        public static string OffsetTextBlockText {
+            get {
+                return ResourceManager.GetString("OffsetTextBlockText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string OkButtonContent {
+            get {
+                return ResourceManager.GetString("OkButtonContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Options.
+        /// </summary>
+        public static string OptionsMenuItemOHeader {
+            get {
+                return ResourceManager.GetString("OptionsMenuItemOHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to PID:.
+        /// </summary>
+        public static string PidTextBlockText {
+            get {
+                return ResourceManager.GetString("PidTextBlockText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Resize.
+        /// </summary>
+        public static string ResizeButtonContent {
+            get {
+                return ResourceManager.GetString("ResizeButtonContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Show Window to Top.
+        /// </summary>
+        public static string ShowWindowToTopMenuItemText {
+            get {
+                return ResourceManager.GetString("ShowWindowToTopMenuItemText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Width:.
+        /// </summary>
+        public static string WidthLabelContent {
+            get {
+                return ResourceManager.GetString("WidthLabelContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Width:.
+        /// </summary>
+        public static string WidthTextBlockText {
+            get {
+                return ResourceManager.GetString("WidthTextBlockText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _X.
+        /// </summary>
+        public static string XLabelContent {
+            get {
+                return ResourceManager.GetString("XLabelContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Y.
+        /// </summary>
+        public static string YLabelContent {
+            get {
+                return ResourceManager.GetString("YLabelContent", resourceCulture);
             }
         }
     }

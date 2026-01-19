@@ -51,7 +51,7 @@ namespace Karamem0.Capreze
             {
                 new FileShortcut("Capreze", @"%ProgramMenu%")
             };
-            _ = Compiler.BuildMsi(project, @"..\..\artifact\capreze.msi");
+            _ = Compiler.BuildMsi(project, @"..\..\artifact\capreze_installer\capreze.msi");
         }
 
     }

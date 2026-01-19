@@ -7,6 +7,7 @@
     xmlns:system="clr-namespace:System;assembly=System"
     xmlns:li="clr-namespace:Karamem0.Capreze.Interactivity"
     xmlns:properties="clr-namespace:Karamem0.Capreze.Properties"
+    xmlns:views="clr-namespace:Karamem0.Capreze.Views"
     x:Class="Karamem0.Capreze.Views.MainWindow"
     x:Name="Window"
     mc:Ignorable="d"
@@ -25,7 +26,7 @@
         </Binding>
     </Window.DataContext>
     <Window.Title>
-        <x:Static Member="properties:Resources.WindowTitle" />
+        <x:Static Member="properties:Resources.MainWindowTitle" />
     </Window.Title>
     <Window.Topmost>
         <Binding
@@ -46,11 +47,11 @@
             Grid.Row="0">
             <MenuItem>
                 <MenuItem.Header>
-                    <x:Static Member="properties:Resources.MenuItemFileHeader" />
+                    <x:Static Member="properties:Resources.FileMenuItemHeader" />
                 </MenuItem.Header>
                 <MenuItem>
                     <MenuItem.Header>
-                        <x:Static Member="properties:Resources.MenuItemExitHeader" />
+                        <x:Static Member="properties:Resources.ExitMenuItemHeader" />
                     </MenuItem.Header>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
@@ -65,7 +66,7 @@
             </MenuItem>
             <MenuItem>
                 <MenuItem.Header>
-                    <x:Static Member="properties:Resources.MenuItemOptionsHeader" />
+                    <x:Static Member="properties:Resources.OptionsMenuItemOHeader" />
                 </MenuItem.Header>
                 <MenuItem IsCheckable="True">
                     <MenuItem.IsChecked>
@@ -74,7 +75,7 @@
                             Path="IsTopmost" />
                     </MenuItem.IsChecked>
                     <MenuItem.Header>
-                        <x:Static Member="properties:Resources.MenuItemAlwaysOnTopHeader" />
+                        <x:Static Member="properties:Resources.AlwaysOnTopMenuItemHeader" />
                     </MenuItem.Header>
                 </MenuItem>
                 <MenuItem IsCheckable="True">
@@ -84,17 +85,17 @@
                             Path="AutoResize" />
                     </MenuItem.IsChecked>
                     <MenuItem.Header>
-                        <x:Static Member="properties:Resources.MenuItemAutoResizeHeader" />
+                        <x:Static Member="properties:Resources.AutoResizeMenuItemHeader" />
                     </MenuItem.Header>
                 </MenuItem>
             </MenuItem>
             <MenuItem>
                 <MenuItem.Header>
-                    <x:Static Member="properties:Resources.MenuItemHelpHeader" />
+                    <x:Static Member="properties:Resources.HelpMenuItemHeader" />
                 </MenuItem.Header>
                 <MenuItem>
                     <MenuItem.Header>
-                        <x:Static Member="properties:Resources.MenuItemGitHubText" />
+                        <x:Static Member="properties:Resources.GitHubMenuItemText" />
                     </MenuItem.Header>
                     <i:Interaction.Behaviors>
                         <li:EventToCommandBehavior EventName="Click">
@@ -106,6 +107,28 @@
                             </li:EventToCommandBehavior.CommandParameter>
                         </li:EventToCommandBehavior>
                     </i:Interaction.Behaviors>
+                </MenuItem>
+                <Separator />
+                <MenuItem>
+                    <MenuItem.Header>
+                        <x:Static Member="properties:Resources.AboutMenuItemText" />
+                    </MenuItem.Header>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <li:ShowDialogAction>
+                                <li:ShowDialogAction.DialogType>
+                                    <x:Type TypeName="views:AboutWindow" />
+                                </li:ShowDialogAction.DialogType>
+                                <li:ShowDialogAction.DataContext>
+                                    <Binding Path="AboutViewModel">
+                                        <Binding.Source>
+                                            <StaticResource ResourceKey="ViewModelLocator" />
+                                        </Binding.Source>
+                                    </Binding>
+                                </li:ShowDialogAction.DataContext>
+                            </li:ShowDialogAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -160,7 +183,7 @@
                                 <ContextMenu>
                                     <MenuItem>
                                         <MenuItem.Header>
-                                            <x:Static Member="properties:Resources.MenuItemShowWindowToTopText" />
+                                            <x:Static Member="properties:Resources.ShowWindowToTopMenuItemText" />
                                         </MenuItem.Header>
                                         <i:Interaction.Behaviors>
                                             <li:EventToCommandBehavior EventName="Click">
@@ -180,7 +203,7 @@
                                     </MenuItem>
                                     <MenuItem>
                                         <MenuItem.Header>
-                                            <x:Static Member="properties:Resources.MenuItemApplyToCaptureSizeText" />
+                                            <x:Static Member="properties:Resources.ApplyToCaptureSizeMenuItemText" />
                                         </MenuItem.Header>
                                         <i:Interaction.Behaviors>
                                             <li:EventToCommandBehavior EventName="Click">
@@ -264,7 +287,7 @@
                         Padding="3,3,3,3"
                         VerticalContentAlignment="Stretch">
                         <Label.Content>
-                            <x:Static Member="properties:Resources.LabelXContent" />
+                            <x:Static Member="properties:Resources.XLabelContent" />
                         </Label.Content>
                         <Label.Target>
                             <Binding ElementName="OffsetXTextBox" />
@@ -278,7 +301,7 @@
                         Padding="3,3,3,3"
                         VerticalContentAlignment="Stretch">
                         <Label.Content>
-                            <x:Static Member="properties:Resources.LabelYContent" />
+                            <x:Static Member="properties:Resources.YLabelContent" />
                         </Label.Content>
                         <Label.Target>
                             <Binding ElementName="OffsetYTextBox" />
@@ -290,7 +313,7 @@
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         TextAlignment="Left">
-                        <x:Static Member="properties:Resources.TextBlockOffsetText" />
+                        <x:Static Member="properties:Resources.OffsetTextBlockText" />
                     </TextBlock>
                     <TextBox
                         x:Name="OffsetXTextBox"
@@ -360,7 +383,7 @@
                             VerticalAlignment="Center"
                             VerticalContentAlignment="Center">
                             <CheckBox.Content>
-                                <x:Static Member="properties:Resources.LabelEnableOffsetContent" />
+                                <x:Static Member="properties:Resources.EnableLabelOffsetContent" />
                             </CheckBox.Content>
                             <CheckBox.IsChecked>
                                 <Binding
@@ -388,7 +411,7 @@
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         TextAlignment="Center">
-                        <x:Static Member="properties:Resources.TextBlockCaptureSizeText" />
+                        <x:Static Member="properties:Resources.CaptureSizeTextBlockText" />
                     </TextBlock>
                     <TextBlock
                         Grid.Column="2"
@@ -396,7 +419,7 @@
                         Margin="3,3,3,3"
                         Padding="3,3,3,3"
                         TextAlignment="Center">
-                        <x:Static Member="properties:Resources.TextBlockActualSizeText" />
+                        <x:Static Member="properties:Resources.ActualSizeTextBlockText" />
                     </TextBlock>
                     <Label
                         Grid.Column="0"
@@ -406,7 +429,7 @@
                         Padding="3,3,3,3"
                         VerticalAlignment="Center">
                         <Label.Content>
-                            <x:Static Member="properties:Resources.LabelWidthContent" />
+                            <x:Static Member="properties:Resources.WidthLabelContent" />
                         </Label.Content>
                         <Label.Target>
                             <Binding ElementName="CaptureWidthTextBox" />
@@ -446,7 +469,7 @@
                         Padding="3,3,3,3"
                         VerticalAlignment="Center">
                         <Label.Content>
-                            <x:Static Member="properties:Resources.LabelHeightContent" />
+                            <x:Static Member="properties:Resources.HeightLabelContent" />
                         </Label.Content>
                         <Label.Target>
                             <Binding ElementName="CaptureHeightTextBox" />
@@ -525,7 +548,7 @@
                             <Binding Path="ResizeCommand" />
                         </Button.Command>
                         <Button.Content>
-                            <x:Static Member="properties:Resources.ButtonResizeContent" />
+                            <x:Static Member="properties:Resources.ResizeButtonContent" />
                         </Button.Content>
                     </Button>
                 </Grid>
@@ -544,7 +567,7 @@
                     </TextBlock.Visibility>
                     <Run>
                         <Run.Text>
-                            <x:Static Member="properties:Resources.TextBlockPidText" />
+                            <x:Static Member="properties:Resources.PidTextBlockText" />
                         </Run.Text>
                     </Run>
                     <Run>
@@ -554,7 +577,7 @@
                     </Run>
                     <Run>
                         <Run.Text>
-                            <x:Static Member="properties:Resources.TextBlockWidthText" />
+                            <x:Static Member="properties:Resources.WidthTextBlockText" />
                         </Run.Text>
                     </Run>
                     <Run>
@@ -564,7 +587,7 @@
                     </Run>
                     <Run>
                         <Run.Text>
-                            <x:Static Member="properties:Resources.TextBlockHeightText" />
+                            <x:Static Member="properties:Resources.HeightTextBlockText" />
                         </Run.Text>
                     </Run>
                     <Run>

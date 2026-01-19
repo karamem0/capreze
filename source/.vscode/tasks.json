@@ -47,6 +47,18 @@
         "format"
       ],
       "problemMatcher": []
+    },
+    {
+      "label": "cleanupcode",
+      "type": "shell",
+      "command": "jb",
+      "args": [
+        "cleanupcode",
+        "--profile='Built-in: Reformat Code'",
+        "--exclude='**/*.config'",
+        "${workspaceFolder}/Karamem0.Capreze.sln"
+      ],
+      "problemMatcher": []
     }
   ]
 }

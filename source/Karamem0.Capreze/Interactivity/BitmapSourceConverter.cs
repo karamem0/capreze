@@ -18,11 +18,11 @@ namespace Karamem0.Capreze.Interactivity;
 public class BitmapSourceConverter : IValueConverter
 {
 
-    public object Convert(
-        object value,
+    public object? Convert(
+        object? value,
         Type targetType,
-        object parameter,
-        CultureInfo culture
+        object? parameter,
+        CultureInfo? culture
     )
     {
         if (value is string path)
@@ -42,11 +42,11 @@ public class BitmapSourceConverter : IValueConverter
         return DependencyProperty.UnsetValue;
     }
 
-    public object ConvertBack(
-        object value,
+    public object? ConvertBack(
+        object? value,
         Type targetType,
-        object parameter,
-        CultureInfo culture
+        object? parameter,
+        CultureInfo? culture
     )
     {
         return DependencyProperty.UnsetValue;

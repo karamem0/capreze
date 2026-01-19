@@ -31,6 +31,7 @@ public partial class Application : System.Windows.Application
             .AddTransient<IConfigurationService, ConfigurationService>()
             .AddTransient<IProcessService, ProcessService>()
             .AddTransient<IWindowService, WindowService>()
+            .AddTransient<AboutViewModel>()
             .AddTransient<MainViewModel>()
             .AddTinyMapper()
         )

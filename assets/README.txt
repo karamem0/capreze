@@ -30,7 +30,7 @@ https://github.com/karamem0/capreze/blob/main/PRIVACY_POLICY.ja-jp.md
 
 【動作環境】
 - 対応 OS: Windows 11
-- 必要コンポーネント: .NET 8 Runtime https://dotnet.microsoft.com/ja-jp/download/dotnet/8.0
+- 必要コンポーネント: .NET 10 Runtime https://dotnet.microsoft.com/ja-jp/download/dotnet/10.0
 
 【インストール手順】
 1. .NET 8 Runtime がインストール済みであることを確認します。

@@ -11,8 +11,6 @@ namespace Karamem0.Capreze.Infrastructure;
 public abstract class ServiceBase : IDisposable
 {
 
-    protected ServiceBase() { }
-
     ~ServiceBase()
     {
         this.Dispose(false);
