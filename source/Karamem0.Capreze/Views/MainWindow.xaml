@@ -12,7 +12,7 @@
     x:Name="Window"
     mc:Ignorable="d"
     Height="480"
-    Icon="/App.png"
+    Icon="/Icons/App.png"
     ResizeMode="CanResize"
     Width="720">
     <Window.Background>
@@ -88,6 +88,22 @@
                         <x:Static Member="properties:Resources.AutoResizeMenuItemHeader" />
                     </MenuItem.Header>
                 </MenuItem>
+                <Separator />
+                <MenuItem>
+                    <MenuItem.Header>
+                        <x:Static Member="properties:Resources.LaunchSnippingToolMenuItemText" />
+                    </MenuItem.Header>
+                    <i:Interaction.Behaviors>
+                        <li:EventToCommandBehavior EventName="Click">
+                            <li:EventToCommandBehavior.Command>
+                                <Binding Path="OpenUriCommand" />
+                            </li:EventToCommandBehavior.Command>
+                            <li:EventToCommandBehavior.CommandParameter>
+                                <system:Uri>ms-screenclip://capture/image?enabledmodes=all</system:Uri>
+                            </li:EventToCommandBehavior.CommandParameter>
+                        </li:EventToCommandBehavior>
+                    </i:Interaction.Behaviors>
+                </MenuItem>
             </MenuItem>
             <MenuItem>
                 <MenuItem.Header>
@@ -100,7 +116,7 @@
                     <i:Interaction.Behaviors>
                         <li:EventToCommandBehavior EventName="Click">
                             <li:EventToCommandBehavior.Command>
-                                <Binding Path="OpenBrowserCommand" />
+                                <Binding Path="OpenUriCommand" />
                             </li:EventToCommandBehavior.Command>
                             <li:EventToCommandBehavior.CommandParameter>
                                 <system:Uri>https://github.com/karamem0/capreze</system:Uri>
@@ -622,6 +638,16 @@
                     <Binding Path="LoadOffsetCommand" />
                 </i:InvokeCommandAction.Command>
             </i:InvokeCommandAction>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Raised">
+            <i:EventTrigger.SourceObject>
+                <Binding Path="ErrorRequest" />
+            </i:EventTrigger.SourceObject>
+            <li:ShowDialogAction>
+                <li:ShowDialogAction.DialogType>
+                    <x:Type TypeName="views:ErrorWindow" />
+                </li:ShowDialogAction.DialogType>
+            </li:ShowDialogAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 </Window>

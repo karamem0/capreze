@@ -141,6 +141,9 @@
   <data name="EnableLabelOffsetContent" xml:space="preserve">
     <value>_Enable offsets</value>
   </data>
+  <data name="ErrorWindowTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="ExitMenuItemHeader" xml:space="preserve">
     <value>_Exit</value>
   </data>
@@ -156,17 +159,23 @@
   <data name="HeightTextBlockText" xml:space="preserve">
     <value>Height:</value>
   </data>
-  <data name="MainWindowTitle" xml:space="preserve">
-    <value>Capreze</value>
-  </data>
   <data name="HelpMenuItemHeader" xml:space="preserve">
     <value>_Help</value>
+  </data>
+  <data name="LaunchSnippingToolMenuItemText" xml:space="preserve">
+    <value>Launch _Snipping Tool</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Capreze</value>
   </data>
   <data name="OffsetTextBlockText" xml:space="preserve">
     <value>Offset:</value>
   </data>
   <data name="OkButtonContent" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="OpenUriErrorText" xml:space="preserve">
+    <value>Failed to open URL.</value>
   </data>
   <data name="OptionsMenuItemOHeader" xml:space="preserve">
     <value>_Options</value>

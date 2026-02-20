@@ -8,6 +8,7 @@
 
 using Karamem0.Capreze.Infrastructure;
 using Karamem0.Capreze.Models;
+using Karamem0.Capreze.Properties;
 using Karamem0.Capreze.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -228,6 +229,8 @@ public class MainViewModel(
 
     public ObservableCollection<WindowSize> WindowSizes { get; } = [];
 
+    public InteractionRequest ErrorRequest { get; } = new();
+
     public ICommand ApplyToCaptureSizeCommand => new DelegateCommand(() =>
         {
             this.CaptureHeight = this.SelectedHeight;
@@ -306,11 +309,23 @@ public class MainViewModel(
         }
     );
 
-    public ICommand OpenBrowserCommand => new DelegateCommand<Uri>(async (parameter) =>
+    public ICommand OpenUriCommand => new DelegateCommand<Uri>(async (parameter) =>
         {
-            if (parameter is not null)
+            try
             {
-                await this.processService.OpenBrowserAsync(parameter);
+                if (parameter is not null)
+                {
+                    await this.processService.OpenUriAsync(parameter);
+                }
+            }
+            catch
+            {
+                this.ErrorRequest.Raise(
+                    new ErrorViewModel()
+                    {
+                        Content = Resources.OpenUriErrorText
+                    }
+                );
             }
         }
     );

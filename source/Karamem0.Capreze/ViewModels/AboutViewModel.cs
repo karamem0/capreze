@@ -7,12 +7,16 @@
 //
 
 using Karamem0.Capreze.Infrastructure;
+using Karamem0.Capreze.Services;
 using System.Reflection;
+using System.Windows.Input;
 
 namespace Karamem0.Capreze.ViewModels;
 
-public class AboutViewModel : ViewModelBase
+public class AboutViewModel(IProcessService processService) : ViewModelBase
 {
+
+    private readonly IProcessService processService = processService;
 
     public string? Company
     {
@@ -57,6 +61,15 @@ public class AboutViewModel : ViewModelBase
             return attribute?.Version;
         }
     }
+
+    public ICommand OpenUriCommand => new DelegateCommand<Uri>(async (parameter) =>
+        {
+            if (parameter is not null)
+            {
+                await this.processService.OpenUriAsync(parameter);
+            }
+        }
+    );
 
     public override void OnLoaded() { }
 

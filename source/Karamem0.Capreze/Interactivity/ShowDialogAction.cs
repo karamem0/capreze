@@ -6,6 +6,7 @@
 // https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
+using Karamem0.Capreze.Infrastructure;
 using Microsoft.Xaml.Behaviors;
 using System.Windows;
 
@@ -46,8 +47,17 @@ public class ShowDialogAction : TriggerAction<DependencyObject>
             if (dialog is not null)
             {
                 dialog.Owner = Window.GetWindow(this.AssociatedObject);
-                dialog.DataContext = this.DataContext;
-                _ = dialog.ShowDialog();
+                var dataContext = this.DataContext ?? parameter;
+                if (dataContext is InteractionRequestedEventArgs args)
+                {
+                    dialog.DataContext = args.Parameter;
+                    args.Callback(dialog.ShowDialog());
+                }
+                else
+                {
+                    dialog.DataContext = dataContext;
+                    _ = dialog.ShowDialog();
+                }
             }
         }
     }

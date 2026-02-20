@@ -141,6 +141,9 @@
   <data name="EnableLabelOffsetContent" xml:space="preserve">
     <value>オフセットを有効にする (_E)</value>
   </data>
+  <data name="ErrorWindowTitle" xml:space="preserve">
+    <value>エラー</value>
+  </data>
   <data name="ExitMenuItemHeader" xml:space="preserve">
     <value>終了 (_X)</value>
   </data>
@@ -159,6 +162,9 @@
   <data name="HelpMenuItemHeader" xml:space="preserve">
     <value>ヘルプ (_H)</value>
   </data>
+  <data name="LaunchSnippingToolMenuItemText" xml:space="preserve">
+    <value>Snipping Tool を起動 (_S)</value>
+  </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Capreze</value>
   </data>
@@ -167,6 +173,9 @@
   </data>
   <data name="OkButtonContent" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="OpenUriErrorText" xml:space="preserve">
+    <value>URL を開くことができませんでした。</value>
   </data>
   <data name="OptionsMenuItemOHeader" xml:space="preserve">
     <value>オプション (_O)</value>

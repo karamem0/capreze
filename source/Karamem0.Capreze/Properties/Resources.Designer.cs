@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Karamem0.Capreze.Properties {
+namespace Karamem0.Capreze.Properties
+{
     using System;
 
 
@@ -19,26 +20,31 @@ namespace Karamem0.Capreze.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class Resources
+    {
 
         private static global::System.Resources.ResourceManager resourceMan;
 
         private static global::System.Globalization.CultureInfo resourceCulture;
 
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resources()
+        {
         }
 
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        public static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Karamem0.Capreze.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
@@ -51,11 +57,14 @@ namespace Karamem0.Capreze.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
-            get {
+        public static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
@@ -63,8 +72,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _About.
         /// </summary>
-        public static string AboutMenuItemText {
-            get {
+        public static string AboutMenuItemText
+        {
+            get
+            {
                 return ResourceManager.GetString("AboutMenuItemText", resourceCulture);
             }
         }
@@ -72,8 +83,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
-        public static string AboutWindowTitle {
-            get {
+        public static string AboutWindowTitle
+        {
+            get
+            {
                 return ResourceManager.GetString("AboutWindowTitle", resourceCulture);
             }
         }
@@ -92,8 +105,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Always On _Top.
         /// </summary>
-        public static string AlwaysOnTopMenuItemHeader {
-            get {
+        public static string AlwaysOnTopMenuItemHeader
+        {
+            get
+            {
                 return ResourceManager.GetString("AlwaysOnTopMenuItemHeader", resourceCulture);
             }
         }
@@ -101,8 +116,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Apply to Capture Size.
         /// </summary>
-        public static string ApplyToCaptureSizeMenuItemText {
-            get {
+        public static string ApplyToCaptureSizeMenuItemText
+        {
+            get
+            {
                 return ResourceManager.GetString("ApplyToCaptureSizeMenuItemText", resourceCulture);
             }
         }
@@ -110,8 +127,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Auto _Resize.
         /// </summary>
-        public static string AutoResizeMenuItemHeader {
-            get {
+        public static string AutoResizeMenuItemHeader
+        {
+            get
+            {
                 return ResourceManager.GetString("AutoResizeMenuItemHeader", resourceCulture);
             }
         }
@@ -119,8 +138,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Capture Size.
         /// </summary>
-        public static string CaptureSizeTextBlockText {
-            get {
+        public static string CaptureSizeTextBlockText
+        {
+            get
+            {
                 return ResourceManager.GetString("CaptureSizeTextBlockText", resourceCulture);
             }
         }
@@ -128,17 +149,32 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Enable offsets.
         /// </summary>
-        public static string EnableLabelOffsetContent {
-            get {
+        public static string EnableLabelOffsetContent
+        {
+            get
+            {
                 return ResourceManager.GetString("EnableLabelOffsetContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string ErrorWindowTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("ErrorWindowTitle", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to _Exit.
         /// </summary>
-        public static string ExitMenuItemHeader {
-            get {
+        public static string ExitMenuItemHeader
+        {
+            get
+            {
                 return ResourceManager.GetString("ExitMenuItemHeader", resourceCulture);
             }
         }
@@ -146,8 +182,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _File.
         /// </summary>
-        public static string FileMenuItemHeader {
-            get {
+        public static string FileMenuItemHeader
+        {
+            get
+            {
                 return ResourceManager.GetString("FileMenuItemHeader", resourceCulture);
             }
         }
@@ -155,26 +193,21 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _GitHub.
         /// </summary>
-        public static string GitHubMenuItemText {
-            get {
+        public static string GitHubMenuItemText
+        {
+            get
+            {
                 return ResourceManager.GetString("GitHubMenuItemText", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to _Help.
-        /// </summary>
-        public static string HelpMenuItemHeader {
-            get {
-                return ResourceManager.GetString("HelpMenuItemHeader", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to _Height:.
         /// </summary>
-        public static string HeightLabelContent {
-            get {
+        public static string HeightLabelContent
+        {
+            get
+            {
                 return ResourceManager.GetString("HeightLabelContent", resourceCulture);
             }
         }
@@ -182,17 +215,43 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Height:.
         /// </summary>
-        public static string HeightTextBlockText {
-            get {
+        public static string HeightTextBlockText
+        {
+            get
+            {
                 return ResourceManager.GetString("HeightTextBlockText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Help.
+        /// </summary>
+        public static string HelpMenuItemHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("HelpMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Launch _Snipping Tool.
+        /// </summary>
+        public static string LaunchSnippingToolMenuItemText
+        {
+            get
+            {
+                return ResourceManager.GetString("LaunchSnippingToolMenuItemText", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Capreze.
         /// </summary>
-        public static string MainWindowTitle {
-            get {
+        public static string MainWindowTitle
+        {
+            get
+            {
                 return ResourceManager.GetString("MainWindowTitle", resourceCulture);
             }
         }
@@ -200,8 +259,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Offset:.
         /// </summary>
-        public static string OffsetTextBlockText {
-            get {
+        public static string OffsetTextBlockText
+        {
+            get
+            {
                 return ResourceManager.GetString("OffsetTextBlockText", resourceCulture);
             }
         }
@@ -209,17 +270,32 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
-        public static string OkButtonContent {
-            get {
+        public static string OkButtonContent
+        {
+            get
+            {
                 return ResourceManager.GetString("OkButtonContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to open URL..
+        /// </summary>
+        public static string OpenUriErrorText
+        {
+            get
+            {
+                return ResourceManager.GetString("OpenUriErrorText", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to _Options.
         /// </summary>
-        public static string OptionsMenuItemOHeader {
-            get {
+        public static string OptionsMenuItemOHeader
+        {
+            get
+            {
                 return ResourceManager.GetString("OptionsMenuItemOHeader", resourceCulture);
             }
         }
@@ -227,8 +303,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to PID:.
         /// </summary>
-        public static string PidTextBlockText {
-            get {
+        public static string PidTextBlockText
+        {
+            get
+            {
                 return ResourceManager.GetString("PidTextBlockText", resourceCulture);
             }
         }
@@ -236,8 +314,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Resize.
         /// </summary>
-        public static string ResizeButtonContent {
-            get {
+        public static string ResizeButtonContent
+        {
+            get
+            {
                 return ResourceManager.GetString("ResizeButtonContent", resourceCulture);
             }
         }
@@ -245,8 +325,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Show Window to Top.
         /// </summary>
-        public static string ShowWindowToTopMenuItemText {
-            get {
+        public static string ShowWindowToTopMenuItemText
+        {
+            get
+            {
                 return ResourceManager.GetString("ShowWindowToTopMenuItemText", resourceCulture);
             }
         }
@@ -254,8 +336,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Width:.
         /// </summary>
-        public static string WidthLabelContent {
-            get {
+        public static string WidthLabelContent
+        {
+            get
+            {
                 return ResourceManager.GetString("WidthLabelContent", resourceCulture);
             }
         }
@@ -263,8 +347,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Width:.
         /// </summary>
-        public static string WidthTextBlockText {
-            get {
+        public static string WidthTextBlockText
+        {
+            get
+            {
                 return ResourceManager.GetString("WidthTextBlockText", resourceCulture);
             }
         }
@@ -272,8 +358,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _X.
         /// </summary>
-        public static string XLabelContent {
-            get {
+        public static string XLabelContent
+        {
+            get
+            {
                 return ResourceManager.GetString("XLabelContent", resourceCulture);
             }
         }
@@ -281,8 +369,10 @@ namespace Karamem0.Capreze.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Y.
         /// </summary>
-        public static string YLabelContent {
-            get {
+        public static string YLabelContent
+        {
+            get
+            {
                 return ResourceManager.GetString("YLabelContent", resourceCulture);
             }
         }

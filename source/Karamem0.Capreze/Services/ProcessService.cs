@@ -14,14 +14,14 @@ namespace Karamem0.Capreze.Services;
 public interface IProcessService
 {
 
-    Task OpenBrowserAsync(Uri uri, CancellationToken cancellationToken = default);
+    Task OpenUriAsync(Uri uri, CancellationToken cancellationToken = default);
 
 }
 
 public class ProcessService : IProcessService
 {
 
-    public Task OpenBrowserAsync(Uri uri, CancellationToken cancellationToken = default)
+    public Task OpenUriAsync(Uri uri, CancellationToken cancellationToken = default)
     {
         return Task.Run(
             () =>
