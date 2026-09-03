@@ -6,7 +6,7 @@ runs:
   using: composite
   steps:
     - name: Download artifatcs
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: capreze_installer
         path: artifact
@@ -14,11 +14,11 @@ runs:
       shell: pwsh
       run: Copy-Item -Path artifact/capreze.msi -Destination capreze_${{env.BUILD_VERSION}}.msi
     - name: Connect to Azure
-      uses: azure/login@a65d910e8af852a8061c627c456678983e180302
+      uses: azure/login@7ddb5af1ef8758cf1353cf3b42f940aee27ba21c
       with:
         creds: ${{env.AZURE_CREDENTIALS}}
     - name: Deploy MSI package
-      uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956
+      uses: azure/cli@9eb25b8360668fb0ecbafa808d40e2197b2f5f52
       with:
         inlineScript: |
           az storage blob upload \

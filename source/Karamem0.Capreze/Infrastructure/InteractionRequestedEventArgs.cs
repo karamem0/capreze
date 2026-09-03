@@ -8,8 +8,16 @@
 
 namespace Karamem0.Capreze.Infrastructure;
 
-public class InteractionRequestedEventArgs(object? parameter, Action<object?> callback) : EventArgs
+public class InteractionRequestedEventArgs(
+    string title,
+    object? parameter,
+    Action<object?> callback
+) : EventArgs
 {
+
+    public string Title { get; } = title;
+
+    public string Name { get; } = title;
 
     public object? Parameter { get; } = parameter;
 

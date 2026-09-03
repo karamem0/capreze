@@ -6,54 +6,40 @@
 // https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
-using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using WixSharp;
 
-namespace Karamem0.Capreze
+WixExtension.UI.PreferredVersion = "5.0.2";
+
+var project = new Project("Capreze", new InstallDir(@"%LocalAppData%\Programs\Capreze", new Files(@"..\..\artifact\capreze\*.*")))
 {
-
-    public static class Program
+    ControlPanelInfo = new ProductInfo()
     {
+        Manufacturer = "karamem0"
+    },
+    Encoding = Encoding.UTF8,
+    GUID = new Guid("e5e36352-6460-4916-bfba-7a13d69aa501"),
+    Scope = InstallScope.perUser,
+    LicenceFile = @".\LICENSE.rtf",
+    MajorUpgrade = new MajorUpgrade()
+    {
+        AllowDowngrades = true
+    },
+    Version = new Version(
+        FileVersionInfo.GetVersionInfo(typeof(Program).Assembly.Location)
+            .FileVersion ??
+        "0.0.0.0"
+    )
+};
 
-        private static void Main()
-        {
-            var project = new Project("Capreze", new InstallDir(@"%LocalAppData%\Programs\Capreze", new Files(@"..\..\artifact\capreze\*.*")))
-            {
-                ControlPanelInfo = new ProductInfo()
-                {
-                    Manufacturer = "karamem0"
-                },
-                Encoding = Encoding.UTF8,
-                GUID = new Guid("e5e36352-6460-4916-bfba-7a13d69aa501"),
-                InstallPrivileges = InstallPrivileges.limited,
-                InstallScope = InstallScope.perUser,
-                LicenceFile = @".\LICENSE.rtf",
-                MajorUpgrade = new MajorUpgrade()
-                {
-                    AllowDowngrades = true
-                },
-                Version = new Version(
-                    FileVersionInfo.GetVersionInfo(
-                            System.Reflection.Assembly.GetEntryAssembly()
-                                .Location
-                        )
-                        .FileVersion
-                )
-            };
-            project
-                .ResolveWildCards()
-                .FindFile(f => f.Name.EndsWith("Capreze.exe"))
-                .First()
-                .Shortcuts = new[]
-            {
-                new FileShortcut("Capreze", @"%ProgramMenu%")
-            };
-            _ = Compiler.BuildMsi(project, @"..\..\artifact\capreze_installer\capreze.msi");
-        }
+var executable = project
+    .ResolveWildCards()
+    .FindFile(f => f.Name.EndsWith("Capreze.exe", StringComparison.OrdinalIgnoreCase) || f.Name.EndsWith("Capreze.dll", StringComparison.OrdinalIgnoreCase))
+    .FirstOrDefault();
+executable?.Shortcuts =
+[
+    new FileShortcut("Capreze", @"%ProgramMenu%")
+];
 
-    }
-
-}
+_ = Compiler.BuildMsi(project, @"..\..\artifact\capreze_installer\capreze.msi");

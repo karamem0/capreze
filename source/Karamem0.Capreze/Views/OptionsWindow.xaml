@@ -1,0 +1,188 @@
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:system="clr-namespace:System;assembly=System"
+    xmlns:li="clr-namespace:Karamem0.Capreze.Interactivity"
+    xmlns:properties="clr-namespace:Karamem0.Capreze.Properties"
+    x:Class="Karamem0.Capreze.Views.OptionsWindow"
+    x:Name="Window"
+    mc:Ignorable="d"
+    Height="360"
+    Icon="/Icons/App.png"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    Width="480"
+    WindowStartupLocation="CenterOwner">
+    <Window.Background>
+        <x:Static Member="SystemColors.ControlBrush" />
+    </Window.Background>
+    <Window.Title>
+        <x:Static Member="properties:Resources.OptionsWindowTitle" />
+    </Window.Title>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Column="0"
+            Grid.Row="0"
+            Margin="6,6,6,0">
+            <DataGrid
+                AutoGenerateColumns="False"
+                Background="#FFFFFF"
+                GridLinesVisibility="None"
+                HeadersVisibility="Column"
+                Margin="3,3,3,3"
+                RowBackground="#FFFFFF"
+                SelectionMode="Single"
+                SelectionUnit="FullRow">
+                <DataGrid.Resources>
+                    <Style>
+                        <Style.TargetType>
+                            <x:Type TypeName="DataGridCell" />
+                        </Style.TargetType>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFF5F9FC" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#FFE8F2FC" />
+                                <Setter Property="Foreground" Value="#FF1F1F1F" />
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderBrush" Value="#FFF0F0F0" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                        <Setter Property="Foreground" Value="#FF1F1F1F" />
+                        <Setter Property="Padding" Value="3,3,3,3" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                    <Style>
+                        <Style.TargetType>
+                            <x:Type TypeName="DataGridColumnHeader" />
+                        </Style.TargetType>
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="BorderBrush" Value="#FFE5E5E5" />
+                        <Setter Property="BorderThickness" Value="0,0,1,1" />
+                        <Setter Property="FontWeight" Value="Normal" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Padding" Value="3,3,3,3" />
+                    </Style>
+                    <Style>
+                        <Style.TargetType>
+                            <x:Type TypeName="DataGridRow" />
+                        </Style.TargetType>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFF5F9FC" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#FFE8F2FC" />
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Padding" Value="3,3,3,3" />
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="1*">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Name" />
+                        </DataGridTextColumn.Binding>
+                        <DataGridTextColumn.Header>
+                            <x:Static Member="properties:Resources.NameDataGridColumnHeader" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="1*">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Width" />
+                        </DataGridTextColumn.Binding>
+                        <DataGridTextColumn.Header>
+                            <x:Static Member="properties:Resources.WidthDataGridColumnHeader" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="1*">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Height" />
+                        </DataGridTextColumn.Binding>
+                        <DataGridTextColumn.Header>
+                            <x:Static Member="properties:Resources.HeightDataGridColumnHeader" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="2*">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Description" />
+                        </DataGridTextColumn.Binding>
+                        <DataGridTextColumn.Header>
+                            <x:Static Member="properties:Resources.DescriptionDataGridColumnHeader" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+                <DataGrid.ItemsSource>
+                    <Binding Path="WindowSizes" />
+                </DataGrid.ItemsSource>
+            </DataGrid>
+        </Grid>
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="1"
+            Margin="6,6,6,6"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+            <Button
+                Margin="3,3,3,3"
+                Padding="3,3,3,3"
+                Width="96">
+                <Button.Content>
+                    <x:Static Member="properties:Resources.OkButtonContent" />
+                </Button.Content>
+                <i:Interaction.Behaviors>
+                    <li:EventToCommandBehavior EventName="Click">
+                        <li:EventToCommandBehavior.Command>
+                            <Binding Path="CloseCommand" />
+                        </li:EventToCommandBehavior.Command>
+                        <li:EventToCommandBehavior.CommandParameter>
+                            <system:Boolean>true</system:Boolean>
+                        </li:EventToCommandBehavior.CommandParameter>
+                    </li:EventToCommandBehavior>
+                </i:Interaction.Behaviors>
+            </Button>
+            <Button
+                Margin="3,3,3,3"
+                Padding="3,3,3,3"
+                Width="96">
+                <Button.Content>
+                    <x:Static Member="properties:Resources.CancelButtonContent" />
+                </Button.Content>
+                <i:Interaction.Behaviors>
+                    <li:EventToCommandBehavior EventName="Click">
+                        <li:EventToCommandBehavior.Command>
+                            <Binding Path="CloseCommand" />
+                        </li:EventToCommandBehavior.Command>
+                        <li:EventToCommandBehavior.CommandParameter>
+                            <system:Boolean>false</system:Boolean>
+                        </li:EventToCommandBehavior.CommandParameter>
+                    </li:EventToCommandBehavior>
+                </i:Interaction.Behaviors>
+            </Button>
+        </StackPanel>
+    </Grid>
+    <i:Interaction.Behaviors>
+        <li:ViewModelBehavior />
+    </i:Interaction.Behaviors>
+    <i:Interaction.Triggers>
+        <li:InteractionRequestTrigger Name="Close">
+            <li:InteractionRequestTrigger.SourceObject>
+                <Binding Path="InteractionRequest" />
+            </li:InteractionRequestTrigger.SourceObject>
+            <li:CloseDialogAction />
+        </li:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+</Window>

@@ -62,6 +62,12 @@ public class AboutViewModel(IProcessService processService) : ViewModelBase
         }
     }
 
+    public ICommand CloseCommand => new DelegateCommand<bool?>(parameter =>
+        {
+            this.InteractionRequest.Raise("Close", parameter);
+        }
+    );
+
     public ICommand OpenUriCommand => new DelegateCommand<Uri>(async (parameter) =>
         {
             if (parameter is not null)

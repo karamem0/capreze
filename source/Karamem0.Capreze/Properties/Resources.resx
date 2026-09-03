@@ -22,8 +22,10 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
+  mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
+  object]</value>
         <comment>This is a comment</comment>
     </data>
 
@@ -59,7 +61,8 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -112,12 +115,14 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutMenuItemText" xml:space="preserve">
+  <data name="AboutMenuItemHeader" xml:space="preserve">
     <value>_About</value>
   </data>
   <data name="AboutWindowTitle" xml:space="preserve">
@@ -129,14 +134,20 @@
   <data name="AlwaysOnTopMenuItemHeader" xml:space="preserve">
     <value>Always On _Top</value>
   </data>
-  <data name="ApplyToCaptureSizeMenuItemText" xml:space="preserve">
-    <value>_Apply to Capture Size</value>
+  <data name="ApplyToCaptureSizeMenuItemHeader" xml:space="preserve">
+    <value>Apply to Capture _Size</value>
   </data>
   <data name="AutoResizeMenuItemHeader" xml:space="preserve">
     <value>Auto _Resize</value>
   </data>
+  <data name="CancelButtonContent" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="CaptureSizeTextBlockText" xml:space="preserve">
     <value>Capture Size</value>
+  </data>
+  <data name="DescriptionDataGridColumnHeader" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="EnableLabelOffsetContent" xml:space="preserve">
     <value>_Enable offsets</value>
@@ -150,8 +161,11 @@
   <data name="FileMenuItemHeader" xml:space="preserve">
     <value>_File</value>
   </data>
-  <data name="GitHubMenuItemText" xml:space="preserve">
+  <data name="GitHubMenuItemHeader" xml:space="preserve">
     <value>_GitHub</value>
+  </data>
+  <data name="HeightDataGridColumnHeader" xml:space="preserve">
+    <value>Height</value>
   </data>
   <data name="HeightLabelContent" xml:space="preserve">
     <value>_Height:</value>
@@ -162,11 +176,20 @@
   <data name="HelpMenuItemHeader" xml:space="preserve">
     <value>_Help</value>
   </data>
-  <data name="LaunchSnippingToolMenuItemText" xml:space="preserve">
+  <data name="LaunchSnippingToolMenuItemHeader" xml:space="preserve">
     <value>Launch _Snipping Tool</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Capreze</value>
+  </data>
+  <data name="MaximizeWindowMenuItemHeader" xml:space="preserve">
+    <value>M_aximize Window</value>
+  </data>
+  <data name="MinimizeWindowMenuItemHeader" xml:space="preserve">
+    <value>M_inimize Window</value>
+  </data>
+  <data name="NameDataGridColumnHeader" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="OffsetTextBlockText" xml:space="preserve">
     <value>Offset:</value>
@@ -177,8 +200,11 @@
   <data name="OpenUriErrorText" xml:space="preserve">
     <value>Failed to open URL.</value>
   </data>
-  <data name="OptionsMenuItemOHeader" xml:space="preserve">
+  <data name="OptionsMenuItemHeader" xml:space="preserve">
     <value>_Options</value>
+  </data>
+  <data name="OptionsWindowTitle" xml:space="preserve">
+    <value>Options</value>
   </data>
   <data name="PidTextBlockText" xml:space="preserve">
     <value>PID:</value>
@@ -186,8 +212,17 @@
   <data name="ResizeButtonContent" xml:space="preserve">
     <value>_Resize</value>
   </data>
-  <data name="ShowWindowToTopMenuItemText" xml:space="preserve">
+  <data name="ShowWindowToTopMenuItemHeader" xml:space="preserve">
     <value>_Show Window to Top</value>
+  </data>
+  <data name="ToolsMenuItemHeader" xml:space="preserve">
+    <value>_Tools</value>
+  </data>
+  <data name="ViewMenuItemHeader" xml:space="preserve">
+    <value>_View</value>
+  </data>
+  <data name="WidthDataGridColumnHeader" xml:space="preserve">
+    <value>Width</value>
   </data>
   <data name="WidthLabelContent" xml:space="preserve">
     <value>_Width:</value>

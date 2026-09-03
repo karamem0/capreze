@@ -6,14 +6,16 @@
 // https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
+using Karamem0.Capreze.Models;
 using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Configuration;
 using System.ComponentModel;
 using System.IO;
 using System.Text.Json;
 
 namespace Karamem0.Capreze.Configuration;
 
-public class AppSettings(TelemetryClient telemetryClient)
+public class AppSettings(IConfiguration configuration, TelemetryClient telemetryClient)
 {
 
     private readonly FileInfo fileInfo = new(
@@ -23,6 +25,8 @@ public class AppSettings(TelemetryClient telemetryClient)
             "settings.json"
         )
     );
+
+    private readonly IConfiguration configuration = configuration;
 
     private readonly TelemetryClient telemetryClient = telemetryClient;
 
@@ -41,6 +45,8 @@ public class AppSettings(TelemetryClient telemetryClient)
     [DefaultValue(false)]
     public bool AutoResize { get; set; }
 
+    public WindowSize[] WindowSizes { get; set; } = [];
+
     public async Task LoadAsync()
     {
         try
@@ -54,7 +60,15 @@ public class AppSettings(TelemetryClient telemetryClient)
                 }
                 else
                 {
-                    property.SetValue(this, null);
+                    var value = this.configuration.GetSection(property.Name).Get(property.PropertyType);
+                    if (value is null)
+                    {
+                        property.SetValue(this, null);
+                    }
+                    else
+                    {
+                        property.SetValue(this, value);
+                    }
                 }
             }
             if (this.fileInfo.Exists)
@@ -84,6 +98,12 @@ public class AppSettings(TelemetryClient telemetryClient)
                             if (value.ValueKind is JsonValueKind.String)
                             {
                                 property.SetValue(this, value.GetString());
+                            }
+                            if (value.ValueKind is JsonValueKind.Array)
+                            {
+                                var text = value.GetRawText();
+                                var type = property.PropertyType;
+                                property.SetValue(this, JsonSerializer.Deserialize(text, type));
                             }
                         }
                     }

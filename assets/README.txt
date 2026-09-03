@@ -33,7 +33,7 @@ https://github.com/karamem0/capreze/blob/main/PRIVACY_POLICY.ja-jp.md
 - 必要コンポーネント: .NET 10 Runtime https://dotnet.microsoft.com/ja-jp/download/dotnet/10.0
 
 【インストール手順】
-1. .NET 8 Runtime がインストール済みであることを確認します。
+1. .NET 10 Runtime がインストール済みであることを確認します。
 2. capreze_{{BUILD_VERSION}}.msi をダウンロードします。
 3. ファイルをダブルクリックします。
 4. 画面の指示に従って完了します。

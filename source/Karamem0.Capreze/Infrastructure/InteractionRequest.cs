@@ -6,21 +6,28 @@
 // https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
+using System.Windows;
+
 namespace Karamem0.Capreze.Infrastructure;
 
-public class InteractionRequest
+public class InteractionRequest : DependencyObject
 {
 
     public event EventHandler<InteractionRequestedEventArgs>? Raised;
 
-    public void Raise(object? parameter)
+    public void Raise(
+        string name,
+        object? parameter = null,
+        Action<object?>? callback = null
+    )
     {
-        this.OnRaised(new InteractionRequestedEventArgs(parameter, (parameter) => { }));
-    }
-
-    public void Raise(object? parameter, Action<object?> callback)
-    {
-        this.OnRaised(new InteractionRequestedEventArgs(parameter, callback));
+        this.OnRaised(
+            new InteractionRequestedEventArgs(
+                name,
+                parameter,
+                callback ?? (_ => { })
+            )
+        );
     }
 
     protected virtual void OnRaised(InteractionRequestedEventArgs e)

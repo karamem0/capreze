@@ -6,10 +6,12 @@
 // https://github.com/karamem0/capreze/blob/main/LICENSE
 //
 
+using Karamem0.Capreze.Configuration;
 using Karamem0.Capreze.Infrastructure;
 using Karamem0.Capreze.Models;
 using Karamem0.Capreze.Properties;
 using Karamem0.Capreze.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -18,13 +20,13 @@ using System.Windows.Input;
 namespace Karamem0.Capreze.ViewModels;
 
 public class MainViewModel(
-    IConfigurationService configurationService,
+    AppSettings appSettings,
     IProcessService processService,
     IWindowService windowService
 ) : ViewModelBase
 {
 
-    private readonly IConfigurationService configurationService = configurationService;
+    private readonly AppSettings appSettings = appSettings;
 
     private readonly IProcessService processService = processService;
 
@@ -229,7 +231,11 @@ public class MainViewModel(
 
     public ObservableCollection<WindowSize> WindowSizes { get; } = [];
 
-    public InteractionRequest ErrorRequest { get; } = new();
+    public ICommand AboutCommand => new DelegateCommand(() =>
+        {
+            this.InteractionRequest.Raise("About", Application.Host.Services.GetService<AboutViewModel>());
+        }
+    );
 
     public ICommand ApplyToCaptureSizeCommand => new DelegateCommand(() =>
         {
@@ -271,13 +277,9 @@ public class MainViewModel(
     public ICommand LoadWindowSizesCommand => new DelegateCommand(async () =>
         {
             this.WindowSizes.Clear();
-            var values = await this.configurationService.GetWindowSizesAsync();
-            if (values is not null)
+            foreach (var value in this.appSettings.WindowSizes)
             {
-                foreach (var value in values)
-                {
-                    this.WindowSizes.Add(value);
-                }
+                this.WindowSizes.Add(value);
             }
         }
     );
@@ -296,6 +298,24 @@ public class MainViewModel(
                     this.OffsetX = await this.windowService.GetOffsetXAsync(this.SelectedInformation.Hwnd);
                     this.OffsetY = await this.windowService.GetOffsetYAsync(this.SelectedInformation.Hwnd);
                 }
+            }
+        }
+    );
+
+    public ICommand MaximizeWindowCommand => new DelegateCommand(async () =>
+        {
+            if (this.SelectedInformation is not null)
+            {
+                await this.windowService.MaximizeWindowAsync(this.SelectedInformation.Hwnd);
+            }
+        }
+    );
+
+    public ICommand MinimizeWindowCommand => new DelegateCommand(async () =>
+        {
+            if (this.SelectedInformation is not null)
+            {
+                await this.windowService.MinimizeWindowAsync(this.SelectedInformation.Hwnd);
             }
         }
     );
@@ -320,13 +340,30 @@ public class MainViewModel(
             }
             catch
             {
-                this.ErrorRequest.Raise(
+                this.InteractionRequest.Raise(
+                    "Error",
                     new ErrorViewModel()
                     {
                         Content = Resources.OpenUriErrorText
                     }
                 );
             }
+        }
+    );
+
+    public ICommand OptionsCommand => new DelegateCommand(() =>
+        {
+            this.InteractionRequest.Raise(
+                "Options",
+                Application.Host.Services.GetService<OptionsViewModel>(),
+                parameter =>
+                {
+                    if (parameter is true)
+                    {
+                        this.LoadWindowSizesCommand.Execute(null);
+                    }
+                }
+            );
         }
     );
 

@@ -4,7 +4,7 @@
 
 ピクセル単位で正確なキャプチャを行うためのウィンドウ サイズ自動調整ツール
 
-[![.github/workflows/trigger-on-main.yml](https://github.com/karamem0/capreze/actions/workflows/trigger-on-main.yml/badge.svg)](https://github.com/karamem0/capreze/actions/workflows/trigger-on-main.yml)
+[![.github/workflows/push-on-main.yml](https://github.com/karamem0/capreze/actions/workflows/push-on-main.yml/badge.svg)](https://github.com/karamem0/capreze/actions/workflows/push-on-main.yml)
 [![License](https://img.shields.io/github/license/karamem0/capreze.svg)](https://github.com/karamem0/capreze/blob/main/LICENSE)
 
 ## 機能

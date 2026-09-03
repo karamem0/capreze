@@ -7,6 +7,7 @@
 //
 
 using Karamem0.Capreze.Infrastructure;
+using System.Windows.Input;
 
 namespace Karamem0.Capreze.ViewModels;
 
@@ -25,6 +26,12 @@ public class ErrorViewModel : ViewModelBase
             }
         }
     }
+
+    public ICommand CloseCommand => new DelegateCommand<bool?>(parameter =>
+        {
+            this.InteractionRequest.Raise("Close", parameter);
+        }
+    );
 
     public override void OnLoaded() { }
 

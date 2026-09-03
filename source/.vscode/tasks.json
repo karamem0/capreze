@@ -56,7 +56,7 @@
         "cleanupcode",
         "--profile='Built-in: Reformat Code'",
         "--exclude='**/*.config'",
-        "${workspaceFolder}/Karamem0.Capreze.sln"
+        "${workspaceFolder}/Karamem0.Capreze.slnx"
       ],
       "problemMatcher": []
     }

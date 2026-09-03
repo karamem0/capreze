@@ -72,11 +72,11 @@ namespace Karamem0.Capreze.Properties
         /// <summary>
         ///   Looks up a localized string similar to _About.
         /// </summary>
-        public static string AboutMenuItemText
+        public static string AboutMenuItemHeader
         {
             get
             {
-                return ResourceManager.GetString("AboutMenuItemText", resourceCulture);
+                return ResourceManager.GetString("AboutMenuItemHeader", resourceCulture);
             }
         }
 
@@ -114,13 +114,13 @@ namespace Karamem0.Capreze.Properties
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to _Apply to Capture Size.
+        ///   Looks up a localized string similar to Apply to Capture _Size.
         /// </summary>
-        public static string ApplyToCaptureSizeMenuItemText
+        public static string ApplyToCaptureSizeMenuItemHeader
         {
             get
             {
-                return ResourceManager.GetString("ApplyToCaptureSizeMenuItemText", resourceCulture);
+                return ResourceManager.GetString("ApplyToCaptureSizeMenuItemHeader", resourceCulture);
             }
         }
 
@@ -136,6 +136,17 @@ namespace Karamem0.Capreze.Properties
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelButtonContent
+        {
+            get
+            {
+                return ResourceManager.GetString("CancelButtonContent", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Capture Size.
         /// </summary>
         public static string CaptureSizeTextBlockText
@@ -146,6 +157,16 @@ namespace Karamem0.Capreze.Properties
             }
         }
 
+        /// <summary>
+        ///   Looks up a localized string similar to Display Name.
+        /// </summary>
+        public static string DescriptionDataGridColumnHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("DescriptionDataGridColumnHeader", resourceCulture);
+            }
+        }
         /// <summary>
         ///   Looks up a localized string similar to _Enable offsets.
         /// </summary>
@@ -193,11 +214,22 @@ namespace Karamem0.Capreze.Properties
         /// <summary>
         ///   Looks up a localized string similar to _GitHub.
         /// </summary>
-        public static string GitHubMenuItemText
+        public static string GitHubMenuItemHeader
         {
             get
             {
-                return ResourceManager.GetString("GitHubMenuItemText", resourceCulture);
+                return ResourceManager.GetString("GitHubMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string HeightDataGridColumnHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("HeightDataGridColumnHeader", resourceCulture);
             }
         }
 
@@ -237,11 +269,11 @@ namespace Karamem0.Capreze.Properties
         /// <summary>
         ///   Looks up a localized string similar to Launch _Snipping Tool.
         /// </summary>
-        public static string LaunchSnippingToolMenuItemText
+        public static string LaunchSnippingToolMenuItemHeader
         {
             get
             {
-                return ResourceManager.GetString("LaunchSnippingToolMenuItemText", resourceCulture);
+                return ResourceManager.GetString("LaunchSnippingToolMenuItemHeader", resourceCulture);
             }
         }
 
@@ -253,6 +285,39 @@ namespace Karamem0.Capreze.Properties
             get
             {
                 return ResourceManager.GetString("MainWindowTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M_aximize Window.
+        /// </summary>
+        public static string MaximizeWindowMenuItemHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("MaximizeWindowMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M_inimize Window.
+        /// </summary>
+        public static string MinimizeWindowMenuItemHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("MinimizeWindowMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string NameDataGridColumnHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("NameDataGridColumnHeader", resourceCulture);
             }
         }
 
@@ -292,11 +357,23 @@ namespace Karamem0.Capreze.Properties
         /// <summary>
         ///   Looks up a localized string similar to _Options.
         /// </summary>
-        public static string OptionsMenuItemOHeader
+        public static string OptionsMenuItemHeader
         {
             get
             {
-                return ResourceManager.GetString("OptionsMenuItemOHeader", resourceCulture);
+                return ResourceManager.GetString("OptionsMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string OptionsWindowTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("OptionsWindowTitle", resourceCulture);
             }
         }
 
@@ -325,11 +402,44 @@ namespace Karamem0.Capreze.Properties
         /// <summary>
         ///   Looks up a localized string similar to _Show Window to Top.
         /// </summary>
-        public static string ShowWindowToTopMenuItemText
+        public static string ShowWindowToTopMenuItemHeader
         {
             get
             {
-                return ResourceManager.GetString("ShowWindowToTopMenuItemText", resourceCulture);
+                return ResourceManager.GetString("ShowWindowToTopMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _Tools.
+        /// </summary>
+        public static string ToolsMenuItemHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("ToolsMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to _View.
+        /// </summary>
+        public static string ViewMenuItemHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("ViewMenuItemHeader", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        public static string WidthDataGridColumnHeader
+        {
+            get
+            {
+                return ResourceManager.GetString("WidthDataGridColumnHeader", resourceCulture);
             }
         }
 

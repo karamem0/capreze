@@ -15,6 +15,8 @@ public abstract class ViewModelBase : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    public InteractionRequest InteractionRequest { get; } = new InteractionRequest();
+
     public abstract void OnLoaded();
 
     public abstract void OnUnloaded();

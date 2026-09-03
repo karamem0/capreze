@@ -66,7 +66,7 @@
             </MenuItem>
             <MenuItem>
                 <MenuItem.Header>
-                    <x:Static Member="properties:Resources.OptionsMenuItemOHeader" />
+                    <x:Static Member="properties:Resources.ViewMenuItemHeader" />
                 </MenuItem.Header>
                 <MenuItem IsCheckable="True">
                     <MenuItem.IsChecked>
@@ -91,7 +91,24 @@
                 <Separator />
                 <MenuItem>
                     <MenuItem.Header>
-                        <x:Static Member="properties:Resources.LaunchSnippingToolMenuItemText" />
+                        <x:Static Member="properties:Resources.OptionsMenuItemHeader" />
+                    </MenuItem.Header>
+                    <i:Interaction.Behaviors>
+                        <li:EventToCommandBehavior EventName="Click">
+                            <li:EventToCommandBehavior.Command>
+                                <Binding Path="OptionsCommand" />
+                            </li:EventToCommandBehavior.Command>
+                        </li:EventToCommandBehavior>
+                    </i:Interaction.Behaviors>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem>
+                <MenuItem.Header>
+                    <x:Static Member="properties:Resources.ToolsMenuItemHeader" />
+                </MenuItem.Header>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <x:Static Member="properties:Resources.LaunchSnippingToolMenuItemHeader" />
                     </MenuItem.Header>
                     <i:Interaction.Behaviors>
                         <li:EventToCommandBehavior EventName="Click">
@@ -111,7 +128,7 @@
                 </MenuItem.Header>
                 <MenuItem>
                     <MenuItem.Header>
-                        <x:Static Member="properties:Resources.GitHubMenuItemText" />
+                        <x:Static Member="properties:Resources.GitHubMenuItemHeader" />
                     </MenuItem.Header>
                     <i:Interaction.Behaviors>
                         <li:EventToCommandBehavior EventName="Click">
@@ -127,24 +144,15 @@
                 <Separator />
                 <MenuItem>
                     <MenuItem.Header>
-                        <x:Static Member="properties:Resources.AboutMenuItemText" />
+                        <x:Static Member="properties:Resources.AboutMenuItemHeader" />
                     </MenuItem.Header>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <li:ShowDialogAction>
-                                <li:ShowDialogAction.DialogType>
-                                    <x:Type TypeName="views:AboutWindow" />
-                                </li:ShowDialogAction.DialogType>
-                                <li:ShowDialogAction.DataContext>
-                                    <Binding Path="AboutViewModel">
-                                        <Binding.Source>
-                                            <StaticResource ResourceKey="ViewModelLocator" />
-                                        </Binding.Source>
-                                    </Binding>
-                                </li:ShowDialogAction.DataContext>
-                            </li:ShowDialogAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                    <i:Interaction.Behaviors>
+                        <li:EventToCommandBehavior EventName="Click">
+                            <li:EventToCommandBehavior.Command>
+                                <Binding Path="AboutCommand" />
+                            </li:EventToCommandBehavior.Command>
+                        </li:EventToCommandBehavior>
+                    </i:Interaction.Behaviors>
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -199,7 +207,7 @@
                                 <ContextMenu>
                                     <MenuItem>
                                         <MenuItem.Header>
-                                            <x:Static Member="properties:Resources.ShowWindowToTopMenuItemText" />
+                                            <x:Static Member="properties:Resources.ShowWindowToTopMenuItemHeader" />
                                         </MenuItem.Header>
                                         <i:Interaction.Behaviors>
                                             <li:EventToCommandBehavior EventName="Click">
@@ -217,9 +225,51 @@
                                             </li:EventToCommandBehavior>
                                         </i:Interaction.Behaviors>
                                     </MenuItem>
+                                    <Separator />
                                     <MenuItem>
                                         <MenuItem.Header>
-                                            <x:Static Member="properties:Resources.ApplyToCaptureSizeMenuItemText" />
+                                            <x:Static Member="properties:Resources.MaximizeWindowMenuItemHeader" />
+                                        </MenuItem.Header>
+                                        <i:Interaction.Behaviors>
+                                            <li:EventToCommandBehavior EventName="Click">
+                                                <li:EventToCommandBehavior.Command>
+                                                    <Binding Path="PlacementTarget.Tag.MaximizeWindowCommand">
+                                                        <Binding.RelativeSource>
+                                                            <RelativeSource Mode="FindAncestor">
+                                                                <RelativeSource.AncestorType>
+                                                                    <x:Type TypeName="ContextMenu" />
+                                                                </RelativeSource.AncestorType>
+                                                            </RelativeSource>
+                                                        </Binding.RelativeSource>
+                                                    </Binding>
+                                                </li:EventToCommandBehavior.Command>
+                                            </li:EventToCommandBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <MenuItem.Header>
+                                            <x:Static Member="properties:Resources.MinimizeWindowMenuItemHeader" />
+                                        </MenuItem.Header>
+                                        <i:Interaction.Behaviors>
+                                            <li:EventToCommandBehavior EventName="Click">
+                                                <li:EventToCommandBehavior.Command>
+                                                    <Binding Path="PlacementTarget.Tag.MinimizeWindowCommand">
+                                                        <Binding.RelativeSource>
+                                                            <RelativeSource Mode="FindAncestor">
+                                                                <RelativeSource.AncestorType>
+                                                                    <x:Type TypeName="ContextMenu" />
+                                                                </RelativeSource.AncestorType>
+                                                            </RelativeSource>
+                                                        </Binding.RelativeSource>
+                                                    </Binding>
+                                                </li:EventToCommandBehavior.Command>
+                                            </li:EventToCommandBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </MenuItem>
+                                    <Separator />
+                                    <MenuItem>
+                                        <MenuItem.Header>
+                                            <x:Static Member="properties:Resources.ApplyToCaptureSizeMenuItemHeader" />
                                         </MenuItem.Header>
                                         <i:Interaction.Behaviors>
                                             <li:EventToCommandBehavior EventName="Click">
@@ -639,15 +689,35 @@
                 </i:InvokeCommandAction.Command>
             </i:InvokeCommandAction>
         </i:EventTrigger>
-        <i:EventTrigger EventName="Raised">
-            <i:EventTrigger.SourceObject>
-                <Binding Path="ErrorRequest" />
-            </i:EventTrigger.SourceObject>
+        <li:InteractionRequestTrigger Name="About">
+            <li:InteractionRequestTrigger.SourceObject>
+                <Binding Path="InteractionRequest" />
+            </li:InteractionRequestTrigger.SourceObject>
+            <li:ShowDialogAction>
+                <li:ShowDialogAction.DialogType>
+                    <x:Type TypeName="views:AboutWindow" />
+                </li:ShowDialogAction.DialogType>
+            </li:ShowDialogAction>
+        </li:InteractionRequestTrigger>
+        <li:InteractionRequestTrigger Name="Error">
+            <li:InteractionRequestTrigger.SourceObject>
+                <Binding Path="InteractionRequest" />
+            </li:InteractionRequestTrigger.SourceObject>
             <li:ShowDialogAction>
                 <li:ShowDialogAction.DialogType>
                     <x:Type TypeName="views:ErrorWindow" />
                 </li:ShowDialogAction.DialogType>
             </li:ShowDialogAction>
-        </i:EventTrigger>
+        </li:InteractionRequestTrigger>
+        <li:InteractionRequestTrigger Name="Options">
+            <li:InteractionRequestTrigger.SourceObject>
+                <Binding Path="InteractionRequest" />
+            </li:InteractionRequestTrigger.SourceObject>
+            <li:ShowDialogAction>
+                <li:ShowDialogAction.DialogType>
+                    <x:Type TypeName="views:OptionsWindow" />
+                </li:ShowDialogAction.DialogType>
+            </li:ShowDialogAction>
+        </li:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 </Window>

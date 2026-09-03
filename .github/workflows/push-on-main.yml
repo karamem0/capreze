@@ -1,4 +1,4 @@
-name: Trigger on main
+name: Push on main
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout repos
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Build source
         uses: ./.github/actions/build-source
         env:

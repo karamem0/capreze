@@ -14,7 +14,7 @@
     "EnableDependencyTrackingTelemetryModule": false,
     "EnablePerformanceCounterCollectionModule": false
   },
-  "WindowSize": [
+  "WindowSizes": [
     {
       "Name": "800x600",
       "Description": "SVGA, 4:3",

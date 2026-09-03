@@ -50,12 +50,12 @@ public class ShowDialogAction : TriggerAction<DependencyObject>
                 var dataContext = this.DataContext ?? parameter;
                 if (dataContext is InteractionRequestedEventArgs args)
                 {
-                    dialog.DataContext = args.Parameter;
+                    dialog.DataContext ??= args.Parameter;
                     args.Callback(dialog.ShowDialog());
                 }
                 else
                 {
-                    dialog.DataContext = dataContext;
+                    dialog.DataContext ??= dataContext;
                     _ = dialog.ShowDialog();
                 }
             }

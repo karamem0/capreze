@@ -118,16 +118,28 @@
                 <Button.Content>
                     <x:Static Member="properties:Resources.OkButtonContent" />
                 </Button.Content>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <i:CallMethodAction MethodName="Close">
-                            <i:CallMethodAction.TargetObject>
-                                <Binding ElementName="Window" />
-                            </i:CallMethodAction.TargetObject>
-                        </i:CallMethodAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                <i:Interaction.Behaviors>
+                    <li:EventToCommandBehavior EventName="Click">
+                        <li:EventToCommandBehavior.Command>
+                            <Binding Path="CloseCommand" />
+                        </li:EventToCommandBehavior.Command>
+                        <li:EventToCommandBehavior.CommandParameter>
+                            <system:Boolean>true</system:Boolean>
+                        </li:EventToCommandBehavior.CommandParameter>
+                    </li:EventToCommandBehavior>
+                </i:Interaction.Behaviors>
             </Button>
         </StackPanel>
     </Grid>
+    <i:Interaction.Behaviors>
+        <li:ViewModelBehavior />
+    </i:Interaction.Behaviors>
+    <i:Interaction.Triggers>
+        <li:InteractionRequestTrigger Name="Close">
+            <li:InteractionRequestTrigger.SourceObject>
+                <Binding Path="InteractionRequest" />
+            </li:InteractionRequestTrigger.SourceObject>
+            <li:CloseDialogAction />
+        </li:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
 </Window>

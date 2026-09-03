@@ -92,4 +92,15 @@
             </Button>
         </StackPanel>
     </Grid>
+    <i:Interaction.Behaviors>
+        <li:ViewModelBehavior />
+    </i:Interaction.Behaviors>
+    <i:Interaction.Triggers>
+        <li:InteractionRequestTrigger Name="Close">
+            <li:InteractionRequestTrigger.SourceObject>
+                <Binding Path="InteractionRequest" />
+            </li:InteractionRequestTrigger.SourceObject>
+            <li:CloseDialogAction />
+        </li:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
 </Window>
