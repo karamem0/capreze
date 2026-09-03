@@ -1,4 +1,4 @@
-name: Trigger on tags
+name: Push on tags
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout repos
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Build source
         uses: ./.github/actions/build-source
         env:
@@ -25,7 +25,7 @@ jobs:
     needs: build-source
     steps:
       - name: Checkout repos
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Deploy to Azure
         uses: ./.github/actions/deploy-to-azure
         env:
@@ -38,8 +38,21 @@ jobs:
     needs: build-source
     steps:
       - name: Checkout repos
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Deploy to GitHub Release
         uses: ./.github/actions/deploy-to-github-release
         env:
           BUILD_VERSION: ${{vars.BUILD_VERSION}}
+  submit-to-winget:
+    name: Submit to WinGet
+    runs-on: windows-latest
+    needs: deploy-to-azure
+    steps:
+      - name: Checkout repos
+        uses: actions/checkout@v7
+      - name: Submit to WinGet
+        uses: ./.github/actions/submit-to-winget
+        env:
+          AZURE_STORAGE_ACCOUNT_NAME: ${{vars.AZURE_STORAGE_ACCOUNT_NAME}}
+          BUILD_VERSION: ${{vars.BUILD_VERSION}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

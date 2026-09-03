@@ -29,6 +29,10 @@ public interface IWindowService
 
     Task<User32.Rectangle> GetWindowRectangleAsync(IntPtr hwnd, CancellationToken cancellationToken = default);
 
+    Task MaximizeWindowAsync(IntPtr hwnd, CancellationToken cancellationToken = default);
+
+    Task MinimizeWindowAsync(IntPtr hwnd, CancellationToken cancellationToken = default);
+
     Task ResizeWindowAsync(
         IntPtr hwnd,
         int width,
@@ -125,6 +129,28 @@ public class WindowService : ServiceBase, IWindowService
                 wi.Size = Marshal.SizeOf(wi);
                 _ = User32.GetWindowInfo(hwnd, ref wi);
                 return wi.Window;
+            },
+            cancellationToken
+        );
+    }
+
+    public async Task MaximizeWindowAsync(IntPtr hwnd, CancellationToken cancellationToken = default)
+    {
+        await Task.Run(
+            () =>
+            {
+                _ = User32.ShowWindow(hwnd, (uint)User32.ShowWindowFlags.SW_MAXIMIZE);
+            },
+            cancellationToken
+        );
+    }
+
+    public async Task MinimizeWindowAsync(IntPtr hwnd, CancellationToken cancellationToken = default)
+    {
+        await Task.Run(
+            () =>
+            {
+                _ = User32.ShowWindow(hwnd, (uint)User32.ShowWindowFlags.SW_MINIMIZE);
             },
             cancellationToken
         );

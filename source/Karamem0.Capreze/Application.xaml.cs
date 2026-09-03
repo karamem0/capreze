@@ -10,11 +10,11 @@ using Karamem0.Capreze.Configuration;
 using Karamem0.Capreze.Interactivity;
 using Karamem0.Capreze.Services;
 using Karamem0.Capreze.ViewModels;
+using MapsterMapper;
 using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Nelibur.ObjectMapper;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -33,7 +33,7 @@ public partial class Application : System.Windows.Application
             .AddTransient<IWindowService, WindowService>()
             .AddTransient<AboutViewModel>()
             .AddTransient<MainViewModel>()
-            .AddTinyMapper()
+            .AddMapster()
         )
         .Build();
 
@@ -41,10 +41,13 @@ public partial class Application : System.Windows.Application
 
     private readonly AppSettings appSettings;
 
+    private readonly IMapper mapper;
+
     public Application()
     {
-        this.telemetryClient = Host.Services.GetService<TelemetryClient>() ?? throw new ArgumentNullException(nameof(this.telemetryClient));
-        this.appSettings = Host.Services.GetService<AppSettings>() ?? throw new ArgumentNullException(nameof(this.appSettings));
+        this.telemetryClient = Host.Services.GetRequiredService<TelemetryClient>();
+        this.appSettings = Host.Services.GetRequiredService<AppSettings>();
+        this.mapper = Host.Services.GetRequiredService<IMapper>();
     }
 
     protected override async void OnStartup(StartupEventArgs e)
@@ -56,7 +59,7 @@ public partial class Application : System.Windows.Application
             if (viewModelLocator.MainViewModel is MainViewModel mainViewModel)
             {
                 await this.appSettings.LoadAsync();
-                _ = TinyMapper.Map(this.appSettings, mainViewModel);
+                _ = this.mapper.Map(this.appSettings, mainViewModel);
             }
         }
         this.telemetryClient.TrackEvent("Application.OnStartup");
@@ -69,7 +72,7 @@ public partial class Application : System.Windows.Application
         {
             if (viewModelLocator.MainViewModel is MainViewModel mainViewModel)
             {
-                _ = TinyMapper.Map(mainViewModel, this.appSettings);
+                _ = this.mapper.Map(mainViewModel, this.appSettings);
                 await this.appSettings.SaveAsync();
             }
         }

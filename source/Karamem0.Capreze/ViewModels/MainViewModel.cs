@@ -300,6 +300,24 @@ public class MainViewModel(
         }
     );
 
+    public ICommand MaximizeWindowCommand => new DelegateCommand(async () =>
+        {
+            if (this.SelectedInformation is not null)
+            {
+                await this.windowService.MaximizeWindowAsync(this.SelectedInformation.Hwnd);
+            }
+        }
+    );
+
+    public ICommand MinimizeWindowCommand => new DelegateCommand(async () =>
+        {
+            if (this.SelectedInformation is not null)
+            {
+                await this.windowService.MinimizeWindowAsync(this.SelectedInformation.Hwnd);
+            }
+        }
+    );
+
     public ICommand OffsetChangedCommand => new DelegateCommand(() =>
         {
             if (this.SelectedInformation is not null)

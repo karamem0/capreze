@@ -217,6 +217,48 @@
                                             </li:EventToCommandBehavior>
                                         </i:Interaction.Behaviors>
                                     </MenuItem>
+                                    <Separator />
+                                    <MenuItem>
+                                        <MenuItem.Header>
+                                            <x:Static Member="properties:Resources.MaximizeWindowMenuItemText" />
+                                        </MenuItem.Header>
+                                        <i:Interaction.Behaviors>
+                                            <li:EventToCommandBehavior EventName="Click">
+                                                <li:EventToCommandBehavior.Command>
+                                                    <Binding Path="PlacementTarget.Tag.MaximizeWindowCommand">
+                                                        <Binding.RelativeSource>
+                                                            <RelativeSource Mode="FindAncestor">
+                                                                <RelativeSource.AncestorType>
+                                                                    <x:Type TypeName="ContextMenu" />
+                                                                </RelativeSource.AncestorType>
+                                                            </RelativeSource>
+                                                        </Binding.RelativeSource>
+                                                    </Binding>
+                                                </li:EventToCommandBehavior.Command>
+                                            </li:EventToCommandBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <MenuItem.Header>
+                                            <x:Static Member="properties:Resources.MinimizeWindowMenuItemText" />
+                                        </MenuItem.Header>
+                                        <i:Interaction.Behaviors>
+                                            <li:EventToCommandBehavior EventName="Click">
+                                                <li:EventToCommandBehavior.Command>
+                                                    <Binding Path="PlacementTarget.Tag.MinimizeWindowCommand">
+                                                        <Binding.RelativeSource>
+                                                            <RelativeSource Mode="FindAncestor">
+                                                                <RelativeSource.AncestorType>
+                                                                    <x:Type TypeName="ContextMenu" />
+                                                                </RelativeSource.AncestorType>
+                                                            </RelativeSource>
+                                                        </Binding.RelativeSource>
+                                                    </Binding>
+                                                </li:EventToCommandBehavior.Command>
+                                            </li:EventToCommandBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </MenuItem>
+                                    <Separator />
                                     <MenuItem>
                                         <MenuItem.Header>
                                             <x:Static Member="properties:Resources.ApplyToCaptureSizeMenuItemText" />

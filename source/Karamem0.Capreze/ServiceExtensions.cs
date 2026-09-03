@@ -8,18 +8,20 @@
 
 using Karamem0.Capreze.Configuration;
 using Karamem0.Capreze.ViewModels;
+using Mapster;
+using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
-using Nelibur.ObjectMapper;
 
 namespace Karamem0.Capreze;
 
 public static class ServiceExtensions
 {
 
-    public static IServiceCollection AddTinyMapper(this IServiceCollection services)
+    public static IServiceCollection AddMapster(this IServiceCollection services)
     {
-        TinyMapper.Bind<AppSettings, MainViewModel>();
-        TinyMapper.Bind<MainViewModel, AppSettings>();
+        _ = TypeAdapterConfig.GlobalSettings.NewConfig<AppSettings, MainViewModel>();
+        _ = TypeAdapterConfig.GlobalSettings.NewConfig<MainViewModel, AppSettings>();
+        _ = services.AddTransient<IMapper, Mapper>();
         return services;
     }
 

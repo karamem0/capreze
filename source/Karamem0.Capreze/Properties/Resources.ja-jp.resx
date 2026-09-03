@@ -130,7 +130,7 @@
     <value>常に手前に表示 (_T)</value>
   </data>
   <data name="ApplyToCaptureSizeMenuItemText" xml:space="preserve">
-    <value>切り取るサイズに適用 (_A)</value>
+    <value>切り取るサイズに適用 (_S)</value>
   </data>
   <data name="AutoResizeMenuItemHeader" xml:space="preserve">
     <value>自動的にサイズ変更(_R)</value>
@@ -167,6 +167,12 @@
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Capreze</value>
+  </data>
+  <data name="MaximizeWindowMenuItemText" xml:space="preserve">
+    <value>ウィンドウの最大化 (_A)</value>
+  </data>
+  <data name="MinimizeWindowMenuItemText" xml:space="preserve">
+    <value>ウィンドウの最小化 (_I)</value>
   </data>
   <data name="OffsetTextBlockText" xml:space="preserve">
     <value>オフセット:</value>

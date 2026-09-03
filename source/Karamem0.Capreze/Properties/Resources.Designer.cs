@@ -114,7 +114,7 @@ namespace Karamem0.Capreze.Properties
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to _Apply to Capture Size.
+        ///   Looks up a localized string similar to Apply to Capture _Size.
         /// </summary>
         public static string ApplyToCaptureSizeMenuItemText
         {
@@ -253,6 +253,28 @@ namespace Karamem0.Capreze.Properties
             get
             {
                 return ResourceManager.GetString("MainWindowTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M_aximize Window.
+        /// </summary>
+        public static string MaximizeWindowMenuItemText
+        {
+            get
+            {
+                return ResourceManager.GetString("MaximizeWindowMenuItemText", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M_inimize Window.
+        /// </summary>
+        public static string MinimizeWindowMenuItemText
+        {
+            get
+            {
+                return ResourceManager.GetString("MinimizeWindowMenuItemText", resourceCulture);
             }
         }
 

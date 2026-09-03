@@ -1,0 +1,18 @@
+name: Submit to WinGet
+
+description: This GitHub Action submits a new manifest version to winget-pkgs.
+
+runs:
+  using: composite
+  steps:
+    - name: Download wingetcreate
+      shell: pwsh
+      run: Invoke-WebRequest -Uri https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
+    - name: Submit manifest
+      shell: pwsh
+      run: |
+        ./wingetcreate.exe update karamem0.Capreze `
+          --version ${{env.BUILD_VERSION}} `
+          --urls https://${{env.AZURE_STORAGE_ACCOUNT_NAME}}.blob.core.windows.net/msi/capreze_${{env.BUILD_VERSION}}.msi `
+          --submit `
+          --token ${{env.GITHUB_TOKEN}}
