@@ -35,7 +35,7 @@ var project = new Project("Capreze", new InstallDir(@"%LocalAppData%\Programs\Ca
 
 var executable = project
     .ResolveWildCards()
-    .FindFile(f => f.Name.EndsWith("Capreze.exe", StringComparison.OrdinalIgnoreCase) || f.Name.EndsWith("Capreze.dll", StringComparison.OrdinalIgnoreCase))
+    .FindFile(f => f.Name.EndsWith("Capreze.exe", StringComparison.OrdinalIgnoreCase))
     .FirstOrDefault();
 executable?.Shortcuts =
 [

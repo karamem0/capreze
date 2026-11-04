@@ -3,8 +3,8 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Mapster" Version="10.0.13" />
-    <PackageVersion Include="Mapster.DependencyInjection" Version="10.0.13" />
+    <PackageVersion Include="Mapster" Version="10.0.14" />
+    <PackageVersion Include="Mapster.DependencyInjection" Version="10.0.14" />
     <PackageVersion Include="Microsoft.ApplicationInsights.WorkerService" Version="3.2.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.14" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.14" />
